@@ -1,0 +1,28 @@
+.navbar {
+  min-height: 56px;
+  background: $sgtalk-panel !important;
+  border-bottom: 1px solid $sgtalk-border;
+  box-shadow: none;
+}
+
+.navbar-brand {
+  color: $sgtalk-text !important;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.navbar-brand::first-letter {
+  color: $sgtalk-red;
+}
+
+.navbar .form-control,
+.navbar input[type="search"] {
+  min-height: 34px;
+  background: #f3f6f9;
+  border-color: $sgtalk-border;
+}
+
+.navbar .nav-link {
+  color: $sgtalk-link;
+  font-weight: 600;
+}

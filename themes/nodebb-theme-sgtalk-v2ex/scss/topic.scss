@@ -1,0 +1,21 @@
+.topic {
+  border: 1px solid $sgtalk-border;
+  border-radius: $sgtalk-radius;
+}
+
+.topic .posts > li,
+.topic .post {
+  border-bottom: 1px solid $sgtalk-border;
+}
+
+.topic .content,
+.post-content {
+  font-size: 15px;
+  line-height: 1.72;
+}
+
+.topic .post-header,
+.post-header {
+  color: $sgtalk-muted;
+  font-size: 12px;
+}

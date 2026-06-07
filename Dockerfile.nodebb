@@ -1,0 +1,5 @@
+ARG NODEBB_TAG=4.7
+FROM ghcr.io/nodebb/nodebb:${NODEBB_TAG}
+
+COPY --chown=nodebb:nodebb themes/nodebb-theme-sgtalk-v2ex /opt/sgtalk-theme
+RUN cd /usr/src/app && npm install /opt/sgtalk-theme nodebb-plugin-sso-google@3.1.1

@@ -1,0 +1,46 @@
+body {
+  background: $sgtalk-bg;
+  color: $sgtalk-text;
+  font-family: $sgtalk-font;
+  font-size: 14px;
+  letter-spacing: 0;
+}
+
+a {
+  color: $sgtalk-link;
+  text-decoration: none;
+}
+
+a:hover {
+  color: $sgtalk-link-hover;
+  text-decoration: underline;
+}
+
+.btn,
+button,
+.form-control,
+.form-select,
+input,
+textarea,
+select {
+  border-radius: $sgtalk-radius !important;
+}
+
+.btn-primary {
+  background: $sgtalk-red;
+  border-color: $sgtalk-red;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background: #cf2020;
+  border-color: #cf2020;
+}
+
+.card,
+.panel,
+.modal-content {
+  border: 1px solid $sgtalk-border;
+  border-radius: $sgtalk-radius;
+  box-shadow: none;
+}

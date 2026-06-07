@@ -1,0 +1,27 @@
+.sidebar,
+.widgets,
+[component="sidebar"] {
+  font-size: 13px;
+}
+
+.sidebar .card,
+.widgets .card,
+[component="sidebar"] .card {
+  margin-bottom: 12px;
+  border-color: $sgtalk-border;
+}
+
+.sidebar .card-header,
+.widgets .card-header,
+[component="sidebar"] .card-header {
+  padding: 10px 12px;
+  background: $sgtalk-panel;
+  border-bottom: 1px solid $sgtalk-border;
+  font-weight: 700;
+}
+
+.sidebar .card-body,
+.widgets .card-body,
+[component="sidebar"] .card-body {
+  padding: 12px;
+}

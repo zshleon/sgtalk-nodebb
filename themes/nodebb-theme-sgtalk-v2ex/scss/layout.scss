@@ -1,0 +1,33 @@
+.container,
+.container-lg,
+.container-md,
+.container-sm,
+.container-xl,
+.container-xxl {
+  max-width: 1180px;
+}
+
+#content {
+  padding-top: 16px;
+}
+
+.category,
+.categories,
+.topic,
+.account,
+.users,
+.groups,
+.popular,
+.recent,
+.unread {
+  background: $sgtalk-panel;
+}
+
+.row {
+  --bs-gutter-x: 16px;
+}
+
+.breadcrumb {
+  margin-bottom: 8px;
+  font-size: 13px;
+}

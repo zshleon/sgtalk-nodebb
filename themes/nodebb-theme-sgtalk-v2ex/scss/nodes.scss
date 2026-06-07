@@ -1,0 +1,24 @@
+.categories .category-children,
+.category-children {
+  background: #f6f8fa;
+  border-top: 1px solid $sgtalk-border;
+}
+
+.category-item,
+.category-children-item {
+  border-color: $sgtalk-border !important;
+}
+
+.category-title,
+.category-name {
+  font-weight: 700;
+}
+
+.badge,
+.tag,
+.category-item .badge {
+  border-radius: $sgtalk-radius;
+  background: #eef3f8;
+  color: $sgtalk-link;
+  font-weight: 600;
+}

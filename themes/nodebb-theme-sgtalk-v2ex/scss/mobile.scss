@@ -1,0 +1,31 @@
+@media (max-width: 767.98px) {
+  #content {
+    padding: 8px 10px 16px;
+  }
+
+  .navbar {
+    min-height: 50px;
+  }
+
+  .topic-list > li,
+  .category .topics > li,
+  .recent .topics > li,
+  .topic-row {
+    min-height: 58px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .topic-title {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .sidebar,
+  .widgets,
+  [component="sidebar"] {
+    margin-top: 12px;
+  }
+}

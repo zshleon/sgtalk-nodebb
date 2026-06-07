@@ -1,0 +1,15 @@
+{
+  "name": "nodebb-theme-sgtalk-v2ex",
+  "version": "0.1.0",
+  "description": "A compact, node-first NodeBB theme for SGTALK.",
+  "main": "library.js",
+  "keywords": [
+    "nodebb",
+    "nodebb-theme",
+    "sgtalk"
+  ],
+  "license": "UNLICENSED",
+  "nbbpm": {
+    "compatibility": "^4.0.0"
+  }
+}

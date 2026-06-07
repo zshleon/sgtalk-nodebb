@@ -1,0 +1,43 @@
+.topic-list,
+.category .topics,
+.recent .topics {
+  background: $sgtalk-panel;
+  border: 1px solid $sgtalk-border;
+  border-radius: $sgtalk-radius;
+}
+
+.topic-list > li,
+.category .topics > li,
+.recent .topics > li,
+.topic-row {
+  min-height: 68px;
+  border-bottom: 1px solid $sgtalk-border;
+}
+
+.topic-list > li:last-child,
+.category .topics > li:last-child,
+.recent .topics > li:last-child {
+  border-bottom: 0;
+}
+
+.topic-title {
+  color: $sgtalk-text;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.topic-info,
+.topic-meta,
+.topic-list .description {
+  color: $sgtalk-muted;
+  font-size: 12px;
+}
+
+.posts-count,
+.topic-list .badge {
+  min-width: 28px;
+  padding: 4px 8px;
+  text-align: center;
+  background: #eef3f8;
+  color: $sgtalk-link;
+}

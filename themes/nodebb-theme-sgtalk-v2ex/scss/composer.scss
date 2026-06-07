@@ -1,0 +1,82 @@
+.composer {
+  border-top: 1px solid $sgtalk-border-strong;
+  box-shadow: none;
+}
+
+.composer .composer-container,
+.composer .composer-container > .p-2,
+.page-compose .composer .composer-container {
+  min-height: 0;
+}
+
+.composer .title-container input,
+.composer textarea,
+.composer .write,
+.composer .preview {
+  border-color: $sgtalk-border;
+}
+
+.composer .formatting-bar,
+.composer .composer-submit {
+  background: #f6f8fa;
+  border-color: $sgtalk-border;
+}
+
+.page-compose .composer .write-preview-container {
+  flex: 0 0 auto !important;
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+.page-compose .composer .write-container {
+  min-height: 0;
+}
+
+.page-compose .composer textarea.write {
+  min-height: 168px;
+  max-height: 52vh;
+  overflow-y: hidden;
+  line-height: 1.55;
+}
+
+.page-compose .composer textarea.write {
+  min-height: 168px;
+  max-height: 52vh;
+}
+
+@media (max-width: 767.98px) {
+  html.composing .composer,
+  .page-compose .composer {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .composer .composer-container,
+  .composer .composer-container > .p-2,
+  .page-compose .composer .composer-container {
+    height: auto !important;
+  }
+
+  .composer .composer-container > .p-2 {
+    padding: 8px !important;
+  }
+
+  .composer .write-preview-container,
+  .page-compose .composer .write-preview-container {
+    display: block !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .composer .write-container,
+  .page-compose .composer .write-container {
+    width: 100% !important;
+  }
+
+  .composer textarea.write,
+  .page-compose .composer textarea.write {
+    min-height: 136px;
+    max-height: 44vh;
+    resize: none;
+  }
+}

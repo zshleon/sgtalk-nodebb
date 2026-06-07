@@ -1,0 +1,8 @@
+{
+  "id": "nodebb-theme-sgtalk-v2ex",
+  "name": "SGTALK V2EX",
+  "description": "A compact, node-first NodeBB theme for SGTALK.",
+  "url": "https://sgtalk.zshstc.org",
+  "screenshot": "screenshot.png",
+  "baseTheme": "nodebb-theme-harmony"
+}

@@ -10,8 +10,9 @@ The current work is a NodeBB theme/customization stack focused on a V2EX-style, 
 
 ## Important Paths
 
-- Durable local project copy: `/Users/jingwazhu/Documents/CODEX/sgtalk-nodebb`
-- Previous temporary work copy: `/tmp/sgtalk-nodebb-work`
+- Canonical project copy in Google Drive: `/Users/jingwazhu/Library/CloudStorage/GoogleDrive-zshstc@gmail.com/.Encrypted/我的云端硬盘/CODEX/sgtalk-nodebb`
+- Local mirror: `/Users/jingwazhu/Documents/Codex/sgtalk-nodebb`
+- Previous temporary work copy, safe to delete after handoff: `/tmp/sgtalk-nodebb-work`
 - Live server stack: `/opt/stacks/sgtalk-nodebb`
 - Live site: `https://sgtalk.zshstc.org`
 - Custom theme: `themes/nodebb-theme-sgtalk-v2ex`
@@ -47,11 +48,11 @@ Keep secrets in the server stack or password manager only.
 
 ## Deploy Theme Changes
 
-From the local project:
+From the Google Drive project:
 
 ```sh
 rsync -az --delete -e "ssh -o HostKeyAlias=10.0.0.50 -i ~/.ssh/id_ed25519" \
-  /Users/jingwazhu/Documents/CODEX/sgtalk-nodebb/themes/nodebb-theme-sgtalk-v2ex/ \
+  '/Users/jingwazhu/Library/CloudStorage/GoogleDrive-zshstc@gmail.com/.Encrypted/我的云端硬盘/CODEX/sgtalk-nodebb/themes/nodebb-theme-sgtalk-v2ex/' \
   root@100.106.234.127:/opt/stacks/sgtalk-nodebb/themes/nodebb-theme-sgtalk-v2ex/
 ```
 
@@ -107,7 +108,7 @@ Highest-priority structural work:
 Use this prompt:
 
 ```text
-You are taking over SGTALK, a NodeBB-based forum at https://sgtalk.zshstc.org. Do not work on the older custom Next.js/Supabase prototype. The durable local project is /Users/jingwazhu/Documents/CODEX/sgtalk-nodebb and the live server stack is /opt/stacks/sgtalk-nodebb on root@100.106.234.127 using ssh -o HostKeyAlias=10.0.0.50 -i ~/.ssh/id_ed25519.
+You are taking over SGTALK, a NodeBB-based forum at https://sgtalk.zshstc.org. Do not work on the older custom Next.js/Supabase prototype. The canonical project is /Users/jingwazhu/Library/CloudStorage/GoogleDrive-zshstc@gmail.com/.Encrypted/我的云端硬盘/CODEX/sgtalk-nodebb and the live server stack is /opt/stacks/sgtalk-nodebb on root@100.106.234.127 using ssh -o HostKeyAlias=10.0.0.50 -i ~/.ssh/id_ed25519.
 
 Read HANDOFF.md, docs/SGTALK_PHASE1_QA.md, and docs/SGTALK_V2EX_UI_BLUEPRINT.md first. Keep secrets, .env, mongo data, nodebb runtime data, and backups out of git. Work mainly in themes/nodebb-theme-sgtalk-v2ex.
 

@@ -1,6 +1,6 @@
 # SGTALK NodeBB Handoff
 
-Updated: 2026-06-07
+Updated: 2026-06-08
 
 ## What This Is
 
@@ -10,9 +10,9 @@ The current work is a NodeBB theme/customization stack focused on a V2EX-style, 
 
 ## Important Paths
 
-- Canonical project copy in Google Drive: `/Users/jingwazhu/Library/CloudStorage/GoogleDrive-zshstc@gmail.com/.Encrypted/我的云端硬盘/CODEX/sgtalk-nodebb`
-- Local mirror: `/Users/jingwazhu/Documents/Codex/sgtalk-nodebb`
-- Previous temporary work copy, safe to delete after handoff: `/tmp/sgtalk-nodebb-work`
+- GitHub private repository: `https://github.com/zshleon/sgtalk-nodebb`
+- Local working copy: `/Users/jingwazhu/Documents/Codex/sgtalk-nodebb`
+- Google Drive copy: not used for code. Google Drive rejected writes to the previous `sgtalk-nodebb` folder, so GitHub is now the canonical code handoff source.
 - Live server stack: `/opt/stacks/sgtalk-nodebb`
 - Live site: `https://sgtalk.zshstc.org`
 - Custom theme: `themes/nodebb-theme-sgtalk-v2ex`
@@ -48,11 +48,11 @@ Keep secrets in the server stack or password manager only.
 
 ## Deploy Theme Changes
 
-From the Google Drive project:
+From the local working copy:
 
 ```sh
 rsync -az --delete -e "ssh -o HostKeyAlias=10.0.0.50 -i ~/.ssh/id_ed25519" \
-  '/Users/jingwazhu/Library/CloudStorage/GoogleDrive-zshstc@gmail.com/.Encrypted/我的云端硬盘/CODEX/sgtalk-nodebb/themes/nodebb-theme-sgtalk-v2ex/' \
+  '/Users/jingwazhu/Documents/Codex/sgtalk-nodebb/themes/nodebb-theme-sgtalk-v2ex/' \
   root@100.106.234.127:/opt/stacks/sgtalk-nodebb/themes/nodebb-theme-sgtalk-v2ex/
 ```
 
@@ -108,7 +108,7 @@ Highest-priority structural work:
 Use this prompt:
 
 ```text
-You are taking over SGTALK, a NodeBB-based forum at https://sgtalk.zshstc.org. Do not work on the older custom Next.js/Supabase prototype. The canonical project is /Users/jingwazhu/Library/CloudStorage/GoogleDrive-zshstc@gmail.com/.Encrypted/我的云端硬盘/CODEX/sgtalk-nodebb and the live server stack is /opt/stacks/sgtalk-nodebb on root@100.106.234.127 using ssh -o HostKeyAlias=10.0.0.50 -i ~/.ssh/id_ed25519.
+You are taking over SGTALK, a NodeBB-based forum at https://sgtalk.zshstc.org. Do not work on the older custom Next.js/Supabase prototype. The canonical code repository is https://github.com/zshleon/sgtalk-nodebb and the local working copy is /Users/jingwazhu/Documents/Codex/sgtalk-nodebb. The live server stack is /opt/stacks/sgtalk-nodebb on root@100.106.234.127 using ssh -o HostKeyAlias=10.0.0.50 -i ~/.ssh/id_ed25519.
 
 Read HANDOFF.md, docs/SGTALK_PHASE1_QA.md, and docs/SGTALK_V2EX_UI_BLUEPRINT.md first. Keep secrets, .env, mongo data, nodebb runtime data, and backups out of git. Work mainly in themes/nodebb-theme-sgtalk-v2ex.
 

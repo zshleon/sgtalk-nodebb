@@ -10,6 +10,7 @@
 			<div class="sg-auth-head">
 				<h2>登录 SGTALK</h2>
 				<p>登录后可以继续发布主题、回复和收藏节点。</p>
+				<p class="sg-auth-context" data-sgtalk-login-context hidden></p>
 			</div>
 
 			{{{ if allowLocalLogin }}}

@@ -377,6 +377,90 @@
     return `${relativePath}/login?next=${encodeURIComponent(next)}`;
   }
 
+  function nextPathFromLocation() {
+    try {
+      return new URLSearchParams(window.location.search).get('next') || '';
+    } catch (err) {
+      return '';
+    }
+  }
+
+  function loginContextFromNext(nextPath) {
+    if (!nextPath) {
+      return '';
+    }
+
+    let decoded = nextPath;
+    try {
+      decoded = decodeURIComponent(nextPath);
+    } catch (err) {
+      decoded = nextPath;
+    }
+
+    if (/^\/compose(?:[?#]|$)/.test(decoded)) {
+      return '登录后继续发布主题。';
+    }
+
+    if (/^\/search(?:[?#]|$)/.test(decoded)) {
+      try {
+        const url = new URL(decoded, window.location.origin);
+        const term = url.searchParams.get('term');
+        return term ? `登录后继续搜索：${term}` : '登录后继续搜索。';
+      } catch (err) {
+        return '登录后继续搜索。';
+      }
+    }
+
+    if (/^\/topic\//.test(decoded)) {
+      return '登录后返回主题继续回复或收藏。';
+    }
+
+    return '';
+  }
+
+  function rememberLoginContext(message) {
+    if (!message || !window.sessionStorage) {
+      return;
+    }
+
+    try {
+      window.sessionStorage.setItem('sgtalkLoginContext', message);
+    } catch (err) {
+      // Session storage can be unavailable in strict/private contexts.
+    }
+  }
+
+  function consumeRememberedLoginContext() {
+    if (!window.sessionStorage) {
+      return '';
+    }
+
+    try {
+      const message = window.sessionStorage.getItem('sgtalkLoginContext') || '';
+      window.sessionStorage.removeItem('sgtalkLoginContext');
+      return message;
+    } catch (err) {
+      return '';
+    }
+  }
+
+  function renderLoginContext() {
+    const target = document.querySelector('[data-sgtalk-login-context]');
+    if (!target) {
+      return;
+    }
+
+    const message = loginContextFromNext(nextPathFromLocation()) || consumeRememberedLoginContext();
+    if (!message) {
+      target.hidden = true;
+      target.textContent = '';
+      return;
+    }
+
+    target.textContent = message;
+    target.hidden = false;
+  }
+
   function bindGuestProtectedActions() {
     if (document.documentElement.dataset.sgtalkGuestActions === '1') {
       return;
@@ -399,6 +483,60 @@
       event.stopImmediatePropagation();
       window.location.assign(loginUrlWithNext());
     }, true);
+  }
+
+  function bindGuestSearch(root) {
+    const scope = root && root.querySelectorAll ? root : document;
+    const forms = [];
+
+    if (scope.matches && scope.matches('[data-sgtalk-search-form]')) {
+      forms.push(scope);
+    }
+
+    scope.querySelectorAll('[data-sgtalk-search-form]').forEach((form) => forms.push(form));
+    forms.forEach((form) => {
+      if (form.dataset.sgtalkSearchBound === '1') {
+        return;
+      }
+
+      form.dataset.sgtalkSearchBound = '1';
+      const input = form.querySelector('input[name="term"]');
+      const notice = form.querySelector('.sg-search-notice');
+
+      form.addEventListener('submit', (event) => {
+        if (!isGuestUser()) {
+          return;
+        }
+
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        const term = input ? input.value.trim() : '';
+        if (!term) {
+          if (notice) {
+            notice.textContent = '请输入要搜索的内容。';
+            notice.hidden = false;
+          }
+          if (input) {
+            input.focus();
+          }
+          return;
+        }
+
+        const next = `/search?term=${encodeURIComponent(term)}`;
+        rememberLoginContext(`登录后继续搜索：${term}`);
+        window.location.assign(loginUrlWithNext(next));
+      }, true);
+
+      if (input) {
+        input.addEventListener('input', () => {
+          if (notice) {
+            notice.hidden = true;
+            notice.textContent = '';
+          }
+        });
+      }
+    });
   }
 
   function registerErrorBox(form) {
@@ -556,6 +694,7 @@
 
       form.dataset.sgtalkRegisterValidation = '1';
       form.setAttribute('novalidate', 'novalidate');
+      form.noValidate = true;
 
       form.addEventListener('submit', (event) => {
         if (!validateRegisterForm(form)) {
@@ -575,6 +714,11 @@
       }
 
       form.querySelectorAll('input').forEach((input) => {
+        input.addEventListener('invalid', (event) => {
+          event.preventDefault();
+          validateRegisterForm(form);
+        }, true);
+
         input.addEventListener('input', () => {
           clearFieldError(input);
           hideRegisterError(form);
@@ -602,6 +746,30 @@
     body.textContent = messages.join(' ');
     box.classList.remove('hidden', 'd-none');
     box.hidden = false;
+  }
+
+  function showLoginFailure(message) {
+    const form = document.querySelector('#login-form');
+    if (!form) {
+      return;
+    }
+
+    const username = form.querySelector('#username');
+    const password = form.querySelector('#password');
+    const text = message || '用户名或密码不正确，请检查后再试。';
+    showLoginError(form, [text]);
+    [username, password].forEach((input) => {
+      if (input) {
+        input.classList.add('is-invalid');
+        input.setAttribute('aria-invalid', 'true');
+      }
+    });
+
+    const box = loginErrorBox(form);
+    if (box && box.focus) {
+      box.setAttribute('tabindex', '-1');
+      box.focus({ preventScroll: true });
+    }
   }
 
   function hideLoginError(form) {
@@ -664,6 +832,7 @@
 
       form.dataset.sgtalkLoginValidation = '1';
       form.setAttribute('novalidate', 'novalidate');
+      form.noValidate = true;
 
       form.addEventListener('submit', (event) => {
         if (!validateLoginForm(form)) {
@@ -683,6 +852,11 @@
       }
 
       form.querySelectorAll('input').forEach((input) => {
+        input.addEventListener('invalid', (event) => {
+          event.preventDefault();
+          validateLoginForm(form);
+        }, true);
+
         input.addEventListener('input', () => {
           clearFieldError(input);
           hideLoginError(form);
@@ -1072,6 +1246,7 @@
       const url = typeof input === 'string' ? input : input && input.url;
       const method = (init && init.method) || (input && input.method) || 'GET';
       const isTopicPost = url && topicApiPattern.test(url) && method.toUpperCase() === 'POST';
+      const isLoginPost = url && /\/login(?:$|[?#])/.test(url) && method.toUpperCase() === 'POST';
 
       if (isTopicPost) {
         const composer = composerScope();
@@ -1090,6 +1265,9 @@
               .catch(() => showSubmitNotice());
           }
         }
+        if (isLoginPost && (response.status === 401 || response.status === 403)) {
+          showLoginFailure('用户名或密码不正确，请检查后再试。');
+        }
         return response;
       }).catch((error) => {
         showSubmitNotice(error && error.message);
@@ -1099,6 +1277,36 @@
 
     patchedFetch.sgtalkComposerPatched = true;
     window.fetch = patchedFetch;
+  }
+
+  function patchXhrForLoginErrors() {
+    if (!window.XMLHttpRequest || window.XMLHttpRequest.sgtalkLoginPatched) {
+      return;
+    }
+
+    const proto = window.XMLHttpRequest.prototype;
+    const originalOpen = proto.open;
+    const originalSend = proto.send;
+
+    proto.open = function patchedOpen(method, url) {
+      this.sgtalkRequestMethod = method;
+      this.sgtalkRequestUrl = url;
+      return originalOpen.apply(this, arguments);
+    };
+
+    proto.send = function patchedSend() {
+      this.addEventListener('load', function onLoad() {
+        const method = String(this.sgtalkRequestMethod || 'GET').toUpperCase();
+        const url = String(this.sgtalkRequestUrl || '');
+        if (method === 'POST' && /\/login(?:$|[?#])/.test(url) && (this.status === 401 || this.status === 403)) {
+          showLoginFailure('用户名或密码不正确，请检查后再试。');
+        }
+      });
+
+      return originalSend.apply(this, arguments);
+    };
+
+    window.XMLHttpRequest.sgtalkLoginPatched = true;
   }
 
   const avatarObserver = new MutationObserver((mutations) => {
@@ -1138,10 +1346,13 @@
     bindSubmitFeedback(document);
     bindHardNavigation();
     bindGuestProtectedActions();
+    bindGuestSearch(document);
     bindRegisterValidation(document);
     bindLoginValidation(document);
+    renderLoginContext();
     updateAuthState();
     patchFetchForComposerErrors();
+    patchXhrForLoginErrors();
     replaceDefaultAvatars();
     injectMerlionPicker();
     startAvatarObserver();
@@ -1171,8 +1382,10 @@
         if (node.nodeType === Node.ELEMENT_NODE) {
           scanLater(node);
           bindSubmitFeedback(node);
+          bindGuestSearch(node);
           bindRegisterValidation(node);
           bindLoginValidation(node);
+          renderLoginContext();
           initV2exEditorTabs(node);
           if (node.matches('.avatar, [component="avatar/icon"], img[src*="googleusercontent.com"]') ||
               node.querySelector('.avatar, [component="avatar/icon"], img[src*="googleusercontent.com"]')) {
@@ -1190,8 +1403,10 @@
     window.jQuery(window).on('action:composer.loaded action:composer.resize', (event, data) => {
       scanLater(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
       bindSubmitFeedback(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
+      bindGuestSearch(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
       bindRegisterValidation(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
       bindLoginValidation(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
+      renderLoginContext();
       initV2exEditorTabs(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
       updateAuthState();
       replaceDefaultAvatars();
@@ -1204,16 +1419,20 @@
         hooks.on('action:composer.enhanced', (data) => {
           scanLater(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
           bindSubmitFeedback(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
+          bindGuestSearch(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
           bindRegisterValidation(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
           bindLoginValidation(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
+          renderLoginContext();
           initV2exEditorTabs(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
           updateAuthState();
           replaceDefaultAvatars();
         });
         hooks.on('action:ajaxify.end', () => {
           updateAuthState();
+          bindGuestSearch(document);
           bindRegisterValidation(document);
           bindLoginValidation(document);
+          renderLoginContext();
           replaceDefaultAvatars();
           injectMerlionPicker();
           initV2exEditorTabs(document);

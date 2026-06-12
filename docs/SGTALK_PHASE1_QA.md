@@ -4,6 +4,13 @@ Updated: 2026-06-12
 
 ## Shipped In This Pass
 
+- Round 3 guest-flow and density polish:
+  - Guest search is now explicit and recoverable: entering a term redirects to login with a visible context message so the action does not appear to do nothing.
+  - Bad login credentials now render a visible Chinese error panel.
+  - `/world` / all-known-topics copy was replaced with SGTALK-facing `全站主题` copy.
+  - `/groups` no longer exposes NodeBB internal groups such as administrators or global moderators; public visitors see a simple community groups placeholder.
+  - Guest sidebar was reduced to useful entry points and hot nodes; empty `今日热议` and `社区状态` boxes are hidden.
+  - Mobile homepage topic rows, auth card, and hot-node block were tightened to read more like a forum list.
 - Round 2 mobile/profile polish:
   - Reworked user profile pages from a dashboard-like layout into a compact forum profile with real avatar, small identity block, contribution tabs, recent public content, and a V2EX-style information table.
   - Localized account topic/reply pages so `Topics`, `Posts`, `Recent`, `Best`, and `Controversial` no longer leak into public UI.
@@ -29,6 +36,14 @@ Updated: 2026-06-12
 
 ## Verified
 
+- Round 3 live Playwright checks passed after deployment:
+  - Desktop home, `/groups`, `/world`, search-to-login, and bad-login feedback have no horizontal overflow.
+  - Mobile home, topic detail, and `/groups` have no horizontal overflow at `390x844`.
+  - `/groups` visible text no longer contains `administrators` or `Global Moderators`.
+  - Guest search for `准证` lands on `/login?next=/search...` and shows `登录后继续搜索：准证`.
+  - Bad password login shows `登录失败` / `无效登录凭证` visibly.
+  - Light/dark toggle was verified; dark mode keeps cards, text, buttons, and node lists readable.
+  - NodeBB build completed successfully, the container restarted, and server logs show no fatal/error after restart.
 - Round 2 live Playwright matrix passed after deployment:
   - Desktop and mobile user profile pages have no horizontal overflow and no console or HTTP errors in the tested route set.
   - Mobile user profile now shows recent public content near the top instead of a large stats dashboard.
@@ -68,6 +83,16 @@ Updated: 2026-06-12
 
 ## Latest Evidence
 
+- `/tmp/sgtalk-final-1781243508845/audit.json`
+- `/tmp/sgtalk-final-1781243508845/home.png`
+- `/tmp/sgtalk-final-1781243508845/mobile-home.png`
+- `/tmp/sgtalk-final-1781243508845/groups.png`
+- `/tmp/sgtalk-final-1781243508845/search-login.png`
+- `/tmp/sgtalk-final-1781243508845/login-bad.png`
+- `/tmp/sgtalk-extra-1781243615070/audit.json`
+- `/tmp/sgtalk-extra-1781243615070/topic-detail-guest.png`
+- `/tmp/sgtalk-extra-1781243615070/node-qa-guest.png`
+- `/tmp/sgtalk-theme-1781243658133/dark-toggle.png`
 - `output/playwright/round2-after/audit.json`
 - `output/playwright/round2-final/audit.json`
 - `output/playwright/round2-final/mobile-light-home.png`
@@ -99,9 +124,9 @@ Updated: 2026-06-12
 - Split page composer and dynamic NodeBB composer into explicit style boundaries.
 - Replace NodeBB default topic toolbar with a compact V2EX-style topic control row.
 - Override post row template for true V2EX-style avatar/content/floor/footer structure.
-- Hide mobile topic-list `最后回复` text to keep rows denser.
 - Make homepage default post target configurable instead of hard-coded `cid=5`.
 - Re-test logged-in compose/reply/like/delete flows in an authenticated browser session or with a temporary QA account.
+- Direct typed `/compose?cid=5` currently redirects to `/login` without a `next` query because that redirect happens in NodeBB before the theme script can preserve context. Clicked guest post-entry links already preserve compose intent.
 - The NodeBB username/group availability checks still use `HEAD` requests where 404 means "available"; this can appear as console noise during registration typing even though the user-facing form now shows proper validation.
 - Decide whether to delete or rewrite the current public test-looking topic `发一个帖子试试`; it is live user content, so it was not removed by code.
 - Review NodeBB dependency audit output and the `nodebb-plugin-emoji-android` compatibility warning before a larger public launch.

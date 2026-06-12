@@ -34,9 +34,9 @@
 			{{{ end }}}
 
 			{{{ if (selectedCategory.cid == "-1") }}}
-			<div class="py-3">
-				<h4>[[recent:uncategorized.title]]</h4>
-				<p>[[recent:uncategorized.intro]]</p>
+			<div class="sg-known-topics-note">
+				<h4>全站主题</h4>
+				<p>这里按时间整理 SGTALK 的公开讨论，适合快速查看最近发生的新加坡生活话题。</p>
 			</div>
 			{{{ end }}}
 

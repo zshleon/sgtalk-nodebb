@@ -14,8 +14,9 @@
       <a class="sg-brand-link d-flex align-items-center text-decoration-none" href="{config.relative_path}/" aria-label="SGTALK">
         <span class="sg-wordmark" aria-hidden="true"><span class="sg-wordmark-sg">SG</span><span class="sg-wordmark-talk">TALK</span></span>
       </a>
-      <form action="{config.relative_path}/search" method="get" class="d-none d-sm-block m-0">
-        <input name="term" type="search" class="form-control px-3 py-1.5 rounded-2 border-0 bg-light text-sm" placeholder="搜索主题 / 节点 / 用户" style="min-width: 240px; background-color: var(--color-tertiary-101) !important;" value=""/>
+      <form action="{config.relative_path}/search" method="get" class="sg-v2-search-form d-none d-sm-block m-0" data-sgtalk-search-form>
+        <input name="term" type="search" class="form-control px-3 py-1.5 rounded-2 border-0 bg-light text-sm" placeholder="{{{ if loggedIn }}}搜索主题 / 节点 / 用户{{{ else }}}登录后搜索主题 / 节点 / 用户{{{ end }}}" style="min-width: 240px; background-color: var(--color-tertiary-101) !important;" value="" aria-describedby="sg-search-notice"/>
+        <span class="sg-search-notice" id="sg-search-notice" role="status" aria-live="polite" hidden></span>
       </form>
     </div>
     <div class="d-flex align-items-center gap-1">

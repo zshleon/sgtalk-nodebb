@@ -103,6 +103,13 @@ Expected log note:
 
 Already shipped:
 
+- Round 3 live polish:
+  - Guest search no longer feels broken: a search term redirects to login with a visible Chinese context message like `登录后继续搜索：准证`.
+  - Bad username/password login now shows a visible Chinese error panel instead of failing silently.
+  - `/world` / all-known-topics copy was replaced with SGTALK-facing `全站主题` copy.
+  - `/groups` no longer exposes NodeBB's internal `administrators` / moderator groups to the public; it now shows a simple community groups placeholder.
+  - Guest homepage/sidebar density was tightened again: hidden promotional hero, hidden empty `今日热议` and `社区状态`, smaller mobile topic rows, and cleaner hot-node card.
+  - Desktop, mobile, and dark-mode screenshots were re-verified after deployment.
 - Round 2 live polish:
   - User profile pages are now compact forum profiles instead of oversized dashboards.
   - Public user pages show recent content near the top, followed by a V2EX-style account information table.
@@ -145,9 +152,10 @@ Highest-priority structural work:
 3. Override post row template for true V2EX-style avatar/content/floor/footer structure.
 4. Make homepage default post target configurable instead of hard-coded `cid=5`.
 5. Re-test logged-in compose/reply/like/delete flows with a real logged-in browser session or a temporary QA account.
-6. Decide whether to delete or rewrite the current public test-looking topic `发一个帖子试试`; it is live user content, so code changes did not remove it.
-7. Review the existing NodeBB dependency audit output and the `nodebb-plugin-emoji-android` compatibility warning before a larger public launch.
-8. If registration console cleanliness becomes important, replace or suppress NodeBB's username/group availability `HEAD` checks where 404 currently means "available".
+6. If direct typed `/compose?cid=5` should preserve intent, add a server-side redirect hook; clicked guest entry already preserves compose intent.
+7. Decide whether to delete or rewrite the current public test-looking topic `发一个帖子试试`; it is live user content, so code changes did not remove it.
+8. Review the existing NodeBB dependency audit output and the `nodebb-plugin-emoji-android` compatibility warning before a larger public launch.
+9. If registration console cleanliness becomes important, replace or suppress NodeBB's username/group availability `HEAD` checks where 404 currently means "available".
 
 ## Handoff Prompt For Another AI
 
@@ -158,5 +166,5 @@ You are taking over SGTALK, a NodeBB-based forum at https://sgtalk.zshstc.org. D
 
 Read HANDOFF.md, widgets/global-sidebar.html, docs/SGTALK_PHASE1_QA.md, and docs/SGTALK_V2EX_UI_BLUEPRINT.md first. Keep secrets, .env, mongo data, nodebb runtime data, and backups out of git. Work mainly in themes/nodebb-theme-sgtalk-v2ex. Do not use the previous Google Drive folder as the source of truth; GitHub is canonical.
 
-The next priority is structural theme quality: split page composer vs dynamic composer styles, replace the default topic toolbar, and make post rows match V2EX-style avatar/content/floor/footer layout. After edits, rsync the theme to the server, run NodeBB build, restart nodebb, then verify with browser screenshots and logs.
+The latest deployed pass fixed guest search context, visible login errors, public groups exposure, `/world` copy, and mobile/sidebar density. The next priority is structural theme quality: split page composer vs dynamic composer styles, replace the default topic toolbar, make post rows match V2EX-style avatar/content/floor/footer layout, and re-test real logged-in compose/reply/like/delete with an authenticated session. After edits, rsync the theme to the server, run NodeBB build, restart nodebb, then verify with browser screenshots and logs.
 ```

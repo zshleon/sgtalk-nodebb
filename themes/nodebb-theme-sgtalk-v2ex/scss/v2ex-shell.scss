@@ -1161,17 +1161,17 @@ body.theme-sgtalk {
 }
 
 .theme-sgtalk .sg-account-avatar {
-  width: 88px;
-  height: 88px;
+  width: 64px;
+  height: 64px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .theme-sgtalk .sg-account-avatar .avatar {
-  --avatar-size: 88px !important;
-  width: 88px !important;
-  height: 88px !important;
+  --avatar-size: 64px !important;
+  width: 64px !important;
+  height: 64px !important;
   border-radius: 4px !important;
   object-fit: cover;
 }

@@ -23,6 +23,7 @@
   --sg-bg: var(--background);
   --sg-bg-top: #FAFAFA;
   --sg-surface: var(--card-bg);
+  --sg-header-bg: #FFFFFF;
   --sg-surface-soft: #FAFAFA;
   --sg-surface-warm: #FFFFFF;
   --sg-border: var(--border-color);
@@ -63,12 +64,13 @@
   --border-color: rgba(255, 255, 255, 0.08);
   --border-color-strong: rgba(255, 255, 255, 0.12);
   --text-main: #F5F5F7;
-  --text-muted: #98989D;
-  --text-tertiary: #636366;
+  --text-muted: #B3B7C2;
+  --text-tertiary: #8A90A0;
   --color-tertiary-101: #2C2C2E;
   --bg-image: none;
 
   --sg-surface-soft: #2C2C2E;
+  --sg-header-bg: #161719;
   --sg-link: #2997FF;
   --sg-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15);
   --sg-shadow-tight: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 1px 2px rgba(0, 0, 0, 0.2);

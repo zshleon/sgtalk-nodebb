@@ -1,5 +1,22 @@
 <!-- IMPORT partials/account/header.tpl -->
 
+<section class="sg-account-section sg-account-recent">
+	<div class="sg-account-section-title">最近内容</div>
+	{{{ if latestPosts.length }}}
+	<div class="sg-account-recent-list">
+		{{{ each latestPosts }}}
+		<a class="sg-account-recent-item" href="{config.relative_path}/topic/{./topic.slug}">
+			<span class="sg-category-label">{./category.name}</span>
+			<strong>{./topic.title}</strong>
+			<span class="sg-account-recent-meta"><span class="timeago" title="{./timestampISO}"></span></span>
+		</a>
+		{{{ end }}}
+	</div>
+	{{{ else }}}
+	<div class="sg-account-muted">暂无公开内容。</div>
+	{{{ end }}}
+</section>
+
 <section class="sg-account-section">
 	<div class="sg-account-section-title">关于</div>
 	{{{ if aboutme }}}
@@ -13,7 +30,7 @@
 
 <section class="sg-account-section">
 	<div class="sg-account-section-title">社区活动</div>
-	<div class="sg-account-stats">
+	<div class="sg-account-info-table">
 		<div>
 			<span>主题</span>
 			<strong>{humanReadableNumber(counts.topics)}</strong>
@@ -21,10 +38,6 @@
 		<div>
 			<span>回复</span>
 			<strong>{humanReadableNumber(counts.posts)}</strong>
-		</div>
-		<div>
-			<span>声望</span>
-			<strong>{humanReadableNumber(reputation)}</strong>
 		</div>
 		<div>
 			<span>资料浏览</span>

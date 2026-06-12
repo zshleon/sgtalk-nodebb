@@ -31,23 +31,14 @@
 		</div>
 	</section>
 
-	<nav class="sg-account-tabs" aria-label="用户资料导航">
-		<a href="{config.relative_path}/user/{userslug}" class="{{{ if template.account/profile }}}active{{{ end }}}">主页</a>
-		<a href="{config.relative_path}/user/{userslug}/topics" class="{{{ if template.account/topics }}}active{{{ end }}}">
-			主题 <span>{humanReadableNumber(counts.topics)}</span>
-		</a>
-		<a href="{config.relative_path}/user/{userslug}/posts" class="{{{ if template.account/posts }}}active{{{ end }}}">
-			回复 <span>{humanReadableNumber(counts.posts)}</span>
-		</a>
-		<a href="{config.relative_path}/user/{userslug}/groups" class="{{{ if template.account/groups }}}active{{{ end }}}">
-			群组 <span>{humanReadableNumber(counts.groups)}</span>
-		</a>
-		<a href="{config.relative_path}/user/{userslug}/followers" class="{{{ if template.account/followers }}}active{{{ end }}}">
-			粉丝 <span>{humanReadableNumber(counts.followers)}</span>
-		</a>
-		<a href="{config.relative_path}/user/{userslug}/following" class="{{{ if template.account/following }}}active{{{ end }}}">
-			关注 <span>{humanReadableNumber(counts.following)}</span>
-		</a>
-	</nav>
+		<nav class="sg-account-tabs" aria-label="用户资料导航">
+			<a href="{config.relative_path}/user/{userslug}" class="{{{ if template.account/profile }}}active{{{ end }}}">主页</a>
+			<a href="{config.relative_path}/user/{userslug}/topics" class="{{{ if template.account/topics }}}active{{{ end }}}">
+				主题 <span>{humanReadableNumber(counts.topics)}</span>
+			</a>
+			<a href="{config.relative_path}/user/{userslug}/posts" class="{{{ if template.account/posts }}}active{{{ end }}}">
+				回复 <span>{humanReadableNumber(counts.posts)}</span>
+			</a>
+		</nav>
 
 	<div class="sg-account-content">

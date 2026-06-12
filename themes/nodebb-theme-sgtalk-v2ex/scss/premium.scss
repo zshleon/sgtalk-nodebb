@@ -1074,7 +1074,7 @@ body.theme-sgtalk {
 
 .theme-sgtalk .sg-account-identity h1 {
   color: var(--sg-text);
-  font-size: 24px;
+  font-size: 21px;
   font-weight: 800;
   letter-spacing: 0;
 }
@@ -1097,7 +1097,33 @@ body.theme-sgtalk {
 
 .theme-sgtalk .sg-account-content {
   background: var(--sg-surface);
-  padding: 20px 24px;
+  padding: 16px 20px;
+}
+
+.theme-sgtalk .sg-account-hero {
+  grid-template-columns: 64px minmax(0, 1fr) auto;
+  padding: 16px 18px;
+}
+
+.theme-sgtalk .sg-account-avatar,
+.theme-sgtalk .sg-account-avatar .avatar,
+.theme-sgtalk .sg-account-avatar [component="user/picture"] {
+  width: 64px !important;
+  height: 64px !important;
+  --avatar-size: 64px !important;
+}
+
+.theme-sgtalk .sg-account-meta {
+  margin-top: 7px;
+  font-size: 12px;
+}
+
+.theme-sgtalk.page-user .sg-v2-guest-card {
+  display: none !important;
+}
+
+.theme-sgtalk.page-user .sg-v2-side {
+  gap: 12px;
 }
 
 .theme-sgtalk .sg-account-stats {
@@ -1120,6 +1146,134 @@ body.theme-sgtalk {
   color: var(--sg-text);
   font-size: 24px;
   font-weight: 700;
+}
+
+.theme-sgtalk .sg-account-info-table {
+  overflow: hidden;
+  border: 1px solid var(--sg-border);
+  border-radius: var(--sg-radius-tight);
+  background: var(--sg-surface);
+}
+
+.theme-sgtalk .sg-account-info-table div {
+  display: grid;
+  grid-template-columns: 128px minmax(0, 1fr);
+  align-items: center;
+  min-height: 38px;
+  border-bottom: 1px solid var(--sg-border);
+}
+
+.theme-sgtalk .sg-account-info-table div:last-child {
+  border-bottom: 0;
+}
+
+.theme-sgtalk .sg-account-info-table span {
+  height: 100%;
+  padding: 10px 14px;
+  border-right: 1px solid var(--sg-border);
+  background: var(--sg-surface-soft);
+  color: var(--sg-muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.theme-sgtalk .sg-account-info-table strong {
+  padding: 10px 14px;
+  color: var(--sg-text);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.theme-sgtalk .sg-account-subhead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.theme-sgtalk .sg-account-subhead h3 {
+  margin: 0;
+  color: var(--sg-text);
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.theme-sgtalk .sg-account-subhead a,
+.theme-sgtalk .sg-account-subtabs a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 10px;
+  border: 1px solid var(--sg-border);
+  border-radius: var(--sg-radius-tight);
+  background: var(--sg-surface);
+  color: var(--sg-link);
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.theme-sgtalk .sg-account-subtabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.theme-sgtalk .sg-account-subtabs a.active {
+  border-color: var(--sg-text);
+  background: var(--sg-text);
+  color: var(--sg-surface) !important;
+}
+
+.theme-sgtalk .sg-account-empty {
+  padding: 18px 0;
+  color: var(--sg-muted);
+  font-size: 14px;
+}
+
+.theme-sgtalk .sg-account-recent-list {
+  overflow: hidden;
+  border: 1px solid var(--sg-border);
+  border-radius: var(--sg-radius-tight);
+  background: var(--sg-surface);
+}
+
+.theme-sgtalk .sg-account-recent-item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--sg-border);
+  color: var(--sg-text);
+  text-decoration: none;
+}
+
+.theme-sgtalk .sg-account-recent-item:last-child {
+  border-bottom: 0;
+}
+
+.theme-sgtalk .sg-account-recent-item:hover {
+  background: var(--sg-surface-soft);
+}
+
+.theme-sgtalk .sg-account-recent-item strong {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--sg-text);
+  font-size: 14px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.theme-sgtalk .sg-account-recent-meta {
+  color: var(--sg-muted);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -1987,5 +2141,84 @@ body.theme-sgtalk:not(.page-compose) .composer[component="composer"] {
 
   .theme-sgtalk .sg-auth-submit.sg-v2-button {
     font-size: 15px;
+  }
+
+  .theme-sgtalk .sg-v2-guest-card .sg-v2-guest-hero {
+    display: none !important;
+  }
+
+  .theme-sgtalk .sg-v2-guest-card .sg-v2-guest-body {
+    padding: 12px 14px !important;
+  }
+
+  .theme-sgtalk .sg-v2-guest-card .sg-v2-guest-copy {
+    margin-bottom: 10px !important;
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+  }
+
+  .theme-sgtalk .sg-v2-today-box,
+  .theme-sgtalk .sg-v2-status-box {
+    display: none !important;
+  }
+
+  .theme-sgtalk .sg-account-hero {
+    grid-template-columns: 52px minmax(0, 1fr);
+    align-items: start;
+    gap: 12px;
+    padding: 14px 16px;
+  }
+
+  .theme-sgtalk .sg-account-avatar,
+  .theme-sgtalk .sg-account-avatar .avatar,
+  .theme-sgtalk .sg-account-avatar [component="user/picture"] {
+    width: 52px !important;
+    height: 52px !important;
+    --avatar-size: 52px !important;
+  }
+
+  .theme-sgtalk .sg-account-identity h1 {
+    font-size: 20px !important;
+  }
+
+  .theme-sgtalk .sg-account-meta {
+    gap: 4px 10px;
+    margin-top: 7px;
+    font-size: 12px;
+  }
+
+  .theme-sgtalk .sg-account-actions {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+
+  .theme-sgtalk .sg-account-content {
+    padding: 14px 16px;
+  }
+
+  .theme-sgtalk .sg-account-section + .sg-account-section {
+    margin-top: 14px;
+    padding-top: 14px;
+  }
+
+  .theme-sgtalk .sg-account-info-table div {
+    grid-template-columns: 94px minmax(0, 1fr);
+    min-height: 34px;
+  }
+
+  .theme-sgtalk .sg-account-recent-item {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 7px 9px;
+    min-height: 42px;
+  }
+
+  .theme-sgtalk .sg-account-recent-meta {
+    grid-column: 2;
+  }
+
+  .theme-sgtalk .sg-account-links a {
+    min-height: 34px;
+    color: var(--sg-link);
+    background: var(--sg-surface);
   }
 }

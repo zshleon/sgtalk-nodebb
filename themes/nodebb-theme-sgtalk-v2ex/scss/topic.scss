@@ -26,6 +26,7 @@
   min-height: 42px;
 
   a.sg-v2-topic-rss,
+  .sg-topic-sort-toggle,
   .btn-group button.dropdown-toggle,
   [component="topic/watch"] button.dropdown-toggle {
     display: inline-flex;
@@ -102,6 +103,43 @@
     &:hover {
       background: #bf1d1d;
       border-color: #a91616;
+    }
+  }
+}
+
+@media (max-width: 575.98px) {
+  .sg-v2-topic-bar {
+    align-items: center !important;
+    gap: 8px;
+    min-height: 44px;
+    padding: 8px 10px !important;
+
+    > div:first-child {
+      flex: 1 1 auto;
+      min-width: 0;
+      flex-wrap: nowrap !important;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    > div:first-child::-webkit-scrollbar {
+      display: none;
+    }
+
+    a.sg-v2-topic-rss,
+    .sg-topic-sort-toggle,
+    .btn-group button.dropdown-toggle,
+    [component="topic/watch"] button.dropdown-toggle {
+      min-height: 34px;
+      padding: 0 10px;
+      font-size: 12px;
+    }
+
+    a[component="topic/reply/guest"],
+    [component="topic/reply/container"] a[component="topic/reply"] {
+      min-height: 36px;
+      padding: 0 12px;
+      white-space: nowrap;
     }
   }
 }

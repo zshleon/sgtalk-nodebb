@@ -103,6 +103,14 @@ Expected log note:
 
 Already shipped:
 
+- Round 2 live polish:
+  - User profile pages are now compact forum profiles instead of oversized dashboards.
+  - Public user pages show recent content near the top, followed by a V2EX-style account information table.
+  - User contribution tabs are reduced to `主页`, `主题`, and `回复`; account topics/replies pages are localized.
+  - Topic sort and reply controls are localized and compact.
+  - Mobile sidebars no longer show the large guest illustration or empty low-value cards.
+  - Mobile header/node navigation is denser and clearer, with a fade affordance and less guest-only clutter.
+  - Dark-mode muted text and theme-toggle touch target were improved.
 - Latest live theme was pulled back from `/opt/stacks/sgtalk-nodebb/themes/nodebb-theme-sgtalk-v2ex` and committed to GitHub so the repository reflects the actual deployed theme.
 - The public sidebar widget source is now tracked at `widgets/global-sidebar.html`; it removes fake coin/favourite counts and uses a text SGTALK mark instead of the old logo screenshot.
 - Stable desktop frame with `1280px` shell and `1fr + 300px` grid.
@@ -124,6 +132,7 @@ Already shipped:
 - Login/register now use field-level Chinese validation for empty required fields and mismatched passwords.
 - Mobile auth controls and topic reply/upvote controls were raised to practical touch-target sizes.
 - Post-audit Playwright live matrix passed across desktop `1440x900`, wide `1920x1080`, and mobile `390x844`.
+- Round 2 Playwright live checks passed for mobile/desktop user pages, mobile home, and mobile dark topic detail with no horizontal overflow, no console/HTTP errors, and no visible prompt/demo/provider residue.
 
 See `docs/SGTALK_PHASE1_QA.md` for screenshot evidence and verified flows.
 
@@ -135,7 +144,7 @@ Highest-priority structural work:
 2. Replace NodeBB default topic toolbar with a compact V2EX-style control row.
 3. Override post row template for true V2EX-style avatar/content/floor/footer structure.
 4. Make homepage default post target configurable instead of hard-coded `cid=5`.
-5. Re-test logged-in compose with a real logged-in browser session or a temporary QA account.
+5. Re-test logged-in compose/reply/like/delete flows with a real logged-in browser session or a temporary QA account.
 6. Decide whether to delete or rewrite the current public test-looking topic `发一个帖子试试`; it is live user content, so code changes did not remove it.
 7. Review the existing NodeBB dependency audit output and the `nodebb-plugin-emoji-android` compatibility warning before a larger public launch.
 8. If registration console cleanliness becomes important, replace or suppress NodeBB's username/group availability `HEAD` checks where 404 currently means "available".
@@ -147,7 +156,7 @@ Use this prompt:
 ```text
 You are taking over SGTALK, a NodeBB-based forum at https://sgtalk.zshstc.org. Do not work on the older custom Next.js/Supabase prototype. The canonical code repository is https://github.com/zshleon/sgtalk-nodebb and the local working copy is /Users/jingwazhu/Documents/Codex/sgtalk-nodebb. The live server stack is /opt/stacks/sgtalk-nodebb on root@10.0.0.50 using ssh -o HostKeyAlias=10.0.0.50 -i ~/.ssh/id_ed25519.
 
-Read HANDOFF.md, widgets/global-sidebar.html, docs/SGTALK_PHASE1_QA.md, and docs/SGTALK_V2EX_UI_BLUEPRINT.md first. Keep secrets, .env, mongo data, nodebb runtime data, and backups out of git. Work mainly in themes/nodebb-theme-sgtalk-v2ex.
+Read HANDOFF.md, widgets/global-sidebar.html, docs/SGTALK_PHASE1_QA.md, and docs/SGTALK_V2EX_UI_BLUEPRINT.md first. Keep secrets, .env, mongo data, nodebb runtime data, and backups out of git. Work mainly in themes/nodebb-theme-sgtalk-v2ex. Do not use the previous Google Drive folder as the source of truth; GitHub is canonical.
 
 The next priority is structural theme quality: split page composer vs dynamic composer styles, replace the default topic toolbar, and make post rows match V2EX-style avatar/content/floor/footer layout. After edits, rsync the theme to the server, run NodeBB build, restart nodebb, then verify with browser screenshots and logs.
 ```

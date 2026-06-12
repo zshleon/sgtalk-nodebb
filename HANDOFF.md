@@ -119,7 +119,11 @@ Already shipped:
 - Dark mode keeps primary CTAs red and profile section headings readable.
 - The dead palette button was removed; the reliable light/dark toggle remains.
 - Public avatars preserve real image URLs when present and otherwise use a restrained initials fallback.
-- Post-audit Playwright core matrix passed 20/20 on the live site.
+- Guest post entry is now explicit: visitors see `登录后发帖`, and post links carry `next=/compose?cid=5` so login preserves intent.
+- Topic/category labels now use a lightweight SGTALK node label instead of NodeBB's default label markup, removing the broken-looking `? 问与答`.
+- Login/register now use field-level Chinese validation for empty required fields and mismatched passwords.
+- Mobile auth controls and topic reply/upvote controls were raised to practical touch-target sizes.
+- Post-audit Playwright live matrix passed across desktop `1440x900`, wide `1920x1080`, and mobile `390x844`.
 
 See `docs/SGTALK_PHASE1_QA.md` for screenshot evidence and verified flows.
 
@@ -130,10 +134,11 @@ Highest-priority structural work:
 1. Split page composer and dynamic NodeBB composer into explicit style boundaries.
 2. Replace NodeBB default topic toolbar with a compact V2EX-style control row.
 3. Override post row template for true V2EX-style avatar/content/floor/footer structure.
-4. Hide mobile topic-list `最后回复` text to keep rows denser.
-5. Make homepage default post target configurable instead of hard-coded `cid=5`.
-6. Re-test logged-in compose with a real logged-in browser session or a temporary QA account.
-7. If registration console cleanliness becomes important, replace or suppress NodeBB's username/group availability `HEAD` checks where 404 currently means "available".
+4. Make homepage default post target configurable instead of hard-coded `cid=5`.
+5. Re-test logged-in compose with a real logged-in browser session or a temporary QA account.
+6. Decide whether to delete or rewrite the current public test-looking topic `发一个帖子试试`; it is live user content, so code changes did not remove it.
+7. Review the existing NodeBB dependency audit output and the `nodebb-plugin-emoji-android` compatibility warning before a larger public launch.
+8. If registration console cleanliness becomes important, replace or suppress NodeBB's username/group availability `HEAD` checks where 404 currently means "available".
 
 ## Handoff Prompt For Another AI
 

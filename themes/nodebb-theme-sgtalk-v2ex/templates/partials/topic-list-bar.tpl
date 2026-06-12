@@ -27,7 +27,11 @@
 		{{{ end }}}
 
 		{{{ if (!loggedIn && (!privileges.topics:create && !canPost))}}}
-		<a component="category/post/guest" href="{config.relative_path}/login" class="sg-v2-post-link">登录后发帖</a>
+		{{{ if template.category }}}
+		<a component="category/post/guest" href="{config.relative_path}/login?next=%2Fcompose%3Fcid%3D{cid}" class="sg-v2-post-link sg-v2-post-link-guest" data-ajaxify="false">登录后发帖</a>
+		{{{ else }}}
+		<a component="category/post/guest" href="{config.relative_path}/login?next=%2Fcompose%3Fcid%3D{config.defaultComposeCid}" class="sg-v2-post-link sg-v2-post-link-guest" data-ajaxify="false">登录后发帖</a>
+		{{{ end }}}
 		{{{ end }}}
 	</div>
 </div>

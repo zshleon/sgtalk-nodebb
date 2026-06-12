@@ -371,9 +371,9 @@
     return !(user && Number(user.uid) > 0);
   }
 
-  function loginUrlWithNext() {
+  function loginUrlWithNext(nextUrl) {
     const relativePath = (window.config && window.config.relative_path) || '';
-    const next = window.location.pathname + window.location.search + window.location.hash;
+    const next = nextUrl || (window.location.pathname + window.location.search + window.location.hash);
     return `${relativePath}/login?next=${encodeURIComponent(next)}`;
   }
 
@@ -425,6 +425,7 @@
 
     input.classList.remove('is-invalid');
     input.removeAttribute('aria-invalid');
+    input.setCustomValidity('');
     const feedback = fieldFeedback(input);
     if (feedback) {
       feedback.textContent = '';
@@ -438,6 +439,7 @@
 
     input.classList.add('is-invalid');
     input.setAttribute('aria-invalid', 'true');
+    input.setCustomValidity(message);
     const feedback = fieldFeedback(input);
     if (feedback) {
       feedback.textContent = message;
@@ -479,28 +481,48 @@
     fields.forEach(clearFieldError);
     hideRegisterError(form);
 
-    if (!username || username.value.trim().length < 2) {
+    if (!username || !username.value.trim()) {
+      const message = '请填写昵称。';
+      setFieldError(username, message);
+      messages.push(message);
+      firstInvalid = firstInvalid || username;
+    } else if (username.value.trim().length < 2) {
       const message = '昵称至少需要 2 个字符。';
       setFieldError(username, message);
       messages.push(message);
       firstInvalid = firstInvalid || username;
     }
 
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+    if (!email || !email.value.trim()) {
+      const message = '请填写邮箱地址。';
+      setFieldError(email, message);
+      messages.push(message);
+      firstInvalid = firstInvalid || email;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
       const message = '请填写有效邮箱地址。';
       setFieldError(email, message);
       messages.push(message);
       firstInvalid = firstInvalid || email;
     }
 
-    if (!password || password.value.length < 6) {
+    if (!password || !password.value) {
+      const message = '请填写密码。';
+      setFieldError(password, message);
+      messages.push(message);
+      firstInvalid = firstInvalid || password;
+    } else if (password.value.length < 6) {
       const message = '密码至少需要 6 位。';
       setFieldError(password, message);
       messages.push(message);
       firstInvalid = firstInvalid || password;
     }
 
-    if (!confirm || confirm.value !== (password && password.value)) {
+    if (!confirm || !confirm.value) {
+      const message = '请再次输入密码。';
+      setFieldError(confirm, message);
+      messages.push(message);
+      firstInvalid = firstInvalid || confirm;
+    } else if (confirm.value !== (password && password.value)) {
       const message = '两次输入的密码不一致。';
       setFieldError(confirm, message);
       messages.push(message);
@@ -556,6 +578,114 @@
         input.addEventListener('input', () => {
           clearFieldError(input);
           hideRegisterError(form);
+          const password = form.querySelector('#password');
+          const confirm = form.querySelector('#password-confirm');
+          if (confirm && confirm.value && password && password.value && confirm.value !== password.value) {
+            setFieldError(confirm, '两次输入的密码不一致。');
+          }
+        });
+      });
+    });
+  }
+
+  function loginErrorBox(form) {
+    return form && form.querySelector('#login-error-notify');
+  }
+
+  function showLoginError(form, messages) {
+    const box = loginErrorBox(form);
+    if (!box) {
+      return;
+    }
+
+    const body = box.querySelector('p') || box;
+    body.textContent = messages.join(' ');
+    box.classList.remove('hidden', 'd-none');
+    box.hidden = false;
+  }
+
+  function hideLoginError(form) {
+    const box = loginErrorBox(form);
+    if (!box) {
+      return;
+    }
+
+    box.classList.add('hidden');
+    box.hidden = true;
+  }
+
+  function validateLoginForm(form) {
+    const username = form.querySelector('#username');
+    const password = form.querySelector('#password');
+    const messages = [];
+    let firstInvalid = null;
+
+    [username, password].forEach(clearFieldError);
+    hideLoginError(form);
+
+    if (!username || !username.value.trim()) {
+      const message = '请填写用户名或邮箱。';
+      setFieldError(username, message);
+      messages.push(message);
+      firstInvalid = firstInvalid || username;
+    }
+
+    if (!password || !password.value) {
+      const message = '请填写密码。';
+      setFieldError(password, message);
+      messages.push(message);
+      firstInvalid = firstInvalid || password;
+    }
+
+    if (messages.length) {
+      showLoginError(form, messages);
+      if (firstInvalid) {
+        firstInvalid.focus();
+      }
+      return false;
+    }
+
+    return true;
+  }
+
+  function bindLoginValidation(root) {
+    const scope = root && root.querySelectorAll ? root : document;
+    const forms = [];
+
+    if (scope.matches && scope.matches('#login-form')) {
+      forms.push(scope);
+    }
+
+    scope.querySelectorAll('#login-form').forEach((form) => forms.push(form));
+    forms.forEach((form) => {
+      if (form.dataset.sgtalkLoginValidation === '1') {
+        return;
+      }
+
+      form.dataset.sgtalkLoginValidation = '1';
+      form.setAttribute('novalidate', 'novalidate');
+
+      form.addEventListener('submit', (event) => {
+        if (!validateLoginForm(form)) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+        }
+      }, true);
+
+      const submitButton = form.querySelector('#login');
+      if (submitButton) {
+        submitButton.addEventListener('click', (event) => {
+          if (!validateLoginForm(form)) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+          }
+        }, true);
+      }
+
+      form.querySelectorAll('input').forEach((input) => {
+        input.addEventListener('input', () => {
+          clearFieldError(input);
+          hideLoginError(form);
         });
       });
     });
@@ -584,6 +714,12 @@
       event.preventDefault();
       event.stopImmediatePropagation();
       link.setAttribute('aria-busy', 'true');
+
+      if (isGuestUser() && url.pathname.startsWith('/compose')) {
+        window.location.assign(loginUrlWithNext(url.pathname + url.search + url.hash));
+        return;
+      }
+
       window.location.assign(link.href);
     }, true);
   }
@@ -1003,6 +1139,7 @@
     bindHardNavigation();
     bindGuestProtectedActions();
     bindRegisterValidation(document);
+    bindLoginValidation(document);
     updateAuthState();
     patchFetchForComposerErrors();
     replaceDefaultAvatars();
@@ -1035,6 +1172,7 @@
           scanLater(node);
           bindSubmitFeedback(node);
           bindRegisterValidation(node);
+          bindLoginValidation(node);
           initV2exEditorTabs(node);
           if (node.matches('.avatar, [component="avatar/icon"], img[src*="googleusercontent.com"]') ||
               node.querySelector('.avatar, [component="avatar/icon"], img[src*="googleusercontent.com"]')) {
@@ -1053,6 +1191,7 @@
       scanLater(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
       bindSubmitFeedback(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
       bindRegisterValidation(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
+      bindLoginValidation(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
       initV2exEditorTabs(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
       updateAuthState();
       replaceDefaultAvatars();
@@ -1066,6 +1205,7 @@
           scanLater(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
           bindSubmitFeedback(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
           bindRegisterValidation(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
+          bindLoginValidation(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
           initV2exEditorTabs(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
           updateAuthState();
           replaceDefaultAvatars();
@@ -1073,6 +1213,7 @@
         hooks.on('action:ajaxify.end', () => {
           updateAuthState();
           bindRegisterValidation(document);
+          bindLoginValidation(document);
           replaceDefaultAvatars();
           injectMerlionPicker();
           initV2exEditorTabs(document);

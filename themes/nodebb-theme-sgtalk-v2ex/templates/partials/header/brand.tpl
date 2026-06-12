@@ -42,7 +42,7 @@
   </div>
   <div class="border-top border-light-subtle"></div>
   <div class="container-lg d-flex align-items-center justify-content-between py-1.5 py-md-2 px-3 px-md-4">
-    <div class="d-flex align-items-center overflow-x-auto no-scrollbar gap-2" style="scrollbar-width: none;">
+    <div class="sg-v2-nav-scroll d-flex align-items-center overflow-x-auto no-scrollbar gap-2" style="scrollbar-width: none;">
       <a class="d-none d-sm-inline-block text-muted text-decoration-none pe-2" title="首页" href="{config.relative_path}/">
         <!-- Lucide-style Home Icon SVG -->
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home sg-home-icon" style="width:18px; height:18px;"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
@@ -62,10 +62,16 @@
       </nav>
     </div>
     <div>
+      {{{ if loggedIn }}}
       <a class="btn btn-danger btn-sm text-white d-flex align-items-center gap-1 sg-v2-post-link px-2.5 py-1.5" href="{config.relative_path}/compose?cid={config.defaultComposeCid}" data-ajaxify="false" role="button" style="font-weight:600; font-size:12px; background-color: var(--primary-color); border-color: var(--primary-color);">
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
         发布主题
       </a>
+      {{{ else }}}
+      <a class="btn btn-light btn-sm d-flex align-items-center gap-1 sg-v2-post-link sg-v2-post-link-guest px-2.5 py-1.5" href="{config.relative_path}/login?next=%2Fcompose%3Fcid%3D{config.defaultComposeCid}" data-ajaxify="false" role="button" style="font-weight:600; font-size:12px;">
+        登录后发帖
+      </a>
+      {{{ end }}}
     </div>
   </div>
 </header>

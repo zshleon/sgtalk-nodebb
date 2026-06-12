@@ -18,7 +18,7 @@
 
 			<div class="sg-topic-meta">
 				{{{ if (!template.category || (cid != ./cid)) }}}
-				{buildCategoryLabel(./category, "a", "border")}
+				<a class="sg-category-label" href="{config.relative_path}/category/{./category.slug}">{./category.name}</a>
 				{{{ end }}}
 				<a class="sg-topic-user" href="{{{ if ./user.userslug }}}{config.relative_path}/user/{./user.userslug}{{{ else }}}#{{{ end }}}">{./user.displayname}</a>
 				<span class="sg-dot">·</span>

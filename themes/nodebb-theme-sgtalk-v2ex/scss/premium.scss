@@ -1,5 +1,5 @@
 // ============================================================
-// SGTALK Premium Design — Apple / Google Tier
+// SGTALK visual polish
 // ============================================================
 // This file is loaded LAST and provides the definitive styling.
 // It uses design tokens from variables.scss exclusively.
@@ -13,7 +13,7 @@ body.theme-sgtalk {
                "Segoe UI", "PingFang SC", "Hiragino Sans GB",
                "Microsoft YaHei", system-ui, sans-serif;
   font-size: 14px;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -150,7 +150,7 @@ body.theme-sgtalk {
   color: var(--sg-text) !important;
   font-size: 28px !important;
   font-weight: 800 !important;
-  letter-spacing: -0.03em !important;
+  letter-spacing: 0 !important;
   line-height: 1;
 }
 
@@ -237,6 +237,174 @@ body.theme-sgtalk {
   &:hover {
     background: rgba(142, 142, 147, 0.08) !important;
     text-decoration: none;
+  }
+}
+
+.theme-sgtalk .sg-category-label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 20px;
+  padding: 2px 6px;
+  border-radius: 4px !important;
+  background: #eef3f8 !important;
+  color: #536a87 !important;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.2;
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+
+.theme-sgtalk .sg-category-label:hover {
+  background: #dfe8f3 !important;
+  color: #26364f !important;
+  text-decoration: none !important;
+}
+
+.theme-sgtalk .sg-v2-post-link-guest {
+  background: linear-gradient(#fff, #f3f6f9) !important;
+  color: #536a87 !important;
+}
+
+.theme-sgtalk .sg-auth-field .form-control,
+.theme-sgtalk .sg-auth-form .form-control,
+.theme-sgtalk .sg-auth-submit,
+.theme-sgtalk .sg-auth-oauth {
+  min-height: 42px;
+}
+
+.theme-sgtalk .sg-auth-check {
+  min-height: 36px;
+}
+
+.theme-sgtalk .sg-auth-check input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+}
+
+.theme-sgtalk .sg-v2-post-actions a,
+.theme-sgtalk .sg-v2-post-actions button,
+.theme-sgtalk .sg-v2-post-votes,
+.theme-sgtalk .sg-v2-post-index,
+.theme-sgtalk .sg-v2-topic-bar a,
+.theme-sgtalk .sg-v2-topic-bar button {
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[data-bs-theme="dark"] .theme-sgtalk .sg-category-label,
+.dark .theme-sgtalk .sg-category-label,
+[data-bs-theme="dark"] .theme-sgtalk .sg-v2-post-link-guest,
+.dark .theme-sgtalk .sg-v2-post-link-guest {
+  background: var(--color-tertiary-101) !important;
+  color: var(--text-muted) !important;
+}
+
+@media (max-width: 767.98px) {
+  .theme-sgtalk .sg-v2-header .container-lg {
+    min-height: 52px;
+  }
+
+  .theme-sgtalk .sg-v2-header .btn-link,
+  .theme-sgtalk .sg-v2-header .nav-item,
+  .theme-sgtalk .sg-auth-state-link,
+  .theme-sgtalk .sg-v2-header .sg-v2-post-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .theme-sgtalk .sg-v2-header #sg-dark-toggle {
+    width: 44px;
+    margin-right: 0 !important;
+  }
+
+  .theme-sgtalk .sg-v2-header .sg-v2-post-link {
+    padding-right: 12px !important;
+    padding-left: 12px !important;
+  }
+
+  .theme-sgtalk .sg-v2-nav-scroll {
+    position: relative;
+    flex: 1 1 auto;
+    min-width: 0;
+    padding-right: 22px;
+    -webkit-mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 30px), transparent 100%);
+    mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 30px), transparent 100%);
+  }
+
+  .theme-sgtalk .sg-v2-header .sg-v2-nav-tabs .nav-item {
+    min-height: 44px;
+    padding: 0 12px !important;
+  }
+
+  .theme-sgtalk .sg-auth-field .form-control,
+  .theme-sgtalk .sg-auth-form .form-control,
+  .theme-sgtalk .sg-auth-submit,
+  .theme-sgtalk .sg-auth-oauth {
+    min-height: 46px;
+  }
+
+  .theme-sgtalk .sg-auth-check {
+    min-height: 44px;
+  }
+
+  .theme-sgtalk .sg-auth-check input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    flex-basis: 22px;
+  }
+
+  .theme-sgtalk .sg-topic-avatar,
+  .theme-sgtalk .sg-topic-avatar .avatar,
+  .theme-sgtalk .sg-topic-avatar [component="user/picture"] {
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  .theme-sgtalk .sg-topic-row {
+    grid-template-columns: 38px minmax(0, 1fr) auto;
+  }
+
+  .theme-sgtalk .sg-topic-title a,
+  .theme-sgtalk .sg-topic-meta a,
+  .theme-sgtalk .sg-category-label,
+  .theme-sgtalk .sg-topic-count {
+    min-height: 28px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .theme-sgtalk .sg-v2-post-actions {
+    gap: 8px !important;
+  }
+
+  .theme-sgtalk .sg-v2-post-actions a,
+  .theme-sgtalk .sg-v2-post-actions button,
+  .theme-sgtalk .sg-v2-post-votes,
+  .theme-sgtalk .sg-v2-post-index,
+  .theme-sgtalk .sg-v2-topic-bar a,
+  .theme-sgtalk .sg-v2-topic-bar button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .theme-sgtalk .sg-v2-topic-bar {
+    gap: 6px;
+  }
+
+  .theme-sgtalk .sg-v2-topic-bar .dropdown-toggle,
+  .theme-sgtalk .sg-v2-topic-rss {
+    padding-right: 10px !important;
+    padding-left: 10px !important;
+  }
+
+  .theme-sgtalk .sg-v2-member-box > div:first-child {
+    height: 104px !important;
   }
 }
 
@@ -542,7 +710,7 @@ body.theme-sgtalk {
   color: var(--sg-text);
   font-size: 15px;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   line-height: 1.4;
 }
 
@@ -798,7 +966,7 @@ body.theme-sgtalk {
   color: var(--sg-text);
   font-size: 22px;
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .theme-sgtalk .sg-auth-head p,
@@ -908,7 +1076,7 @@ body.theme-sgtalk {
   color: var(--sg-text);
   font-size: 24px;
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .theme-sgtalk .sg-account-tabs {
@@ -980,7 +1148,7 @@ body.theme-sgtalk {
   color: var(--sg-text);
   font-size: 18px;
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .theme-sgtalk .sg-empty-state p {
@@ -1038,7 +1206,7 @@ body.theme-sgtalk {
   color: var(--sg-text);
   font-size: 24px;
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .theme-sgtalk .sg-directory-list {
@@ -1132,7 +1300,7 @@ body.theme-sgtalk {
   color: var(--sg-text);
   font-size: 20px;
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .theme-sgtalk.page-compose .composer {
@@ -1805,5 +1973,19 @@ body.theme-sgtalk:not(.page-compose) .composer[component="composer"] {
         }
       }
     }
+  }
+}
+
+@media (max-width: 767.98px) {
+  .theme-sgtalk .sg-auth-submit.sg-v2-button,
+  .theme-sgtalk .sg-auth-oauth {
+    min-height: 46px !important;
+    height: auto !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .theme-sgtalk .sg-auth-submit.sg-v2-button {
+    font-size: 15px;
   }
 }

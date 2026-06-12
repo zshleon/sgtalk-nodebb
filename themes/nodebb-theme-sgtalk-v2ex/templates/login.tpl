@@ -16,12 +16,14 @@
 			<form class="sg-auth-form" role="form" method="post" id="login-form">
 				<label class="sg-auth-field" for="username">
 					<span>用户名 / 邮箱</span>
-					<input class="form-control" type="text" placeholder="用户名 / 邮箱" name="username" id="username" autocorrect="off" autocapitalize="off" autocomplete="nickname" value="{username}" aria-required="true"/>
+					<input class="form-control" type="text" placeholder="用户名 / 邮箱" name="username" id="username" autocorrect="off" autocapitalize="off" autocomplete="nickname" value="{username}" required aria-required="true" aria-describedby="login-username-notify"/>
+					<small class="login-feedback text-danger" id="login-username-notify" aria-live="polite"></small>
 				</label>
 
 				<label class="sg-auth-field" for="password">
 					<span>密码</span>
-					<input class="form-control" type="password" placeholder="密码" name="password" id="password" autocomplete="current-password" autocapitalize="off" aria-required="true"/>
+					<input class="form-control" type="password" placeholder="密码" name="password" id="password" autocomplete="current-password" autocapitalize="off" required aria-required="true" aria-describedby="login-password-notify"/>
+					<small class="login-feedback text-danger" id="login-password-notify" aria-live="polite"></small>
 				</label>
 
 				<p id="caps-lock-warning" class="text-danger hidden text-sm mb-0 form-text" aria-live="polite" role="alert" aria-atomic="true">

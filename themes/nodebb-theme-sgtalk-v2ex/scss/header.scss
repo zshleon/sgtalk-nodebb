@@ -1,5 +1,5 @@
 // ============================================================
-// SGTALK Header — Apple / Google Tier Design
+// SGTALK header
 // ============================================================
 
 main#panel {
@@ -99,7 +99,7 @@ main#panel {
   color: var(--text-muted) !important;
   font-size: 14px;
   font-weight: 500;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   padding: 6px 10px;
   border-radius: var(--sg-radius-tight);
   transition: all 0.2s;

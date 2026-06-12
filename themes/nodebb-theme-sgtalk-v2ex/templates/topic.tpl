@@ -32,7 +32,7 @@
 			<div class="sg-topic-crumb">
 				<a href="{config.relative_path}/">SGTALK</a>
 				<span>›</span>
-				{buildCategoryLabel(category, "a", "border")}
+				<a class="sg-category-label" href="{config.relative_path}/category/{category.slug}">{category.name}</a>
 			</div>
 			<h1 component="post/header">
 				<span class="topic-title" component="topic/title">{title}</span>

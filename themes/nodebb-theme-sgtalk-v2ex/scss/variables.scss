@@ -1,20 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 // ============================================================
-// SGTALK Premium Design System — Apple / Google Tier
+// SGTALK design tokens
 // ============================================================
-// Principles: clarity, depth, restraint, delight.
+// Principles: clarity, density, restraint.
 // Every value is intentional.
 
 :root {
   // ── Palette ─────────────────────────────────────────────────
-  --background: #F5F5F7;            // Apple‑style warm gray
+  --background: #F5F5F7;            // Soft neutral gray
   --foreground: #1D1D1F;            // Near-black, high contrast
   --card-bg: #FFFFFF;
   --border-color: rgba(0, 0, 0, 0.06);
   --border-color-strong: rgba(0, 0, 0, 0.10);
   --text-main: #1D1D1F;
-  --text-muted: #86868B;            // Apple secondary text
+  --text-muted: #86868B;            // Secondary text
   --text-tertiary: #AEAEB2;
   --primary-color: #E6002D;         // Singapore Red
   --primary-hover: #CC0028;
@@ -31,7 +31,7 @@
   --sg-text-soft: #424245;
   --sg-muted: var(--text-muted);
   --sg-muted-2: var(--text-tertiary);
-  --sg-link: #0066CC;               // Apple blue
+  --sg-link: #0066CC;
   --sg-link-hover: #E6002D;
   --sg-red: var(--primary-color);
   --sg-red-dark: #B80024;
@@ -57,19 +57,19 @@
 
 // ── Dark Theme ────────────────────────────────────────────────
 [data-bs-theme="dark"], .dark {
-  --background: #000000;            // True black like Apple
+  --background: #000000;
   --foreground: #F5F5F7;
-  --card-bg: #1C1C1E;               // Apple dark card
+  --card-bg: #1C1C1E;
   --border-color: rgba(255, 255, 255, 0.08);
   --border-color-strong: rgba(255, 255, 255, 0.12);
   --text-main: #F5F5F7;
-  --text-muted: #98989D;            // Apple dark secondary
+  --text-muted: #98989D;
   --text-tertiary: #636366;
   --color-tertiary-101: #2C2C2E;
   --bg-image: none;
 
   --sg-surface-soft: #2C2C2E;
-  --sg-link: #2997FF;               // Apple dark blue
+  --sg-link: #2997FF;
   --sg-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15);
   --sg-shadow-tight: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 1px 2px rgba(0, 0, 0, 0.2);
   --sg-shadow-hover: 0 2px 8px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.2);

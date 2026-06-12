@@ -32,6 +32,11 @@ Updated: 2026-06-12
 - Login/register Google OAuth entry remains visible.
 - Login "保持登录状态" renders as a clear checkbox.
 - Profile/default avatars now preserve real image URLs when present and fall back to a restrained initials avatar.
+- Guest top-bar and list post links now say `登录后发帖` and carry `next=/compose?cid=5`, so login preserves the compose intent.
+- Topic/category labels now use the SGTALK lightweight node label and no longer render the broken-looking `? 问与答`.
+- Login empty submit now shows field-level Chinese errors without a server round trip.
+- Register empty submit, bad email, short password, empty confirmation, and mismatched confirmation all show field-level Chinese errors.
+- Mobile auth inputs, primary submit buttons, Google OAuth buttons, reply/upvote controls, and guest post entry meet practical touch-target sizing.
 - NodeBB build completed successfully after each deployment.
 - Public site returns HTTP 200.
 - No Playwright console errors or HTTP >= 400 errors in the tested flows.
@@ -40,11 +45,21 @@ Updated: 2026-06-12
 - Guest post entry opens login.
 - Login and register pages render.
 - Topic in `问与答` appears under `问与答`, not under unrelated nodes.
-- Container logs show only NodeBB's `url.parse` deprecation warning.
+- Container logs show NodeBB's `url.parse` deprecation warning and the existing `nodebb-plugin-emoji-android` compatibility warning; neither was introduced by this theme pass.
 - `git diff --check` passes.
 - Live HTML contains the SGTALK wordmark and clean sidebar copy.
 - Live HTML no longer contains `Powered by NodeBB`, `Inspired by`, `logo_icon.png`, fake coin labels, or fake check-in text.
 - Playwright desktop and mobile smoke tests reported no console errors and no horizontal overflow.
+- Final matrix on live site covered desktop `1440x900`, wide `1920x1080`, and mobile `390x844` for home, `问与答`, topic detail, user profile, login, and register. All returned `200`, had no horizontal overflow, no broken node label text, and no public Supabase/OAuth-provider/demo residue.
+
+## Latest Evidence
+
+- `output/playwright/final-desktop-home.png`
+- `output/playwright/final-mobile-home.png`
+- `output/playwright/final-mobile-user.png`
+- `output/playwright/after-register-touch-fixed.png`
+- `output/playwright/after-mobile-topic-fixed.png`
+- `output/playwright/final-matrix.json`
 
 ## Screenshot Evidence
 
@@ -68,3 +83,5 @@ Updated: 2026-06-12
 - Make homepage default post target configurable instead of hard-coded `cid=5`.
 - Re-test logged-in compose in the user's Chrome session once Chrome control is available, or with a temporary QA account.
 - The NodeBB username/group availability checks still use `HEAD` requests where 404 means "available"; this can appear as console noise during registration typing even though the user-facing form now shows proper validation.
+- Decide whether to delete or rewrite the current public test-looking topic `发一个帖子试试`; it is live user content, so it was not removed by code.
+- Review NodeBB dependency audit output and the `nodebb-plugin-emoji-android` compatibility warning before a larger public launch.

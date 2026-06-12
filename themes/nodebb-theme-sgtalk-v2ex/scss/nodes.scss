@@ -1,6 +1,6 @@
 .categories .category-children,
 .category-children {
-  background: #f6f8fa;
+  background: var(--color-tertiary-101);
   border-top: 1px solid $sgtalk-border;
 }
 
@@ -18,7 +18,7 @@
 .tag,
 .category-item .badge {
   border-radius: $sgtalk-radius;
-  background: #eef3f8;
+  background: var(--color-tertiary-101);
   color: $sgtalk-link;
   font-weight: 600;
 }

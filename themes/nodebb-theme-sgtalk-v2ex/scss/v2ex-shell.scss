@@ -30,7 +30,7 @@ body.theme-sgtalk {
 }
 
 .theme-sgtalk .brand-container > .col-12 {
-  width: min(1120px, calc(100vw - 32px));
+  width: min(1100px, calc(100vw - 32px));
   min-height: 66px;
   margin: 0 auto;
   padding: 0 !important;
@@ -133,7 +133,7 @@ body.theme-sgtalk {
 }
 
 .theme-sgtalk #content {
-  width: min(1120px, calc(100vw - 32px));
+  width: min(1100px, calc(100vw - 32px));
   max-width: none;
   margin: 18px auto 38px;
   padding: 0 !important;
@@ -1615,5 +1615,303 @@ body.theme-sgtalk {
 
   .theme-sgtalk .sg-account-stats div:nth-child(4) {
     border-top: 1px solid #dfe6ee;
+  }
+}
+
+// Master-level adaptive dark mode overrides and footer styling aligning to FSHEX
+.sg-v2-footer {
+  background-color: #ffffff !important;
+  border-top: 1px solid #dfe6ee !important;
+  transition: background-color 0.3s, border-color 0.3s;
+
+  .sg-v2-footer-container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  a {
+    color: #5E6E85 !important;
+    transition: color 0.2s;
+    &:hover {
+      color: #E6002D !important; // Singapore Red
+    }
+  }
+}
+
+.sg-v2-top-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #cfd9e5;
+  background: #f8fafc;
+  border-radius: 4px;
+  font-weight: 800;
+  color: #5E6E85 !important;
+  transition: all 0.2s;
+  &:hover {
+    background: #eef2f7;
+    color: #1d2530 !important;
+    text-decoration: none !important;
+  }
+}
+
+[data-bs-theme="dark"], .dark {
+  body.theme-sgtalk {
+    background: var(--background) !important;
+    color: var(--text-main) !important;
+  }
+  .theme-sgtalk {
+    .brand-container {
+      background: var(--card-bg) !important;
+      border-bottom-color: var(--border-color) !important;
+    }
+    .sg-v2-search input {
+      background: var(--color-tertiary-101) !important;
+      border-color: var(--border-color) !important;
+      color: var(--text-main) !important;
+    }
+    .sg-v2-toplinks a {
+      color: var(--text-muted) !important;
+      &:hover {
+        color: var(--text-main) !important;
+      }
+    }
+    .sg-v2-nodebar,
+    .sg-v2-box,
+    .recent > .category,
+    .category.d-flex,
+    .category-header,
+    .topic,
+    .account,
+    .users,
+    .sg-node-head,
+    .sg-topic-head,
+    .sg-topic-body,
+    .sg-auth-box,
+    .sg-composer-tab-btn,
+    .sg-quickreply-card {
+      background: var(--card-bg) !important;
+      border-color: var(--border-color) !important;
+    }
+    .sg-v2-node-row a {
+      color: var(--text-muted) !important;
+      &:hover {
+        color: var(--text-main) !important;
+      }
+      &.active {
+        background: var(--text-main) !important;
+        color: var(--card-bg) !important;
+      }
+    }
+    .sg-v2-node-row + .sg-v2-node-row {
+      border-top-color: var(--border-color) !important;
+      background: var(--color-tertiary-101) !important;
+    }
+    .sg-v2-listbar {
+      border-bottom-color: var(--border-color) !important;
+      background: var(--color-tertiary-101) !important;
+    }
+    .sg-v2-list-tabs a,
+    .sg-v2-list-link {
+      color: var(--text-muted) !important;
+      &.active {
+        color: var(--text-main) !important;
+      }
+    }
+    .sg-v2-post-link {
+      border-color: var(--border-color) !important;
+      background: var(--color-tertiary-101) !important;
+      color: var(--text-muted) !important;
+      &:hover {
+        color: var(--text-main) !important;
+      }
+    }
+    ul.topics-list {
+      background: var(--card-bg) !important;
+      li.category-item {
+        background: var(--card-bg) !important;
+        border-bottom-color: var(--border-color) !important;
+        &:hover {
+          background: var(--color-tertiary-101) !important;
+        }
+      }
+    }
+    [component="topic/header"].title a,
+    .sg-topic-title a,
+    .sg-node-title-line h1,
+    .sg-topic-head h1,
+    .sg-v2-box-title,
+    .sg-v2-auth-title,
+    .sg-auth-head h2,
+    .sg-auth-field,
+    .sg-auth-subhead,
+    .sg-account-identity h1 {
+      color: var(--text-main) !important;
+    }
+    [component="topic/labels"],
+    .category-item .badge.timeago,
+    .sg-topic-meta,
+    .sg-topic-meta a,
+    .sg-v2-muted,
+    .sg-v2-stats,
+    .sg-node-crumb,
+    .sg-node-crumb a,
+    .sg-node-stats,
+    .sg-node-desc,
+    .sg-topic-crumb,
+    .sg-topic-crumb a,
+    .sg-topic-byline,
+    .sg-topic-byline a,
+    .sg-topic-body .post-header,
+    .sg-topic-body .post-header a,
+    .sg-auth-head p,
+    .sg-auth-note,
+    .sg-auth-section-copy,
+    .sg-auth-field small,
+    .sg-auth-check,
+    .sg-auth-switch,
+    .sg-auth-alt,
+    .sg-account-handle,
+    .sg-account-meta,
+    .sg-account-about,
+    .sg-account-muted,
+    .sg-account-stats span {
+      color: var(--text-muted) !important;
+    }
+    .category-item .badge,
+    .tag-list .badge,
+    [component="category/topic"] .badge,
+    .stats-postcount,
+    .sg-topic-count,
+    .sg-topic-meta .badge,
+    .sg-topic-tags .tag,
+    .sg-topic-state-labels .badge,
+    .sg-topic-byline .tag-list .badge {
+      background: var(--color-tertiary-101) !important;
+      color: var(--text-muted) !important;
+      &:hover {
+        background: var(--border-color) !important;
+        color: var(--text-main) !important;
+      }
+    }
+    .sg-v2-cell {
+      border-bottom-color: var(--border-color) !important;
+    }
+    .sg-v2-button {
+      border-color: var(--border-color) !important;
+      background: var(--card-bg) !important;
+      color: var(--text-muted) !important;
+      &:hover {
+        color: var(--text-main) !important;
+      }
+      &.primary {
+        border-color: var(--primary-color) !important;
+        background: var(--primary-color) !important;
+        color: #fff !important;
+      }
+    }
+    .sg-topic-body {
+      .post-bar {
+        border-bottom-color: var(--border-color) !important;
+        background: var(--color-tertiary-101) !important;
+      }
+      .posts > li[component="post"] {
+        border-bottom-color: var(--border-color) !important;
+      }
+      .content {
+        color: var(--text-main) !important;
+      }
+    }
+    .post-content,
+    .topic .content {
+      color: var(--text-main) !important;
+    }
+    .breadcrumb {
+      color: var(--text-muted) !important;
+    }
+    .sg-auth-field .form-control,
+    .sg-auth-form .form-control {
+      background: var(--color-tertiary-101) !important;
+      border-color: var(--border-color) !important;
+      color: var(--text-main) !important;
+    }
+    .sg-auth-switch,
+    .sg-auth-alt {
+      border-top-color: var(--border-color) !important;
+    }
+    .sg-auth-oauth {
+      border-color: var(--border-color) !important;
+      background: var(--color-tertiary-101) !important;
+      color: var(--text-main) !important;
+    }
+    .sg-auth-errors {
+      border-color: rgba(230, 0, 45, 0.3) !important;
+      background: rgba(230, 0, 45, 0.05) !important;
+      color: var(--primary-color) !important;
+    }
+    .sg-account-hero {
+      border-bottom-color: var(--border-color) !important;
+      background: var(--card-bg) !important;
+    }
+    .sg-account-actions a,
+    .sg-account-links a {
+      border-color: var(--border-color) !important;
+      background: var(--color-tertiary-101) !important;
+      color: var(--text-muted) !important;
+      &:hover {
+        color: var(--text-main) !important;
+      }
+    }
+    .sg-account-tabs {
+      border-bottom-color: var(--border-color) !important;
+      background: var(--color-tertiary-101) !important;
+      a {
+        color: var(--text-muted) !important;
+        &.active {
+          background: var(--text-main) !important;
+          color: var(--card-bg) !important;
+        }
+      }
+    }
+    .sg-account-content {
+      background: var(--card-bg) !important;
+    }
+    .sg-account-section + .sg-account-section {
+      border-top-color: var(--border-color) !important;
+    }
+    .sg-account-stats {
+      border-color: var(--border-color) !important;
+      background: var(--color-tertiary-101) !important;
+      div + div {
+        border-left-color: var(--border-color) !important;
+      }
+      strong {
+        color: var(--text-main) !important;
+      }
+    }
+
+    .sg-v2-footer {
+      background-color: var(--background) !important;
+      border-top: 1px solid var(--border-color) !important;
+
+      a {
+        color: var(--text-muted) !important;
+        &:hover {
+          color: var(--primary-color) !important;
+        }
+      }
+    }
+
+    .sg-v2-top-btn {
+      border-color: var(--border-color) !important;
+      background: var(--color-tertiary-101) !important;
+      color: var(--text-muted) !important;
+      &:hover {
+        background: var(--border-color) !important;
+        color: var(--text-main) !important;
+      }
+    }
   }
 }

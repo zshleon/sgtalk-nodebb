@@ -24,9 +24,9 @@
 				<span class="sg-dot">·</span>
 				<a href="{config.relative_path}/topic/{./slug}" class="timeago" title="{./timestampISO}"></a>
 				{{{ if ./teaser.pid }}}
-				<span class="sg-dot">·</span>
-				<span>最后回复</span>
-				<a class="sg-topic-user" href="{{{ if ./teaser.user.userslug }}}{config.relative_path}/user/{./teaser.user.userslug}{{{ else }}}#{{{ end }}}">{./teaser.user.displayname}</a>
+				<span class="sg-dot sg-mobile-hide">·</span>
+				<span class="sg-mobile-hide">最后回复</span>
+				<a class="sg-topic-user sg-mobile-hide" href="{{{ if ./teaser.user.userslug }}}{config.relative_path}/user/{./teaser.user.userslug}{{{ else }}}#{{{ end }}}">{./teaser.user.displayname}</a>
 				{{{ end }}}
 				<span data-tid="{./tid}" component="topic/tags" class="sg-topic-tags {{{ if !./tags.length }}}hidden{{{ end }}}">
 					{{{ each ./tags }}}

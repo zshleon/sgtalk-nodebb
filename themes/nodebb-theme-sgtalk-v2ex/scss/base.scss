@@ -1,5 +1,6 @@
 body {
-  background: $sgtalk-bg;
+  background-color: $sgtalk-bg !important;
+  background-image: var(--bg-image) !important;
   color: $sgtalk-text;
   font-family: $sgtalk-font;
   font-size: 14px;

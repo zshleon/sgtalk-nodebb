@@ -17,7 +17,7 @@
 				<p>从一个真实问题、经验或新加坡生活细节开始。</p>
 				<div class="sg-empty-actions">
 					{{{ if canPost }}}
-					<a class="sg-v2-button primary" href="{config.relative_path}/compose?cid=5" data-ajaxify="false">发布第一个主题</a>
+					<a class="sg-v2-button primary" href="{config.relative_path}/compose?cid={config.defaultComposeCid}" data-ajaxify="false">发布第一个主题</a>
 					{{{ end }}}
 					{{{ if !canPost }}}
 					<a class="sg-v2-button primary" href="{config.relative_path}/login">登录后发帖</a>

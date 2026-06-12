@@ -1,6 +1,6 @@
 # SGTALK NodeBB Handoff
 
-Updated: 2026-06-08
+Updated: 2026-06-12
 
 ## What This Is
 
@@ -16,17 +16,20 @@ The current work is a NodeBB theme/customization stack focused on a V2EX-style, 
 - Live server stack: `/opt/stacks/sgtalk-nodebb`
 - Live site: `https://sgtalk.zshstc.org`
 - Custom theme: `themes/nodebb-theme-sgtalk-v2ex`
+- Runtime widget source: `widgets/global-sidebar.html`
 - Latest QA note: `docs/SGTALK_PHASE1_QA.md`
 - UI blueprint: `docs/SGTALK_V2EX_UI_BLUEPRINT.md`
 - Design board: `docs/sgtalk-v2ex-design-board.html`
 
 ## Server Access
 
-Use the existing SSH key:
+Use the existing SSH key. Current verified route is the LAN address:
 
 ```sh
-ssh -o HostKeyAlias=10.0.0.50 -i ~/.ssh/id_ed25519 root@100.106.234.127
+ssh -o HostKeyAlias=10.0.0.50 -i ~/.ssh/id_ed25519 root@10.0.0.50
 ```
+
+The old Tailscale address `100.106.234.127` timed out during the latest handoff pass, so prefer `10.0.0.50` while on the home network.
 
 Production stack directory:
 
@@ -53,15 +56,34 @@ From the local working copy:
 ```sh
 rsync -az --delete -e "ssh -o HostKeyAlias=10.0.0.50 -i ~/.ssh/id_ed25519" \
   '/Users/jingwazhu/Documents/Codex/sgtalk-nodebb/themes/nodebb-theme-sgtalk-v2ex/' \
-  root@100.106.234.127:/opt/stacks/sgtalk-nodebb/themes/nodebb-theme-sgtalk-v2ex/
+  root@10.0.0.50:/opt/stacks/sgtalk-nodebb/themes/nodebb-theme-sgtalk-v2ex/
 ```
 
 Then rebuild NodeBB assets and restart:
 
 ```sh
-ssh -o HostKeyAlias=10.0.0.50 -i ~/.ssh/id_ed25519 root@100.106.234.127 \
+ssh -o HostKeyAlias=10.0.0.50 -i ~/.ssh/id_ed25519 root@10.0.0.50 \
   'cd /opt/stacks/sgtalk-nodebb && docker compose exec -T nodebb bash -lc "cd /usr/src/app && ./nodebb build --config=/opt/config/config.json" && docker compose restart nodebb'
 ```
+
+## Deploy Runtime Widgets
+
+The right sidebar is stored in NodeBB's `widgets:global` database object, not as a theme template. The source copy is kept in git at `widgets/global-sidebar.html`. After editing it:
+
+```sh
+rsync -az -e "ssh -o HostKeyAlias=10.0.0.50 -i ~/.ssh/id_ed25519" \
+  '/Users/jingwazhu/Documents/Codex/sgtalk-nodebb/widgets/' \
+  root@10.0.0.50:/opt/stacks/sgtalk-nodebb/widgets/
+
+rsync -az -e "ssh -o HostKeyAlias=10.0.0.50 -i ~/.ssh/id_ed25519" \
+  '/Users/jingwazhu/Documents/Codex/sgtalk-nodebb/scripts/apply-sgtalk-widgets.sh' \
+  root@10.0.0.50:/opt/stacks/sgtalk-nodebb/scripts/apply-sgtalk-widgets.sh
+
+ssh -o HostKeyAlias=10.0.0.50 -i ~/.ssh/id_ed25519 root@10.0.0.50 \
+  'ROOT=/opt/stacks/sgtalk-nodebb /opt/stacks/sgtalk-nodebb/scripts/apply-sgtalk-widgets.sh'
+```
+
+The script reads the server `.env` locally on the server and does not write secrets into git.
 
 ## Verify After Deploy
 
@@ -69,7 +91,7 @@ Minimum checks:
 
 ```sh
 curl -I -L --max-time 12 https://sgtalk.zshstc.org/
-ssh -o HostKeyAlias=10.0.0.50 -i ~/.ssh/id_ed25519 root@100.106.234.127 \
+ssh -o HostKeyAlias=10.0.0.50 -i ~/.ssh/id_ed25519 root@10.0.0.50 \
   'cd /opt/stacks/sgtalk-nodebb && docker compose logs --since=5m nodebb | grep -Ei "uncaught|exception|fatal|EADDR|failed|error" || true'
 ```
 
@@ -81,6 +103,8 @@ Expected log note:
 
 Already shipped:
 
+- Latest live theme was pulled back from `/opt/stacks/sgtalk-nodebb/themes/nodebb-theme-sgtalk-v2ex` and committed to GitHub so the repository reflects the actual deployed theme.
+- The public sidebar widget source is now tracked at `widgets/global-sidebar.html`; it removes fake coin/favourite counts and uses a text SGTALK mark instead of the old logo screenshot.
 - Stable desktop frame with `1280px` shell and `1fr + 300px` grid.
 - Topic detail layout fixed.
 - Current node highlighting on topic pages.
@@ -108,9 +132,9 @@ Highest-priority structural work:
 Use this prompt:
 
 ```text
-You are taking over SGTALK, a NodeBB-based forum at https://sgtalk.zshstc.org. Do not work on the older custom Next.js/Supabase prototype. The canonical code repository is https://github.com/zshleon/sgtalk-nodebb and the local working copy is /Users/jingwazhu/Documents/Codex/sgtalk-nodebb. The live server stack is /opt/stacks/sgtalk-nodebb on root@100.106.234.127 using ssh -o HostKeyAlias=10.0.0.50 -i ~/.ssh/id_ed25519.
+You are taking over SGTALK, a NodeBB-based forum at https://sgtalk.zshstc.org. Do not work on the older custom Next.js/Supabase prototype. The canonical code repository is https://github.com/zshleon/sgtalk-nodebb and the local working copy is /Users/jingwazhu/Documents/Codex/sgtalk-nodebb. The live server stack is /opt/stacks/sgtalk-nodebb on root@10.0.0.50 using ssh -o HostKeyAlias=10.0.0.50 -i ~/.ssh/id_ed25519.
 
-Read HANDOFF.md, docs/SGTALK_PHASE1_QA.md, and docs/SGTALK_V2EX_UI_BLUEPRINT.md first. Keep secrets, .env, mongo data, nodebb runtime data, and backups out of git. Work mainly in themes/nodebb-theme-sgtalk-v2ex.
+Read HANDOFF.md, widgets/global-sidebar.html, docs/SGTALK_PHASE1_QA.md, and docs/SGTALK_V2EX_UI_BLUEPRINT.md first. Keep secrets, .env, mongo data, nodebb runtime data, and backups out of git. Work mainly in themes/nodebb-theme-sgtalk-v2ex.
 
 The next priority is structural theme quality: split page composer vs dynamic composer styles, replace the default topic toolbar, and make post rows match V2EX-style avatar/content/floor/footer layout. After edits, rsync the theme to the server, run NodeBB build, restart nodebb, then verify with browser screenshots and logs.
 ```

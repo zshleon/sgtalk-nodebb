@@ -22,7 +22,7 @@
 			{{{ end }}}
 		{{{ else }}}
 			{{{ if canPost }}}
-			<a href="{config.relative_path}/compose?cid=5" class="sg-v2-post-link" data-ajaxify="false" role="button">发布主题</a>
+			<a href="{config.relative_path}/compose?cid={config.defaultComposeCid}" class="sg-v2-post-link" data-ajaxify="false" role="button">发布主题</a>
 			{{{ end }}}
 		{{{ end }}}
 

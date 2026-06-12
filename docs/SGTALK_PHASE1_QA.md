@@ -1,6 +1,6 @@
 # SGTALK Phase 1 QA
 
-Updated: 2026-06-07
+Updated: 2026-06-12
 
 ## Shipped In This Pass
 
@@ -13,6 +13,12 @@ Updated: 2026-06-07
 - Reduced compose textarea initial height and kept JS autosize active.
 - Added compose submit feedback: empty-title inline warning, busy state, recovery after failure.
 - Replaced the faux Google `G` with an inline multi-colour Google mark.
+- Pulled the currently deployed live theme back from `/opt/stacks/sgtalk-nodebb/themes/nodebb-theme-sgtalk-v2ex` so GitHub reflects production.
+- Replaced the header image logo with a CSS text wordmark; the previous uploaded logo asset was a marked-up design sheet.
+- Removed public footer technology/source text.
+- Moved the right sidebar widget source into `widgets/global-sidebar.html` and deployed it through `scripts/apply-sgtalk-widgets.sh`.
+- Removed fake sidebar coin/favourite/check-in counters from the public widget.
+- Fixed the theme `staticDirs` mapping so NodeBB no longer warns about an invalid mapped path.
 
 ## Verified
 
@@ -25,6 +31,10 @@ Updated: 2026-06-07
 - Login and register pages render.
 - Topic in `问与答` appears under `问与答`, not under unrelated nodes.
 - Container logs show only NodeBB's `url.parse` deprecation warning.
+- `git diff --check` passes.
+- Live HTML contains the SGTALK wordmark and clean sidebar copy.
+- Live HTML no longer contains `Powered by NodeBB`, `Inspired by`, `logo_icon.png`, fake coin labels, or fake check-in text.
+- Playwright desktop and mobile smoke tests reported no console errors and no horizontal overflow.
 
 ## Screenshot Evidence
 
@@ -33,6 +43,8 @@ Updated: 2026-06-07
 - `/tmp/sgtalk-phase1-final/desktop-topic.png`
 - `/tmp/sgtalk-phase1-final/mobile-topic.png`
 - `/tmp/sgtalk-phase1-final/login-google-final.png`
+- `/tmp/sgtalk-github-handoff-desktop.png`
+- `/tmp/sgtalk-github-handoff-mobile.png`
 
 ## Still To Do
 

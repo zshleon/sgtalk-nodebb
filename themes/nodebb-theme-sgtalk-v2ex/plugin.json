@@ -1,9 +1,13 @@
 {
   "id": "nodebb-theme-sgtalk-v2ex",
+  "staticDirs": {
+    "assets": "public"
+  },
   "scripts": [
     "./public/sgtalk-composer.js"
   ],
   "hooks": [
-    { "hook": "filter:middleware.registrationComplete", "method": "allowRegistrationEscapeRoutes" }
+    { "hook": "filter:middleware.registrationComplete", "method": "allowRegistrationEscapeRoutes" },
+    { "hook": "filter:config.get", "method": "addConfig" }
   ]
 }

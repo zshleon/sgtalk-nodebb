@@ -1,11 +1,93 @@
-$sgtalk-bg: #edf0f3;
-$sgtalk-panel: #ffffff;
-$sgtalk-border: #d8e0ea;
-$sgtalk-border-strong: #c7d2df;
-$sgtalk-text: #1f2937;
-$sgtalk-muted: #687589;
-$sgtalk-link: #4f6685;
-$sgtalk-link-hover: #1d4f91;
-$sgtalk-red: #e62929;
-$sgtalk-radius: 4px;
-$sgtalk-font: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+// ============================================================
+// SGTALK Premium Design System — Apple / Google Tier
+// ============================================================
+// Principles: clarity, depth, restraint, delight.
+// Every value is intentional.
+
+:root {
+  // ── Palette ─────────────────────────────────────────────────
+  --background: #F5F5F7;            // Apple‑style warm gray
+  --foreground: #1D1D1F;            // Near-black, high contrast
+  --card-bg: #FFFFFF;
+  --border-color: rgba(0, 0, 0, 0.06);
+  --border-color-strong: rgba(0, 0, 0, 0.10);
+  --text-main: #1D1D1F;
+  --text-muted: #86868B;            // Apple secondary text
+  --text-tertiary: #AEAEB2;
+  --primary-color: #E6002D;         // Singapore Red
+  --primary-hover: #CC0028;
+
+  // ── Semantic Surface Tokens ─────────────────────────────────
+  --sg-bg: var(--background);
+  --sg-bg-top: #FAFAFA;
+  --sg-surface: var(--card-bg);
+  --sg-surface-soft: #FAFAFA;
+  --sg-surface-warm: #FFFFFF;
+  --sg-border: var(--border-color);
+  --sg-border-strong: var(--border-color-strong);
+  --sg-text: var(--text-main);
+  --sg-text-soft: #424245;
+  --sg-muted: var(--text-muted);
+  --sg-muted-2: var(--text-tertiary);
+  --sg-link: #0066CC;               // Apple blue
+  --sg-link-hover: #E6002D;
+  --sg-red: var(--primary-color);
+  --sg-red-dark: #B80024;
+
+  // ── Elevation (Shadows) ─────────────────────────────────────
+  --sg-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.03);
+  --sg-shadow-tight: 0 0 0 1px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
+  --sg-shadow-hover: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.04);
+  --sg-shadow-float: 0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+
+  // ── Focus Ring ──────────────────────────────────────────────
+  --sg-focus: rgba(0, 102, 204, 0.25);
+
+  // ── Radii ───────────────────────────────────────────────────
+  --sg-radius: 12px;
+  --sg-radius-tight: 8px;
+  --sg-radius-pill: 100px;
+
+  // ── Misc ────────────────────────────────────────────────────
+  --color-tertiary-101: #FAFAFA;
+  --bg-image: none;
+}
+
+// ── Dark Theme ────────────────────────────────────────────────
+[data-bs-theme="dark"], .dark {
+  --background: #000000;            // True black like Apple
+  --foreground: #F5F5F7;
+  --card-bg: #1C1C1E;               // Apple dark card
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-color-strong: rgba(255, 255, 255, 0.12);
+  --text-main: #F5F5F7;
+  --text-muted: #98989D;            // Apple dark secondary
+  --text-tertiary: #636366;
+  --color-tertiary-101: #2C2C2E;
+  --bg-image: none;
+
+  --sg-surface-soft: #2C2C2E;
+  --sg-link: #2997FF;               // Apple dark blue
+  --sg-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15);
+  --sg-shadow-tight: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --sg-shadow-hover: 0 2px 8px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.2);
+  --sg-shadow-float: 0 8px 32px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
+  --sg-focus: rgba(41, 151, 255, 0.3);
+}
+
+// ── SCSS Aliases ──────────────────────────────────────────────
+$sgtalk-bg: var(--background);
+$sgtalk-panel: var(--card-bg);
+$sgtalk-border: var(--border-color);
+$sgtalk-border-strong: var(--border-color-strong);
+$sgtalk-text: var(--text-main);
+$sgtalk-muted: var(--text-muted);
+$sgtalk-link: var(--sg-link);
+$sgtalk-link-hover: var(--sg-link-hover);
+$sgtalk-red: var(--primary-color);
+$sgtalk-radius: var(--sg-radius);
+$sgtalk-font: 'Inter', -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+               "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+               system-ui, sans-serif;

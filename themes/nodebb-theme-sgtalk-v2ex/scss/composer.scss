@@ -1,25 +1,30 @@
-.composer {
-  border-top: 1px solid $sgtalk-border-strong;
-  box-shadow: none;
-}
+@import "variables";
 
-.composer .composer-container,
-.composer .composer-container > .p-2,
-.page-compose .composer .composer-container {
-  min-height: 0;
-}
+// ==========================================
+// 1. Static Page Composer Styles (/compose)
+// ==========================================
+.sg-compose-page {
+  .composer {
+    border-top: none;
+    box-shadow: none;
+  }
 
-.composer .title-container input,
-.composer textarea,
-.composer .write,
-.composer .preview {
-  border-color: $sgtalk-border;
-}
+  .composer .composer-container,
+  .composer .composer-container > .p-2 {
+    min-height: 0;
+  }
 
-.composer .formatting-bar,
-.composer .composer-submit {
-  background: #f6f8fa;
-  border-color: $sgtalk-border;
+  .composer .title-container input,
+  .composer textarea,
+  .composer .write,
+  .composer .preview {
+    border-color: $sgtalk-border;
+  }
+
+  .composer .formatting-bar {
+    background: var(--color-tertiary-101) !important;
+    border-color: $sgtalk-border;
+  }
 }
 
 .page-compose .composer .write-preview-container {
@@ -39,44 +44,362 @@
   line-height: 1.55;
 }
 
-.page-compose .composer textarea.write {
-  min-height: 168px;
-  max-height: 52vh;
+// ==========================================
+// 2. Dynamic Floating Composer Styles (NodeBB)
+// ==========================================
+body:not(.page-compose) .composer[component="composer"] {
+  border: 1px solid $sgtalk-border-strong;
+  box-shadow: 0 4px 18px rgba(23, 32, 51, 0.12);
+  border-radius: $sgtalk-radius;
+
+  .composer-container {
+    min-height: 0;
+  }
+
+  .title-container input,
+  textarea,
+  .write,
+  .preview {
+    border-color: $sgtalk-border;
+  }
+
+  .formatting-bar {
+    background: var(--color-tertiary-101) !important;
+    border-color: $sgtalk-border;
+  }
 }
 
+// ==========================================
+// 3. Responsive Adaptations
+// ==========================================
 @media (max-width: 767.98px) {
-  html.composing .composer,
+  // Page Composer Mobile
   .page-compose .composer {
     height: auto !important;
     min-height: 0 !important;
+
+    .composer-container {
+      height: auto !important;
+
+      & > .p-2 {
+        height: auto !important;
+        padding: 8px !important;
+      }
+    }
+
+    .write-preview-container {
+      display: block !important;
+      max-height: none !important;
+      overflow: visible !important;
+    }
+
+    .write-container {
+      width: 100% !important;
+    }
+
+    textarea.write {
+      min-height: 136px;
+      max-height: 44vh;
+      resize: none;
+    }
   }
 
-  .composer .composer-container,
-  .composer .composer-container > .p-2,
-  .page-compose .composer .composer-container {
+  // Floating Composer Mobile
+  html.composing body:not(.page-compose) .composer {
     height: auto !important;
+    min-height: 0 !important;
+
+    .composer-container {
+      height: auto !important;
+
+      & > .p-2 {
+        height: auto !important;
+        padding: 8px !important;
+      }
+    }
+
+    .write-preview-container {
+      display: block !important;
+      max-height: none !important;
+      overflow: visible !important;
+    }
+
+    .write-container {
+      width: 100% !important;
+    }
+
+    textarea.write {
+      min-height: 120px;
+      max-height: 40vh;
+      resize: none;
+    }
+  }
+}
+
+// Category dropdown button alignment & styling overrides
+.theme-sgtalk.page-compose .category-list-container {
+  min-width: 0;
+
+  [component="category-selector"] {
+    width: 100%;
+
+    > button.dropdown-toggle {
+      width: 100%;
+      height: 38px;
+      min-height: 38px;
+      padding: 0 14px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      border: 1px solid var(--border-color) !important;
+      background-color: var(--card-bg) !important;
+      color: var(--text-main) !important;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 6px !important;
+      transition: all 0.2s ease-in-out;
+      box-shadow: none !important;
+
+      &:hover {
+        border-color: var(--sg-border-strong) !important;
+        background-color: var(--color-tertiary-101) !important;
+      }
+
+      &:focus, &.show {
+        border-color: var(--sg-border-strong) !important;
+        box-shadow: 0 0 0 3px rgba(80, 103, 133, 0.08) !important;
+      }
+
+      &::after {
+        margin-left: auto;
+        border-top: 0.3em solid;
+        border-right: 0.3em solid transparent;
+        border-left: 0.3em solid transparent;
+      }
+    }
   }
 
-  .composer .composer-container > .p-2 {
-    padding: 8px !important;
+  [component="category-selector-selected"] {
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    color: var(--text-main) !important;
+    font-size: 14px;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-flex !important;
+    align-items: center !important;
   }
+}
 
-  .composer .write-preview-container,
-  .page-compose .composer .write-preview-container {
+// Category dropdown panel layout overrides
+.theme-sgtalk.page-compose .category-list-container .dropdown-menu {
+  width: 100%;
+  min-width: 220px;
+  border: 1px solid var(--border-color) !important;
+  background-color: var(--card-bg) !important;
+  border-radius: 6px !important;
+  box-shadow: 0 4px 18px rgba(23, 32, 51, 0.08) !important;
+  padding: 6px !important;
+  margin-top: 4px !important;
+  z-index: 1050;
+
+  // Custom dropdown search input field
+  [component="category-selector-search"] {
+    padding: 6px !important;
     display: block !important;
-    max-height: none !important;
-    overflow: visible !important;
+
+    input {
+      width: 100%;
+      height: 32px;
+      padding: 0 10px;
+      border: 1px solid var(--border-color) !important;
+      background-color: var(--color-tertiary-101) !important;
+      color: var(--text-main) !important;
+      border-radius: 4px !important;
+      font-size: 13px;
+      outline: none;
+
+      &:focus {
+        background-color: var(--card-bg) !important;
+        border-color: var(--sg-border-strong) !important;
+        box-shadow: none !important;
+      }
+    }
+
+    hr {
+      display: none !important;
+    }
   }
 
-  .composer .write-container,
-  .page-compose .composer .write-container {
-    width: 100% !important;
+  // Dropdown list
+  [component="category/list"] {
+    max-height: 280px;
+    overflow-y: auto;
+    padding: 4px 0 0 0 !important;
+
+    li.category {
+      margin: 2px 0;
+
+      a.dropdown-item {
+        padding: 8px 12px !important;
+        color: var(--text-main) !important;
+        font-size: 13.5px;
+        font-weight: 600;
+        border-radius: 4px !important;
+        transition: all 0.15s;
+
+        &:hover {
+          background-color: var(--color-tertiary-101) !important;
+          color: var(--text-main) !important;
+          text-decoration: none;
+        }
+
+        &.active, &:active {
+          background-color: var(--primary-color) !important;
+          color: #fff !important;
+        }
+      }
+    }
+  }
+}
+
+// Spacing, hover, and focus effects for title input & write textarea to feel premium
+.theme-sgtalk.page-compose [data-component="composer/title"] input.title {
+  border: 1px solid var(--border-color) !important;
+  border-radius: 4px !important;
+  transition: all 0.2s ease-in-out !important;
+  outline: none !important;
+  box-shadow: none !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  height: 40px !important;
+  padding: 8px 12px !important;
+
+  &:hover {
+    border-color: var(--sg-border-strong) !important;
   }
 
-  .composer textarea.write,
-  .page-compose .composer textarea.write {
-    min-height: 136px;
-    max-height: 44vh;
-    resize: none;
+  &:focus {
+    background-color: var(--card-bg) !important;
+    border-color: var(--sg-border-strong) !important;
+    box-shadow: 0 0 0 3px rgba(80, 103, 133, 0.08) !important;
+  }
+}
+
+// Composer editor card formatting bar top and textarea/gutter blocks
+.theme-sgtalk.page-compose {
+  .formatting-bar.sg-composer-formatting {
+    border: 1px solid var(--border-color) !important;
+    border-bottom: 0 !important;
+    border-radius: 4px 4px 0 0 !important;
+    background: var(--color-tertiary-101) !important;
+    padding: 8px 12px !important;
+  }
+
+  .sg-composer-tab-btn {
+    background: transparent;
+    border: none;
+    padding: 4px 12px;
+    font-size: 13px;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 3px;
+    transition: all 0.15s ease-in-out;
+
+    &:hover {
+      color: var(--text-main);
+    }
+
+    &.active {
+      color: var(--text-main);
+      background: var(--border-color);
+    }
+  }
+
+  textarea.write {
+    border: 1px solid var(--border-color) !important;
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+    border-radius: 0 !important;
+    transition: all 0.2s ease-in-out !important;
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 12px !important;
+    font-size: 14.5px !important;
+    line-height: 1.6 !important;
+    background: var(--card-bg) !important;
+    color: var(--text-main) !important;
+
+    &:hover {
+      border-color: var(--sg-border-strong) !important;
+    }
+
+    &:focus {
+      border-color: var(--sg-border-strong) !important;
+    }
+  }
+
+  .sg-composer-gutter-upload {
+    border: 1px solid var(--border-color) !important;
+    border-top: 1px dashed var(--border-color) !important;
+    border-radius: 0 0 4px 4px !important;
+    background: var(--color-tertiary-101) !important;
+    padding: 8px 12px !important;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s;
+
+    &:hover {
+      background-color: var(--border-color) !important;
+      color: var(--text-main);
+    }
+  }
+
+  // Preview container alignment
+  .preview-container.sg-composer-preview {
+    border: 1px solid var(--border-color) !important;
+    border-radius: 0 0 4px 4px !important;
+    background: var(--card-bg) !important;
+    padding: 14px !important;
+    min-height: 168px;
+    color: var(--text-main) !important;
+  }
+}
+
+// Dark Mode overrides for all composer instances
+[data-bs-theme="dark"], .dark {
+  .composer,
+  [component="composer"] {
+    background: var(--card-bg) !important;
+    background-color: var(--card-bg) !important;
+    border-color: var(--border-color) !important;
+
+    .title-container input,
+    textarea.write,
+    .write,
+    .preview {
+      border-color: var(--border-color) !important;
+      background-color: var(--card-bg) !important;
+      color: var(--text-main) !important;
+    }
+
+    .formatting-bar {
+      background: var(--color-tertiary-101) !important;
+      border-color: var(--border-color) !important;
+    }
+  }
+
+  .sg-composer-page {
+    .composer .formatting-bar {
+      background: var(--color-tertiary-101) !important;
+      border-color: var(--border-color) !important;
+    }
   }
 }

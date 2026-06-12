@@ -193,6 +193,35 @@ main#panel {
   }
 }
 
+.theme-sgtalk.page-recent .sg-v2-header .sg-v2-nav-tabs a[href$="/recent"],
+.theme-sgtalk.page-popular .sg-v2-header .sg-v2-nav-tabs a[href$="/popular"],
+.theme-sgtalk.page-category-5 .sg-v2-header .sg-v2-nav-tabs a[href*="/category/5"],
+.theme-sgtalk.page-topic-category-5 .sg-v2-header .sg-v2-nav-tabs a[href*="/category/5"],
+.theme-sgtalk.page-category-6 .sg-v2-header .sg-v2-nav-tabs a[href*="/category/6"],
+.theme-sgtalk.page-topic-category-6 .sg-v2-header .sg-v2-nav-tabs a[href*="/category/6"],
+.theme-sgtalk.page-category-7 .sg-v2-header .sg-v2-nav-tabs a[href*="/category/7"],
+.theme-sgtalk.page-topic-category-7 .sg-v2-header .sg-v2-nav-tabs a[href*="/category/7"],
+.theme-sgtalk.page-category-8 .sg-v2-header .sg-v2-nav-tabs a[href*="/category/8"],
+.theme-sgtalk.page-topic-category-8 .sg-v2-header .sg-v2-nav-tabs a[href*="/category/8"],
+.theme-sgtalk.page-category-9 .sg-v2-header .sg-v2-nav-tabs a[href*="/category/9"],
+.theme-sgtalk.page-topic-category-9 .sg-v2-header .sg-v2-nav-tabs a[href*="/category/9"],
+.theme-sgtalk.page-category-10 .sg-v2-header .sg-v2-nav-tabs a[href*="/category/10"],
+.theme-sgtalk.page-topic-category-10 .sg-v2-header .sg-v2-nav-tabs a[href*="/category/10"],
+.theme-sgtalk.page-category-12 .sg-v2-header .sg-v2-nav-tabs a[href*="/category/12"],
+.theme-sgtalk.page-topic-category-12 .sg-v2-header .sg-v2-nav-tabs a[href*="/category/12"],
+.theme-sgtalk.page-category-13 .sg-v2-header .sg-v2-nav-tabs a[href*="/category/13"],
+.theme-sgtalk.page-topic-category-13 .sg-v2-header .sg-v2-nav-tabs a[href*="/category/13"],
+.theme-sgtalk.page-category-16 .sg-v2-header .sg-v2-nav-tabs a[href*="/category/16"],
+.theme-sgtalk.page-topic-category-16 .sg-v2-header .sg-v2-nav-tabs a[href*="/category/16"] {
+  color: var(--text-main) !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+
+  &::after {
+    transform: translateX(-50%) scaleX(1) !important;
+  }
+}
+
 // ── Dark Mode ─────────────────────────────────────────────────
 [data-bs-theme="dark"], .dark {
   .sg-v2-header {

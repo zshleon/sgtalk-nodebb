@@ -19,24 +19,25 @@
       </form>
     </div>
     <div class="d-flex align-items-center gap-1">
-      <!-- Theme/Mode switches -->
-      <button class="btn btn-link p-1 text-muted border-0 d-none d-sm-inline-block" id="sg-palette-toggle" title="自定义主题颜色" style="box-shadow: none;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-palette" aria-hidden="true"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"></path><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle></svg>
-      </button>
+      <!-- Theme/Mode switch -->
       <button class="btn btn-link p-1 text-muted border-0 me-2" id="sg-dark-toggle" title="切换明暗模式" style="box-shadow: none;">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon text-muted" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"></path></svg>
       </button>
 
       <!-- Auth State Guest -->
+      {{{ if !loggedIn }}}
       <a class="nav-item text-decoration-none fw-semibold text-muted text-sm px-2 sg-guest-only" href="{config.relative_path}/register">注册</a>
       <a class="nav-item text-decoration-none fw-semibold text-muted text-sm px-2 sg-guest-only" href="{config.relative_path}/login">登录</a>
+      {{{ end }}}
       
       <!-- Auth State Logged In -->
+      {{{ if loggedIn }}}
       <a class="sg-auth-state-link sg-user-only text-decoration-none d-flex align-items-center gap-2 px-1" href="{config.relative_path}/me" data-sgtalk-auth-state>
         <span class="sg-auth-avatar rounded d-flex align-items-center justify-content-center bg-secondary text-white" data-sgtalk-auth-avatar style="width: 24px; height: 24px; font-size: 11px; border-radius: 4px !important;">我</span>
         <span class="sg-auth-name text-muted fw-semibold d-none d-md-inline" data-sgtalk-auth-name>已登录</span>
       </a>
       <a class="nav-item text-decoration-none fw-semibold text-muted text-sm px-2 sg-user-only ms-2" href="{config.relative_path}/logout">退出</a>
+      {{{ end }}}
     </div>
   </div>
   <div class="border-top border-light-subtle"></div>
@@ -49,15 +50,15 @@
       <nav class="sg-v2-nav-tabs d-flex align-items-center gap-3">
         <a class="nav-item text-decoration-none fw-semibold text-muted text-sm text-nowrap" href="{config.relative_path}/recent">活跃</a>
         <a class="nav-item text-decoration-none fw-semibold text-muted text-sm text-nowrap" href="{config.relative_path}/popular">最热</a>
-        <a class="nav-item text-decoration-none fw-semibold text-muted text-sm text-nowrap" href="{config.relative_path}/category/2">新移民</a>
-        <a class="nav-item text-decoration-none fw-semibold text-muted text-sm text-nowrap" href="{config.relative_path}/category/3">安家</a>
-        <a class="nav-item text-decoration-none fw-semibold text-muted text-sm text-nowrap" href="{config.relative_path}/category/4">职场</a>
-        <a class="nav-item text-decoration-none fw-semibold text-muted text-sm text-nowrap" href="{config.relative_path}/category/6">家庭</a>
-        <a class="nav-item text-decoration-none fw-semibold text-muted text-sm text-nowrap" href="{config.relative_path}/category/5">金融</a>
-        <a class="nav-item text-decoration-none fw-semibold text-muted text-sm text-nowrap" href="{config.relative_path}/category/8">生活</a>
-        <a class="nav-item text-decoration-none fw-semibold text-muted text-sm text-nowrap" href="{config.relative_path}/category/9">出行</a>
-        <a class="nav-item text-decoration-none fw-semibold text-muted text-sm text-nowrap" href="{config.relative_path}/category/1">问答</a>
-        <a class="nav-item text-decoration-none fw-semibold text-muted text-sm text-nowrap" href="{config.relative_path}/category/12">交易</a>
+        <a class="nav-item text-decoration-none fw-semibold text-muted text-sm text-nowrap" href="{config.relative_path}/category/6/新移民">新移民</a>
+        <a class="nav-item text-decoration-none fw-semibold text-muted text-sm text-nowrap" href="{config.relative_path}/category/7/安家租房">安家</a>
+        <a class="nav-item text-decoration-none fw-semibold text-muted text-sm text-nowrap" href="{config.relative_path}/category/8/职业与薪资">职场</a>
+        <a class="nav-item text-decoration-none fw-semibold text-muted text-sm text-nowrap" href="{config.relative_path}/category/10/育儿与学校">家庭</a>
+        <a class="nav-item text-decoration-none fw-semibold text-muted text-sm text-nowrap" href="{config.relative_path}/category/9/金融税务">金融</a>
+        <a class="nav-item text-decoration-none fw-semibold text-muted text-sm text-nowrap" href="{config.relative_path}/category/12/本地生活">生活</a>
+        <a class="nav-item text-decoration-none fw-semibold text-muted text-sm text-nowrap" href="{config.relative_path}/category/13/交通出行">出行</a>
+        <a class="nav-item text-decoration-none fw-semibold text-muted text-sm text-nowrap" href="{config.relative_path}/category/5/问与答">问答</a>
+        <a class="nav-item text-decoration-none fw-semibold text-muted text-sm text-nowrap" href="{config.relative_path}/category/16/交易">交易</a>
       </nav>
     </div>
     <div>

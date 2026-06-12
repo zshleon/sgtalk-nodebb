@@ -125,69 +125,32 @@
   }
 
   function getMerlionSvgString(bgColor, username) {
-    let seed = username || 'user';
-    let hash = 0;
-    const str = String(seed);
-    for (let i = 0; i < str.length; i++) {
-      hash = str.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    hash = Math.abs(hash);
-
     let color = bgColor || '#e62929';
     const isHex = color && /^#([0-9A-F]{3}){1,2}$/i.test(color);
     if (!isHex && !color.startsWith('hsl')) {
-      color = '#e62929';
+      color = '#eef2f7';
     }
 
-    const strokeColor = '#1e293b';
-    const fillBodyColor = '#ffffff';
-    const pinkCheekColor = '#fda4af';
+    const source = String(username || 'user').trim();
+    const initial = (Array.from(source)[0] || 'U').toUpperCase()
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+    let textColor = '#1d2530';
+    if (isHex) {
+      const raw = color.slice(1);
+      const full = raw.length === 3 ? raw.split('').map((char) => char + char).join('') : raw;
+      const r = parseInt(full.slice(0, 2), 16);
+      const g = parseInt(full.slice(2, 4), 16);
+      const b = parseInt(full.slice(4, 6), 16);
+      const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+      textColor = luminance < 0.62 ? '#ffffff' : '#1d2530';
+    }
 
-    return '<svg class="sg-merlion-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; border-radius: 4px;">' +
-      // Background
-      '<rect width="64" height="64" fill="' + color + '"/>' +
-
-      // Fish body/tail
-      '<path d="M 28 33 C 28 45, 35 50, 44 48 C 50 46, 51 39, 46 34 C 48 30, 52 31, 54 28 C 51 28, 47 31, 45 34 C 42 32, 39 33, 38 36 C 32 37, 30 35, 28 33 Z" fill="' + fillBodyColor + '" stroke="' + strokeColor + '" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>' +
-
-      // Scale curves on tail
-      '<path d="M 31 42 Q 33 44 35 42" fill="none" stroke="' + strokeColor + '" stroke-width="2" stroke-linecap="round"/>' +
-      '<path d="M 37 45 Q 39 47 41 45" fill="none" stroke="' + strokeColor + '" stroke-width="2" stroke-linecap="round"/>' +
-
-      // Lion Mane circles behind the head (layering trick)
-      '<circle cx="28" cy="14" r="4.5" fill="' + fillBodyColor + '" stroke="' + strokeColor + '" stroke-width="2.5"/>' +
-      '<circle cx="36" cy="17" r="4.5" fill="' + fillBodyColor + '" stroke="' + strokeColor + '" stroke-width="2.5"/>' +
-      '<circle cx="39" cy="25" r="4.5" fill="' + fillBodyColor + '" stroke="' + strokeColor + '" stroke-width="2.5"/>' +
-      '<circle cx="36" cy="33" r="4.5" fill="' + fillBodyColor + '" stroke="' + strokeColor + '" stroke-width="2.5"/>' +
-      '<circle cx="28" cy="36" r="4.5" fill="' + fillBodyColor + '" stroke="' + strokeColor + '" stroke-width="2.5"/>' +
-      '<circle cx="20" cy="33" r="4.5" fill="' + fillBodyColor + '" stroke="' + strokeColor + '" stroke-width="2.5"/>' +
-      '<circle cx="17" cy="25" r="4.5" fill="' + fillBodyColor + '" stroke="' + strokeColor + '" stroke-width="2.5"/>' +
-      '<circle cx="20" cy="17" r="4.5" fill="' + fillBodyColor + '" stroke="' + strokeColor + '" stroke-width="2.5"/>' +
-
-      // Cute ears
-      '<circle cx="20" cy="15" r="3" fill="' + fillBodyColor + '" stroke="' + strokeColor + '" stroke-width="2.5"/>' +
-      '<circle cx="36" cy="15" r="3" fill="' + fillBodyColor + '" stroke="' + strokeColor + '" stroke-width="2.5"/>' +
-
-      // Head / Face circle
-      '<circle cx="28" cy="25" r="11" fill="' + fillBodyColor + '" stroke="' + strokeColor + '" stroke-width="2.5"/>' +
-
-      // Eyes (white sclera)
-      '<circle cx="24" cy="23" r="2.5" fill="#ffffff" stroke="' + strokeColor + '" stroke-width="2"/>' +
-      '<circle cx="32" cy="23" r="2.5" fill="#ffffff" stroke="' + strokeColor + '" stroke-width="2"/>' +
-
-      // Pupils (goofy cross-eyed)
-      '<circle cx="25.2" cy="23" r="1" fill="' + strokeColor + '"/>' +
-      '<circle cx="30.8" cy="23" r="1" fill="' + strokeColor + '"/>' +
-
-      // Blushing cheeks
-      '<circle cx="19.5" cy="25.5" r="1.8" fill="' + pinkCheekColor + '"/>' +
-      '<circle cx="36.5" cy="25.5" r="1.8" fill="' + pinkCheekColor + '"/>' +
-
-      // Tiny nose
-      '<polygon points="27.5,25.5 28.5,25.5 28,26.2" fill="' + strokeColor + '" stroke="' + strokeColor + '" stroke-width="1"/>' +
-
-      // Smile mouth
-      '<path d="M 26 27.5 Q 28 29 30 27.5" fill="none" stroke="' + strokeColor + '" stroke-width="2" stroke-linecap="round"/>' +
+    return '<svg class="sg-merlion-svg sg-initial-avatar" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; border-radius: 4px;">' +
+      '<rect width="64" height="64" rx="6" fill="' + color + '"/>' +
+      '<text x="50%" y="53%" text-anchor="middle" dominant-baseline="middle" fill="' + textColor + '" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif" font-size="30" font-weight="800">' + initial + '</text>' +
       '</svg>';
   }
 
@@ -197,15 +160,14 @@
     }
 
     const picture = user && user.picture;
-    const isGoogleAvatar = picture && picture.includes('googleusercontent.com');
     const bg = (user && user['icon:bgColor']) || '#eef2f7';
     const username = (user && user.username) || 'user';
 
     target.textContent = '';
     target.style.backgroundColor = '';
-    target.classList.toggle('sg-has-picture', Boolean(picture && !isGoogleAvatar));
+    target.classList.toggle('sg-has-picture', Boolean(picture));
 
-    if (picture && !isGoogleAvatar) {
+    if (picture) {
       const img = document.createElement('img');
       img.alt = '';
       img.loading = 'lazy';
@@ -233,18 +195,8 @@
       avatar.innerHTML = getMerlionSvgString(bg, username);
     });
 
-    // Replace Google default avatars
-    document.querySelectorAll('img[src*="googleusercontent.com"]').forEach((img) => {
-      const parent = img.closest('.avatar, [component="user/picture"], [component="avatar/picture"]');
-      if (parent && !parent.querySelector('.sg-merlion-svg')) {
-        const bg = (parent.dataset.iconBg) || '#eef2f7';
-        const username = getUsernameFromAvatar(parent);
-        parent.textContent = '';
-        parent.style.backgroundColor = 'transparent';
-        parent.innerHTML = getMerlionSvgString(bg, username);
-        parent.classList.remove('sg-has-picture');
-      }
-    });
+    // Keep provider photos, including Google avatars. Only text/icon avatars are
+    // replaced, so real profile photos remain visible across lists and profiles.
   }
 
   let selectedMerlionColor = '#e62929';
@@ -261,8 +213,8 @@
     section.style.borderColor = 'var(--sg-border)';
     section.style.background = 'var(--sg-surface-soft)';
     section.innerHTML = `
-      <h5 class="fw-bold mb-2" style="font-size:14px; color: var(--sg-text);">预设可爱鱼尾狮呆萌头像</h5>
-      <p class="mb-3" style="font-size:12px; color: var(--sg-muted);">点击下方颜色实时预览头像效果，确认满意后点击下方“保存并使用”一键上传。</p>
+      <h5 class="fw-bold mb-2" style="font-size:14px; color: var(--sg-text);">预设简洁字母头像</h5>
+      <p class="mb-3" style="font-size:12px; color: var(--sg-muted);">点击下方颜色实时预览头像效果，确认满意后点击“保存并使用”。</p>
 
       <div class="d-flex align-items-center gap-3 mb-3">
         <div id="sg-merlion-preview-box" style="width: 80px; height: 80px; border: 1px solid var(--sg-border); border-radius: 4px; overflow: hidden; background: #f8fafc;">
@@ -323,7 +275,7 @@
     const statusEl = document.getElementById('sg-merlion-status');
     if (statusEl) {
       statusEl.classList.remove('d-none');
-      statusEl.textContent = '正在生成并上传鱼尾狮头像...';
+      statusEl.textContent = '正在生成并上传头像...';
     }
 
     const canvas = document.createElement('canvas');
@@ -355,7 +307,7 @@
               }
             } else {
               if (alerts && alerts.success) {
-                alerts.success('鱼尾狮头像设置成功！');
+                alerts.success('头像设置成功。');
               }
               setTimeout(function() {
                 window.location.reload();
@@ -411,6 +363,201 @@
       element.href = profileHref;
       element.textContent = displayName;
       element.title = displayName;
+    });
+  }
+
+  function isGuestUser() {
+    const user = window.app && window.app.user;
+    return !(user && Number(user.uid) > 0);
+  }
+
+  function loginUrlWithNext() {
+    const relativePath = (window.config && window.config.relative_path) || '';
+    const next = window.location.pathname + window.location.search + window.location.hash;
+    return `${relativePath}/login?next=${encodeURIComponent(next)}`;
+  }
+
+  function bindGuestProtectedActions() {
+    if (document.documentElement.dataset.sgtalkGuestActions === '1') {
+      return;
+    }
+
+    document.documentElement.dataset.sgtalkGuestActions = '1';
+    document.addEventListener('click', (event) => {
+      if (!isGuestUser()) {
+        return;
+      }
+
+      const target = event.target && event.target.closest
+        ? event.target.closest('[component="post/upvote"], [component="post/downvote"], [component="post/reply"], [component="topic/reply"]')
+        : null;
+      if (!target) {
+        return;
+      }
+
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      window.location.assign(loginUrlWithNext());
+    }, true);
+  }
+
+  function registerErrorBox(form) {
+    return form && form.querySelector('#register-error-notify');
+  }
+
+  function fieldFeedback(input) {
+    if (!input) {
+      return null;
+    }
+
+    const describedBy = input.getAttribute('aria-describedby');
+    if (describedBy) {
+      return document.getElementById(describedBy.split(/\s+/)[0]);
+    }
+
+    return document.getElementById(`${input.id}-notify`);
+  }
+
+  function clearFieldError(input) {
+    if (!input) {
+      return;
+    }
+
+    input.classList.remove('is-invalid');
+    input.removeAttribute('aria-invalid');
+    const feedback = fieldFeedback(input);
+    if (feedback) {
+      feedback.textContent = '';
+    }
+  }
+
+  function setFieldError(input, message) {
+    if (!input) {
+      return;
+    }
+
+    input.classList.add('is-invalid');
+    input.setAttribute('aria-invalid', 'true');
+    const feedback = fieldFeedback(input);
+    if (feedback) {
+      feedback.textContent = message;
+    }
+  }
+
+  function showRegisterError(form, messages) {
+    const box = registerErrorBox(form);
+    if (!box) {
+      return;
+    }
+
+    const text = messages.join(' ');
+    const body = box.querySelector('p') || box;
+    body.textContent = text;
+    box.classList.remove('hidden', 'd-none');
+    box.hidden = false;
+  }
+
+  function hideRegisterError(form) {
+    const box = registerErrorBox(form);
+    if (!box) {
+      return;
+    }
+
+    box.classList.add('hidden');
+    box.hidden = true;
+  }
+
+  function validateRegisterForm(form) {
+    const username = form.querySelector('#username');
+    const email = form.querySelector('#email');
+    const password = form.querySelector('#password');
+    const confirm = form.querySelector('#password-confirm');
+    const fields = [username, email, password, confirm];
+    const messages = [];
+    let firstInvalid = null;
+
+    fields.forEach(clearFieldError);
+    hideRegisterError(form);
+
+    if (!username || username.value.trim().length < 2) {
+      const message = '昵称至少需要 2 个字符。';
+      setFieldError(username, message);
+      messages.push(message);
+      firstInvalid = firstInvalid || username;
+    }
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+      const message = '请填写有效邮箱地址。';
+      setFieldError(email, message);
+      messages.push(message);
+      firstInvalid = firstInvalid || email;
+    }
+
+    if (!password || password.value.length < 6) {
+      const message = '密码至少需要 6 位。';
+      setFieldError(password, message);
+      messages.push(message);
+      firstInvalid = firstInvalid || password;
+    }
+
+    if (!confirm || confirm.value !== (password && password.value)) {
+      const message = '两次输入的密码不一致。';
+      setFieldError(confirm, message);
+      messages.push(message);
+      firstInvalid = firstInvalid || confirm;
+    }
+
+    if (messages.length) {
+      showRegisterError(form, messages);
+      if (firstInvalid) {
+        firstInvalid.focus();
+      }
+      return false;
+    }
+
+    return true;
+  }
+
+  function bindRegisterValidation(root) {
+    const scope = root && root.querySelectorAll ? root : document;
+    const forms = [];
+
+    if (scope.matches && scope.matches('[component="register/local"]')) {
+      forms.push(scope);
+    }
+
+    scope.querySelectorAll('[component="register/local"]').forEach((form) => forms.push(form));
+    forms.forEach((form) => {
+      if (form.dataset.sgtalkRegisterValidation === '1') {
+        return;
+      }
+
+      form.dataset.sgtalkRegisterValidation = '1';
+      form.setAttribute('novalidate', 'novalidate');
+
+      form.addEventListener('submit', (event) => {
+        if (!validateRegisterForm(form)) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+        }
+      }, true);
+
+      const submitButton = form.querySelector('#register');
+      if (submitButton) {
+        submitButton.addEventListener('click', (event) => {
+          if (!validateRegisterForm(form)) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+          }
+        }, true);
+      }
+
+      form.querySelectorAll('input').forEach((input) => {
+        input.addEventListener('input', () => {
+          clearFieldError(input);
+          hideRegisterError(form);
+        });
+      });
     });
   }
 
@@ -854,6 +1001,8 @@
     scan(document);
     bindSubmitFeedback(document);
     bindHardNavigation();
+    bindGuestProtectedActions();
+    bindRegisterValidation(document);
     updateAuthState();
     patchFetchForComposerErrors();
     replaceDefaultAvatars();
@@ -885,6 +1034,7 @@
         if (node.nodeType === Node.ELEMENT_NODE) {
           scanLater(node);
           bindSubmitFeedback(node);
+          bindRegisterValidation(node);
           initV2exEditorTabs(node);
           if (node.matches('.avatar, [component="avatar/icon"], img[src*="googleusercontent.com"]') ||
               node.querySelector('.avatar, [component="avatar/icon"], img[src*="googleusercontent.com"]')) {
@@ -902,6 +1052,7 @@
     window.jQuery(window).on('action:composer.loaded action:composer.resize', (event, data) => {
       scanLater(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
       bindSubmitFeedback(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
+      bindRegisterValidation(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
       initV2exEditorTabs(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
       updateAuthState();
       replaceDefaultAvatars();
@@ -914,12 +1065,14 @@
         hooks.on('action:composer.enhanced', (data) => {
           scanLater(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
           bindSubmitFeedback(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
+          bindRegisterValidation(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
           initV2exEditorTabs(data && data.postContainer && data.postContainer[0] ? data.postContainer[0] : document);
           updateAuthState();
           replaceDefaultAvatars();
         });
         hooks.on('action:ajaxify.end', () => {
           updateAuthState();
+          bindRegisterValidation(document);
           replaceDefaultAvatars();
           injectMerlionPicker();
           initV2exEditorTabs(document);

@@ -113,6 +113,13 @@ Already shipped:
 - Tighter compose page and textarea autosize.
 - Compose submit warning and busy/recovery behavior.
 - Multi-colour Google icon on login.
+- Header node shortcuts now point to the real live NodeBB category IDs instead of stale hard-coded IDs.
+- Invalid registration now shows visible Chinese field errors and a summary alert.
+- Guest reply/upvote actions redirect to login before protected API calls.
+- Dark mode keeps primary CTAs red and profile section headings readable.
+- The dead palette button was removed; the reliable light/dark toggle remains.
+- Public avatars preserve real image URLs when present and otherwise use a restrained initials fallback.
+- Post-audit Playwright core matrix passed 20/20 on the live site.
 
 See `docs/SGTALK_PHASE1_QA.md` for screenshot evidence and verified flows.
 
@@ -126,6 +133,7 @@ Highest-priority structural work:
 4. Hide mobile topic-list `最后回复` text to keep rows denser.
 5. Make homepage default post target configurable instead of hard-coded `cid=5`.
 6. Re-test logged-in compose with a real logged-in browser session or a temporary QA account.
+7. If registration console cleanliness becomes important, replace or suppress NodeBB's username/group availability `HEAD` checks where 404 currently means "available".
 
 ## Handoff Prompt For Another AI
 

@@ -9,7 +9,7 @@
 					</nav>
 					<div class="d-flex align-items-end justify-content-between">
 						<div class="d-flex flex-column text-xs text-muted gap-1">
-							<div>小而美的华人交流社区，新移民分享社区。</div>
+							<div>讨论准证、租房、学校、职场、医疗、交通与本地生活。</div>
 							<div>sgtalk.zshstc.org</div>
 							<div>SGTALK © 2026</div>
 						</div>

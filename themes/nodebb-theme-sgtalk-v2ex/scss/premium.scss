@@ -240,6 +240,32 @@ body.theme-sgtalk {
   }
 }
 
+// Keep primary forum actions visually primary in dark mode. The generic dark
+// button treatment above intentionally mutes secondary controls, but it must
+// not neutralize "发布主题", registration, login submit, or compose submit CTAs.
+[data-bs-theme="dark"] .theme-sgtalk,
+.dark .theme-sgtalk {
+  .sg-v2-post-link.btn-danger,
+  .sg-v2-post-link.primary,
+  .sg-v2-button.primary,
+  .sg-auth-submit,
+  .composer-submit,
+  .sg-quickreply-submit-btn {
+    border-color: var(--sg-red-dark) !important;
+    background: var(--sg-red) !important;
+    color: #fff !important;
+    box-shadow: 0 2px 8px rgba(230, 0, 45, 0.22) !important;
+
+    &:hover,
+    &:focus {
+      border-color: var(--sg-red-dark) !important;
+      background: var(--sg-red-dark) !important;
+      color: #fff !important;
+      box-shadow: 0 3px 12px rgba(230, 0, 45, 0.28) !important;
+    }
+  }
+}
+
 .theme-sgtalk a.sg-auth-state {
   text-decoration: none !important;
 }
@@ -293,6 +319,16 @@ body.theme-sgtalk {
   background: transparent !important;
   color: var(--sg-muted) !important;
   box-shadow: none;
+}
+
+.theme-sgtalk .sg-auth-check input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  border: 1px solid var(--sg-border);
+  border-radius: 3px;
+  cursor: pointer;
+  appearance: auto;
 }
 
 .theme-sgtalk.page-recent .sg-v2-toplinks a[href="/"],
@@ -1671,6 +1707,14 @@ body.theme-sgtalk:not(.page-compose) .composer[component="composer"] {
     // Account content sections
     .sg-account-section + .sg-account-section {
       border-top-color: var(--border-color) !important;
+    }
+    .sg-account-section-title {
+      color: var(--text-main) !important;
+    }
+    .sg-account-about,
+    .sg-account-muted,
+    .sg-account-links a {
+      color: var(--text-muted) !important;
     }
 
     // Auth state

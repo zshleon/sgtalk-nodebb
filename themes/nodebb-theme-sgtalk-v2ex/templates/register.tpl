@@ -15,24 +15,25 @@
 			<form component="register/local" class="sg-auth-form" role="form" action="{config.relative_path}/register" method="post">
 				<label class="sg-auth-field" for="username">
 					<span>昵称</span>
-					<input class="form-control" type="text" placeholder="2-16 个字符" name="username" id="username" autocorrect="off" autocapitalize="off" autocomplete="nickname" aria-required="true" aria-describedby="username-notify"/>
+					<input class="form-control" type="text" placeholder="2-16 个字符" name="username" id="username" autocorrect="off" autocapitalize="off" autocomplete="nickname" required minlength="2" maxlength="16" aria-required="true" aria-describedby="username-notify"/>
 					<small class="register-feedback text-danger" id="username-notify" aria-live="polite"></small>
 				</label>
 
 				<label class="sg-auth-field" for="email">
 					<span>邮箱</span>
-					<input class="form-control" type="email" placeholder="用于登录、找回密码和接收验证邮件" name="email" id="email" autocorrect="off" autocapitalize="off" autocomplete="email" aria-required="true"/>
+					<input class="form-control" type="email" placeholder="用于登录、找回密码和接收验证邮件" name="email" id="email" autocorrect="off" autocapitalize="off" autocomplete="email" required aria-required="true" aria-describedby="email-notify"/>
+					<small class="register-feedback text-danger" id="email-notify" aria-live="polite"></small>
 				</label>
 
 				<label class="sg-auth-field" for="password">
 					<span>密码</span>
-					<input class="form-control" type="password" placeholder="至少 6 位" name="password" id="password" autocomplete="new-password" autocapitalize="off" aria-required="true" aria-describedby="password-notify"/>
+					<input class="form-control" type="password" placeholder="至少 6 位" name="password" id="password" autocomplete="new-password" autocapitalize="off" required minlength="6" aria-required="true" aria-describedby="password-notify"/>
 					<small class="register-feedback text-danger" id="password-notify" aria-live="polite"></small>
 				</label>
 
 				<label class="sg-auth-field" for="password-confirm">
 					<span>确认密码</span>
-					<input class="form-control" type="password" placeholder="再次输入密码" name="password-confirm" id="password-confirm" autocomplete="new-password" autocapitalize="off" aria-required="true" aria-describedby="password-confirm-notify"/>
+					<input class="form-control" type="password" placeholder="再次输入密码" name="password-confirm" id="password-confirm" autocomplete="new-password" autocapitalize="off" required minlength="6" aria-required="true" aria-describedby="password-confirm-notify"/>
 					<small class="register-feedback text-danger" id="password-confirm-notify" aria-live="polite"></small>
 				</label>
 

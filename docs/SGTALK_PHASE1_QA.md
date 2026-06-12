@@ -22,6 +22,16 @@ Updated: 2026-06-12
 
 ## Verified
 
+- Post-audit core matrix passed 20/20 on 2026-06-12 after the latest deploy.
+- Header node shortcuts use the real live category IDs: `问与答=5`, `新移民=6`, `安家租房=7`, `职业与薪资=8`, `金融税务=9`, `育儿与学校=10`, `本地生活=12`, `交通出行=13`, `交易=16`.
+- Guest header no longer exposes hidden logged-in labels in rendered body text.
+- Dead palette/theme-customisation button was removed; light/dark toggle remains.
+- Invalid register submit now shows visible Chinese field errors and a visible summary alert.
+- Guest reply/upvote actions redirect to login before calling protected APIs.
+- Dark mode keeps primary CTAs red and profile section headings readable.
+- Login/register Google OAuth entry remains visible.
+- Login "保持登录状态" renders as a clear checkbox.
+- Profile/default avatars now preserve real image URLs when present and fall back to a restrained initials avatar.
 - NodeBB build completed successfully after each deployment.
 - Public site returns HTTP 200.
 - No Playwright console errors or HTTP >= 400 errors in the tested flows.
@@ -45,6 +55,9 @@ Updated: 2026-06-12
 - `/tmp/sgtalk-phase1-final/login-google-final.png`
 - `/tmp/sgtalk-github-handoff-desktop.png`
 - `/tmp/sgtalk-github-handoff-mobile.png`
+- `/tmp/sgtalk-register-invalid-fixed.png`
+- `/tmp/sgtalk-mobile-home-final.png`
+- `/tmp/sgtalk-dark-user-avatar-final.png`
 
 ## Still To Do
 
@@ -54,3 +67,4 @@ Updated: 2026-06-12
 - Hide mobile topic-list `最后回复` text to keep rows denser.
 - Make homepage default post target configurable instead of hard-coded `cid=5`.
 - Re-test logged-in compose in the user's Chrome session once Chrome control is available, or with a temporary QA account.
+- The NodeBB username/group availability checks still use `HEAD` requests where 404 means "available"; this can appear as console noise during registration typing even though the user-facing form now shows proper validation.

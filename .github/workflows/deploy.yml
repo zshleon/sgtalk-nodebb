@@ -43,7 +43,10 @@ jobs:
       - name: Verify live site
         run: |
           set -euo pipefail
-          sleep 6
-          code=$(curl -s -o /dev/null -w '%{http_code}' https://sgtalk.zshstc.org/)
-          echo "Live HTTP status: $code"
-          test "$code" = "200"
+          for i in $(seq 1 30); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' https://sgtalk.zshstc.org/ || true)
+            echo "attempt $i: HTTP $code"
+            [ "$code" = "200" ] && exit 0
+            sleep 4
+          done
+          echo "Site did not return 200 within timeout"; exit 1

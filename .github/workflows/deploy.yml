@@ -1,0 +1,50 @@
+name: Deploy theme to homelab
+
+# Push-to-deploy: when the theme changes on main, a self-hosted runner
+# on the homelab syncs the theme into the live NodeBB stack, rebuilds
+# assets, restarts, and verifies the site responds 200.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'themes/nodebb-theme-sgtalk-v2ex/**'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-homelab
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, sgtalk]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Sync theme into stack
+        run: |
+          set -euo pipefail
+          STACK=/opt/stacks/sgtalk-nodebb
+          THEME=themes/nodebb-theme-sgtalk-v2ex
+          rsync -a --delete \
+            --exclude 'node_modules' --exclude '*.bak*' \
+            "$GITHUB_WORKSPACE/$THEME/" "$STACK/$THEME/"
+          # NodeBB reads theme assets world-readable (see gotcha #1)
+          find "$STACK/$THEME" -type f -exec chmod 644 {} +
+          find "$STACK/$THEME" -type d -exec chmod 755 {} +
+
+      - name: Build assets + restart NodeBB
+        run: |
+          set -euo pipefail
+          cd /opt/stacks/sgtalk-nodebb
+          docker compose exec -T nodebb bash -lc "cd /usr/src/app && ./nodebb build --config=/opt/config/config.json"
+          docker compose restart nodebb
+
+      - name: Verify live site
+        run: |
+          set -euo pipefail
+          sleep 6
+          code=$(curl -s -o /dev/null -w '%{http_code}' https://sgtalk.zshstc.org/)
+          echo "Live HTTP status: $code"
+          test "$code" = "200"

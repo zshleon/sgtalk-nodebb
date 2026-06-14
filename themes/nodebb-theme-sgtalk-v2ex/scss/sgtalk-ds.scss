@@ -103,3 +103,36 @@
 
 // page background warmth (in case of hardcoded leaks on body)
 body.theme-sgtalk, .theme-sgtalk { background-color: var(--background); }
+
+// ── Round 4 phase 2: per-page refinements + leak fixes ─────
+.theme-sgtalk {
+  accent-color: var(--primary-color);
+
+  // serif headings on auth / boxes / node hero / post title
+  .sg-auth-head h2, .sg-auth-box h2,
+  .sg-v2-box-title, .sg-node-hero-title,
+  h1[component="post/header"] .topic-title,
+  [component="topic/title"] {
+    font-family: var(--sg-font-serif);
+    font-weight: 600;
+    letter-spacing: -.005em;
+  }
+
+  // warm-tint stray default-blue links/labels
+  .sg-auth-small-link { color: var(--text-muted); }
+  .sg-auth-small-link:hover { color: var(--primary-color); }
+  .sg-auth-check, .sg-auth-check span { color: var(--text-muted); }
+
+  // post content readability + warm code/quote
+  .sg-v2-post-content { font-size: 15.5px; line-height: 1.8; color: var(--sg-text-soft); }
+  .sg-v2-post-content blockquote {
+    border-left: 3px solid var(--border-color-strong);
+    background: var(--sg-surface-2);
+    border-radius: 0 var(--sg-radius-tight) var(--sg-radius-tight) 0;
+    color: var(--text-muted);
+  }
+  .sg-v2-post-content :where(code, pre) { background: var(--sg-surface-2); color: var(--sg-text-soft); }
+
+  // node/category directory cards pick up warm surfaces cleanly
+  .sg-directory-node { background: var(--card-bg); border-color: var(--border-color); }
+}

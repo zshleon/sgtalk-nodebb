@@ -37,9 +37,8 @@ jobs:
       - name: Build assets + restart NodeBB
         run: |
           set -euo pipefail
-          cd /opt/stacks/sgtalk-nodebb
-          docker compose exec -T nodebb bash -lc "cd /usr/src/app && ./nodebb build --config=/opt/config/config.json"
-          docker compose restart nodebb
+          docker exec sgtalk-nodebb bash -lc "cd /usr/src/app && ./nodebb build --config=/opt/config/config.json"
+          docker restart sgtalk-nodebb
 
       - name: Verify live site
         run: |

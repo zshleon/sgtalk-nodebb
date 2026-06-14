@@ -34,8 +34,8 @@ select {
 
 .btn-primary:hover,
 .btn-primary:focus {
-  background: #cf2020;
-  border-color: #cf2020;
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
 }
 
 .card,

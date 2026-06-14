@@ -44,10 +44,10 @@
 				<span>·</span>
 				<span>{increment(postcount, "-1")} 回复</span>
 				<span component="topic/labels" class="sg-topic-state-labels {{{ if (!scheduled && (!pinned && (!locked && (!icons.length && (!oldCid || (oldCid == "-1")))))) }}}hidden{{{ end }}}">
-					<span component="topic/scheduled" class="badge {{{ if !scheduled }}}hidden{{{ end }}}">定时</span>
-					<span component="topic/pinned" class="badge {{{ if (scheduled || !pinned) }}}hidden{{{ end }}}">置顶</span>
-					<span component="topic/locked" class="badge {{{ if !locked }}}hidden{{{ end }}}">锁定</span>
-					<a component="topic/moved" href="{config.relative_path}/category/{oldCid}" class="badge text-decoration-none {{{ if (!oldCid || (oldCid == "-1")) }}}hidden{{{ end }}}">已移动</a>
+					<span component="topic/scheduled" class="badge {{{ if !scheduled }}}hidden{{{ end }}}" data-sgtalk-i18n="topic.scheduled">定时</span>
+					<span component="topic/pinned" class="badge {{{ if (scheduled || !pinned) }}}hidden{{{ end }}}" data-sgtalk-i18n="topic.pinned">置顶</span>
+					<span component="topic/locked" class="badge {{{ if !locked }}}hidden{{{ end }}}" data-sgtalk-i18n="topic.locked">锁定</span>
+					<a component="topic/moved" href="{config.relative_path}/category/{oldCid}" class="badge text-decoration-none {{{ if (!oldCid || (oldCid == "-1")) }}}hidden{{{ end }}}" data-sgtalk-i18n="topic.moved">已移动</a>
 					{{{each icons}}}<span class="lh-1">{@value}</span>{{{end}}}
 				</span>
 				<div data-tid="{./tid}" component="topic/tags" class="tags tag-list d-flex flex-wrap hidden-xs hidden-empty gap-1"><!-- IMPORT partials/topic/tags.tpl --></div>

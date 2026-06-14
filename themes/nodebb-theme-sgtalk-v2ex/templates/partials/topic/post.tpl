@@ -7,7 +7,7 @@
 			{buildAvatar(posts.user, "48px", true, "", "user/picture")}
 		</a>
 	</div>
-	
+
 	<div class="sg-v2-post-main post-container d-flex gap-2 flex-grow-1 flex-column w-100" style="min-width:0;">
 		<div class="sg-v2-post-header d-flex align-items-center justify-content-between post-header" itemprop="author" itemscope itemtype="https://schema.org/Person">
 			<div class="d-flex gap-2 flex-wrap align-items-center text-truncate">
@@ -30,7 +30,7 @@
 
 				<i component="post/edit-indicator" class="fa fa-edit text-muted{{{ if privileges.posts:history }}} pointer{{{ end }}} edit-icon {{{ if !posts.editor.username }}}hidden{{{ end }}}" title="[[global:edited-timestamp, {isoTimeToLocaleString(./editedISO, config.userLang)}]]"></i>
 			</div>
-			
+
 			<div class="d-flex align-items-center gap-2">
 				<a href="{config.relative_path}/post/{encodeURIComponent(./pid)}" class="sg-v2-post-index post-index text-muted">#{increment(./index, "1")}</a>
 			</div>
@@ -53,10 +53,10 @@
 					</a>
 					{{{ end }}}
 				</div>
-				
+
 				<div component="post/actions" class="d-flex align-items-center gap-3 post-tools sg-v2-post-actions">
 					<!-- IMPORT partials/topic/reactions.tpl -->
-					
+
 					{{{ if !reputation:disabled }}}
 					<span class="sg-v2-post-votes align-items-center d-inline-flex gap-1">
 						<a component="post/upvote" href="#" class="votes-link{{{ if posts.upvoted }}} upvoted{{{ end }}}" title="[[topic:upvote-post]]">
@@ -66,7 +66,7 @@
 					</span>
 					{{{ end }}}
 
-					<a component="post/reply" href="#" class="sg-v2-post-action-link" title="[[topic:reply]]"><i class="fa fa-reply"></i> 回复</a>
+					<a component="post/reply" href="#" class="sg-v2-post-action-link" title="[[topic:reply]]"><i class="fa fa-reply"></i> <span data-sgtalk-i18n="quickreply.submit">回复</span></a>
 
 					<!-- IMPORT partials/topic/post-menu.tpl -->
 				</div>

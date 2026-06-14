@@ -28,11 +28,6 @@
 				<span class="sg-mobile-hide">最后回复</span>
 				<a class="sg-topic-user sg-mobile-hide" href="{{{ if ./teaser.user.userslug }}}{config.relative_path}/user/{./teaser.user.userslug}{{{ else }}}#{{{ end }}}">{./teaser.user.displayname}</a>
 				{{{ end }}}
-				<span data-tid="{./tid}" component="topic/tags" class="sg-topic-tags {{{ if !./tags.length }}}hidden{{{ end }}}">
-					{{{ each ./tags }}}
-					<a href="{config.relative_path}/tags/{./valueEncoded}"><span class="tag tag-class-{./class}" data-tag="{./value}">{./valueEscaped}</span></a>
-					{{{ end }}}
-				</span>
 			</div>
 		</div>
 

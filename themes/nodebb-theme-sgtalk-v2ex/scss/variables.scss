@@ -1,85 +1,120 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+// ============================================================
+// SGTALK Design Tokens — "Quiet Premium / 静奢"
+// ============================================================
+// Refined, trustworthy, text-forward. Restraint over decoration.
+// Reference tier: Linear / Notion / Apple. Every value intentional.
 
-// ============================================================
-// SGTALK design tokens
-// ============================================================
-// Principles: clarity, density, restraint.
-// Every value is intentional.
 
 :root {
+  color-scheme: light;
+
   // ── Palette ─────────────────────────────────────────────────
-  --background: #F5F5F7;            // Soft neutral gray
-  --foreground: #1D1D1F;            // Near-black, high contrast
+  --background: #F4F6F8;            // cool premium paper
+  --foreground: #11181F;            // deep slate ink
   --card-bg: #FFFFFF;
-  --border-color: rgba(0, 0, 0, 0.06);
-  --border-color-strong: rgba(0, 0, 0, 0.10);
-  --text-main: #1D1D1F;
-  --text-muted: #86868B;            // Secondary text
-  --text-tertiary: #AEAEB2;
-  --primary-color: #E6002D;         // Singapore Red
-  --primary-hover: #CC0028;
+  --border-color: #E8ECF1;
+  --border-color-strong: #D6DDE6;
+  --text-main: #11181F;
+  --text-muted: #6A7686;
+  --text-tertiary: #97A1AE;
+  --primary-color: #D23B30;         // refined Singapore vermilion
+  --primary-hover: #B22D24;
+  --sg-topic-visited: #5B6270;
 
   // ── Semantic Surface Tokens ─────────────────────────────────
   --sg-bg: var(--background);
-  --sg-bg-top: #FAFAFA;
+  --sg-bg-top: #F7F8FA;
   --sg-surface: var(--card-bg);
-  --sg-header-bg: #FFFFFF;
-  --sg-surface-soft: #FAFAFA;
+  --sg-surface-soft: #FAFBFC;
+  --sg-surface-2: #F2F5F8;
   --sg-surface-warm: #FFFFFF;
   --sg-border: var(--border-color);
   --sg-border-strong: var(--border-color-strong);
   --sg-text: var(--text-main);
-  --sg-text-soft: #424245;
+  --sg-text-soft: #3B4754;
   --sg-muted: var(--text-muted);
+  --sg-muted-strong: #5A6675;
   --sg-muted-2: var(--text-tertiary);
-  --sg-link: #0066CC;
-  --sg-link-hover: #E6002D;
+  --sg-link: #2C66D6;
+  --sg-link-hover: #1C4DAB;
   --sg-red: var(--primary-color);
-  --sg-red-dark: #B80024;
+  --sg-red-dark: var(--primary-hover);
+  --sg-red-bg: #FCEBE9;
 
-  // ── Elevation (Shadows) ─────────────────────────────────────
-  --sg-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.03);
-  --sg-shadow-tight: 0 0 0 1px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
-  --sg-shadow-hover: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.04);
-  --sg-shadow-float: 0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  // ── Elevation (Shadows) — soft, real, premium ───────────────
+  --sg-shadow-tight: 0 1px 2px rgba(16, 24, 40, .04), 0 1px 3px rgba(16, 24, 40, .05);
+  --sg-shadow: 0 1px 2px rgba(16, 24, 40, .04), 0 1px 3px rgba(16, 24, 40, .05);
+  --sg-shadow-hover: 0 6px 16px rgba(16, 24, 40, .07), 0 2px 5px rgba(16, 24, 40, .04);
+  --sg-shadow-float: 0 18px 44px rgba(16, 24, 40, .12), 0 4px 10px rgba(16, 24, 40, .05);
+  --sg-shadow-red: 0 2px 10px rgba(210, 59, 48, .28);
 
   // ── Focus Ring ──────────────────────────────────────────────
-  --sg-focus: rgba(0, 102, 204, 0.25);
+  --sg-focus: rgba(44, 102, 214, .18);
 
   // ── Radii ───────────────────────────────────────────────────
   --sg-radius: 12px;
+  --sg-radius-card: 14px;
   --sg-radius-tight: 8px;
-  --sg-radius-pill: 100px;
+  --sg-radius-pill: 999px;
+
+  // ── Type / Layout / Controls ────────────────────────────────
+  --sg-font-body: 14px;
+  --sg-font-title: 15.5px;
+  --sg-font-content: 15.5px;
+  --sg-font-meta: 12.5px;
+  --sg-control-h: 40px;
+  --sg-touch-h: 44px;
+  --sg-shell-max: 1200px;
+  --sg-compose-max: 960px;
+  --sg-footer-max: 1120px;
+  --sg-left-rail-w: 188px;
+  --sg-sidebar-w: 300px;
+  --sg-header-bg: rgba(255, 255, 255, .82);
+  --sg-header-backdrop: saturate(160%) blur(14px);
 
   // ── Misc ────────────────────────────────────────────────────
-  --color-tertiary-101: #FAFAFA;
+  --color-tertiary-101: #F2F5F8;
   --bg-image: none;
+  --bg-size: auto;
 }
 
-// ── Dark Theme ────────────────────────────────────────────────
+// ── Dark Theme — deep, calm, not pure black ──────────────────
 [data-bs-theme="dark"], .dark {
-  --background: #000000;
-  --foreground: #F5F5F7;
-  --card-bg: #1C1C1E;
-  --border-color: rgba(255, 255, 255, 0.08);
-  --border-color-strong: rgba(255, 255, 255, 0.12);
-  --text-main: #F5F5F7;
-  --text-muted: #B3B7C2;
-  --text-tertiary: #8A90A0;
-  --color-tertiary-101: #2C2C2E;
+  color-scheme: dark;
+  --background: #0D1117;
+  --foreground: #F0F3F7;
+  --card-bg: #161B22;
+  --border-color: #262C34;
+  --border-color-strong: #333A44;
+  --text-main: #F0F3F7;
+  --text-muted: #97A1AE;
+  --text-tertiary: #6E7785;
+  --sg-text-soft: #C6CEDA;
+  --sg-muted-strong: #C9D1D9;
+  --color-tertiary-101: #21272F;
   --bg-image: none;
+  --bg-size: auto;
 
-  --sg-surface-soft: #2C2C2E;
-  --sg-header-bg: #161719;
-  --sg-link: #2997FF;
-  --sg-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15);
-  --sg-shadow-tight: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 1px 2px rgba(0, 0, 0, 0.2);
-  --sg-shadow-hover: 0 2px 8px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.2);
-  --sg-shadow-float: 0 8px 32px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
-  --sg-focus: rgba(41, 151, 255, 0.3);
+  --sg-surface-soft: #1A2029;
+  --sg-surface-2: #21272F;
+  --primary-color: #E5524A;
+  --primary-hover: #C93C33;
+  --sg-red-bg: #2A1614;
+  --sg-topic-visited: #A7AEC0;
+  --sg-link: #7AA7F5;
+  --sg-link-hover: #A6C4FA;
+
+  --sg-shadow-tight: 0 1px 2px rgba(0, 0, 0, .4);
+  --sg-shadow: 0 1px 2px rgba(0, 0, 0, .4);
+  --sg-shadow-hover: 0 6px 18px rgba(0, 0, 0, .5);
+  --sg-shadow-float: 0 20px 48px rgba(0, 0, 0, .6);
+  --sg-shadow-red: 0 2px 10px rgba(0, 0, 0, .4);
+  --sg-focus: rgba(122, 167, 245, .26);
+  --sg-header-bg: rgba(13, 17, 23, .82);
+  --sg-header-backdrop: saturate(160%) blur(14px);
 }
 
-// ── SCSS Aliases ──────────────────────────────────────────────
+// ── SCSS Aliases (consumed by other partials) ────────────────
 $sgtalk-bg: var(--background);
 $sgtalk-panel: var(--card-bg);
 $sgtalk-border: var(--border-color);
@@ -90,6 +125,6 @@ $sgtalk-link: var(--sg-link);
 $sgtalk-link-hover: var(--sg-link-hover);
 $sgtalk-red: var(--primary-color);
 $sgtalk-radius: var(--sg-radius);
-$sgtalk-font: 'Inter', -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
-               "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
-               system-ui, sans-serif;
+$sgtalk-font: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont,
+               "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+               "Segoe UI", system-ui, sans-serif;

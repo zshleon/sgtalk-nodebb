@@ -14,11 +14,11 @@
 					<div class="sg-directory-crumb">
 						<a href="{config.relative_path}/">SGTALK</a>
 					</div>
-					<h1>节点</h1>
+					<h1 data-sgtalk-i18n="nav.nodes">节点</h1>
 				</div>
 				<div class="sg-directory-actions">
-					<a href="{config.relative_path}/recent">全部主题</a>
-					<a href="{config.relative_path}/popular">最热</a>
+					<a href="{config.relative_path}/recent" data-sgtalk-i18n="filter.all">全部主题</a>
+					<a href="{config.relative_path}/popular" data-sgtalk-i18n="nav.popular">最热</a>
 				</div>
 			</header>
 
@@ -52,7 +52,3 @@
 	{{widgets.footer.html}}
 	{{{end}}}
 </div>
-
-<script>
-document.title = '节点 | SGTALK';
-</script>

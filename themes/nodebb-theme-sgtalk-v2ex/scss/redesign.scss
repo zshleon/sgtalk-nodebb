@@ -1,0 +1,514 @@
+// ============================================================
+// SGTALK · Quiet Premium redesign layer (imported LAST)
+// Refines the live theme on top of existing structure.
+// ============================================================
+
+$sg-nodes: (
+  "问与答":     #4F6B91,
+  "新移民":     #3B82F6,
+  "安家租房":   #607D8B,
+  "职业与薪资": #26364F,
+  "金融税务":   #5E718C,
+  "育儿与学校": #7C77F2,
+  "医疗与家政": #8B96A7,
+  "本地生活":   #2DB7A3,
+  "交通出行":   #2D7FA3,
+  "数码与网络": #385BAF,
+  "同城活动":   #60A5FA,
+  "交易":       #5E718C,
+);
+
+// ── Global ────────────────────────────────────────────────────
+body.theme-sgtalk {
+  background: var(--background) !important;
+  color: var(--text-main);
+  font-family: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont,
+               "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.theme-sgtalk {
+  overflow-x: hidden;
+
+  ::selection { background: rgba(210, 59, 48, .16); }
+
+  // ── Header ──────────────────────────────────────────────────
+  .sg-v2-header {
+    background: var(--sg-header-bg) !important;
+    backdrop-filter: var(--sg-header-backdrop);
+    -webkit-backdrop-filter: var(--sg-header-backdrop);
+    border-bottom: 1px solid var(--border-color) !important;
+    box-shadow: none !important;
+
+    .border-top { border-color: var(--border-color) !important; opacity: .7; }
+  }
+
+  .sg-brand-mark { gap: 10px !important; }
+
+  .sg-logo-icon {
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 9px !important;
+    box-shadow: var(--sg-shadow-red);
+  }
+
+  .sg-logo-word {
+    color: var(--text-main) !important;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -.02em;
+
+    em {
+      font-style: normal;
+      color: var(--primary-color);
+      font-weight: 800;
+    }
+  }
+
+  .sg-v2-search { width: min(440px, 42vw); }
+
+  .sg-v2-search input,
+  .sg-v2-header .form-control {
+    height: 40px !important;
+    background: var(--sg-surface-2) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 11px !important;
+    font-size: 13.5px !important;
+    color: var(--text-main) !important;
+    transition: background .18s, border-color .18s, box-shadow .18s;
+
+    &::placeholder { color: var(--text-tertiary) !important; }
+    &:focus {
+      background: var(--card-bg) !important;
+      border-color: var(--sg-link) !important;
+      box-shadow: 0 0 0 3px var(--sg-focus) !important;
+    }
+  }
+
+  .sg-v2-nav-tabs .nav-item {
+    font-size: 13.5px !important;
+    font-weight: 500 !important;
+    color: var(--text-muted) !important;
+    border-radius: 9px !important;
+    padding: 7px 11px !important;
+    transition: background .15s, color .15s;
+
+    &:hover { color: var(--text-main) !important; background: var(--sg-surface-2) !important; }
+    &.active { color: var(--text-main) !important; font-weight: 600 !important; }
+    &.active::after {
+      transform: translateX(-50%) scaleX(1);
+      width: 18px; background: var(--primary-color);
+    }
+  }
+
+  .sg-header-auth-link {
+    border-radius: 9px !important;
+    padding: 7px 11px !important;
+    font-weight: 500 !important;
+    &:hover { background: var(--sg-surface-2) !important; color: var(--text-main) !important; }
+  }
+
+  .sg-v2-post-link,
+  .sg-v2-header .btn-primary {
+    height: 34px;
+    padding: 0 14px !important;
+    border: 0 !important;
+    border-radius: 9px !important;
+    background: var(--primary-color) !important;
+    color: #fff !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    box-shadow: var(--sg-shadow-red);
+    transition: background .15s, transform .12s;
+
+    &:hover { background: var(--primary-hover) !important; transform: translateY(-1px); }
+    &:active { transform: translateY(0); }
+  }
+
+  #sg-dark-toggle, .sg-language-toggle {
+    border-radius: 9px !important;
+    color: var(--text-muted) !important;
+    &:hover { background: var(--sg-surface-2) !important; color: var(--text-main) !important; }
+  }
+  .sg-language-toggle {
+    height: 32px; padding: 0 10px; border: 1px solid var(--border-color);
+    background: transparent; font-size: 12px; font-weight: 600;
+  }
+
+  // ── Layout rhythm ───────────────────────────────────────────
+  #content > .row { --bs-gutter-x: 20px; align-items: flex-start; }
+
+  // ── Left node rail ──────────────────────────────────────────
+  .sg-v2-left-rail { position: sticky; top: 92px; }
+
+  .sg-v2-left-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--sg-radius-card);
+    box-shadow: var(--sg-shadow);
+    padding: 8px;
+    overflow: hidden;
+  }
+
+  .sg-v2-left-group { padding: 6px 4px; }
+  .sg-v2-left-group + .sg-v2-left-group {
+    margin-top: 4px; padding-top: 12px; border-top: 1px solid var(--border-color);
+  }
+
+  .sg-v2-left-heading {
+    padding: 4px 10px 8px;
+    color: var(--text-tertiary);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .sg-v2-left-group a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 10px;
+    margin: 1px 0;
+    border-radius: 9px;
+    color: var(--sg-text-soft);
+    font-size: 13.5px;
+    font-weight: 500;
+    text-decoration: none !important;
+    transition: background .14s, color .14s;
+
+    &::before {
+      content: "";
+      flex: none;
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--border-color-strong);
+      transition: transform .14s;
+    }
+    &:hover { background: var(--sg-surface-2); color: var(--text-main); }
+    &:hover::before { transform: scale(1.25); }
+    &.active {
+      background: var(--text-main);
+      color: var(--card-bg);
+      font-weight: 600;
+    }
+    &.active::before { background: var(--primary-color); }
+  }
+
+  // per-node accent dots
+  @each $slug, $color in $sg-nodes {
+    .sg-v2-left-group a[href*="#{$slug}"]::before { background: #{$color}; }
+    .sg-category-label[href*="#{$slug}"]::before { background: #{$color}; }
+  }
+
+  .sg-v2-left-footer {
+    display: flex; gap: 4px; padding: 8px 6px 4px; margin-top: 4px;
+    border-top: 1px solid var(--border-color);
+    a {
+      flex: 1; display: grid; place-items: center; height: 34px;
+      border-radius: 8px; color: var(--text-tertiary); font-size: 15px;
+      &:hover { background: var(--sg-surface-2); color: var(--primary-color); }
+    }
+  }
+
+  // ── Panels / cards shared ───────────────────────────────────
+  .recent, .popular, .unread, .categories,
+  .sg-v2-box, .sg-v2-nodebar, .category.d-flex, .category-header,
+  .sg-node-head, .sg-topic-head, .sg-topic-body, .sg-auth-box,
+  .account, .users {
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--sg-radius-card) !important;
+    box-shadow: var(--sg-shadow) !important;
+    background: var(--card-bg) !important;
+  }
+
+  // ── Topic list bar ──────────────────────────────────────────
+  .sg-v2-listbar {
+    min-height: 50px;
+    padding: 0 16px !important;
+    background: var(--card-bg) !important;
+    border-bottom: 1px solid var(--border-color) !important;
+  }
+  .sg-v2-list-tabs a, .sg-v2-list-link {
+    font-size: 13.5px !important;
+    font-weight: 500 !important;
+    color: var(--text-muted) !important;
+    position: relative;
+    &.active { color: var(--text-main) !important; font-weight: 600 !important; }
+  }
+  .sg-v2-list-link { color: var(--text-tertiary) !important; letter-spacing: .04em; }
+
+  // ── Topic rows ──────────────────────────────────────────────
+  ul.topics-list, .sg-topic-list { background: transparent !important; }
+
+  .sg-topic-row {
+    display: grid !important;
+    grid-template-columns: 42px minmax(0, 1fr) auto !important;
+    gap: 13px !important;
+    align-items: center;
+    min-height: 70px;
+    padding: 13px 16px !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    background: var(--card-bg) !important;
+    transition: background .12s;
+
+    &:hover { background: var(--sg-surface-soft) !important; }
+    &:last-child { border-bottom: 0 !important; }
+  }
+
+  .sg-topic-avatar {
+    width: 42px !important; height: 42px !important;
+    border-radius: 11px !important; overflow: hidden;
+    .avatar, [component="user/picture"] {
+      width: 42px !important; height: 42px !important;
+      border-radius: 11px !important;
+    }
+  }
+
+  .sg-topic-title {
+    margin: 0 0 6px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    line-height: 1.4 !important;
+    letter-spacing: -.005em;
+    a {
+      color: var(--text-main) !important;
+      text-decoration: none !important;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+  .sg-topic-row:hover .sg-topic-title a { color: var(--primary-hover) !important; }
+
+  .sg-topic-meta {
+    gap: 8px !important;
+    font-size: 12.5px !important;
+    color: var(--text-muted) !important;
+  }
+  .sg-topic-meta a { color: var(--text-muted) !important; }
+  .sg-topic-user { color: var(--sg-text-soft) !important; font-weight: 500 !important; }
+  .sg-dot { color: var(--text-tertiary) !important; }
+
+  .sg-category-label {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 9px !important;
+    border-radius: 7px !important;
+    background: var(--sg-surface-2) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--sg-text-soft) !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+
+    &::before {
+      content: ""; flex: none;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--primary-color);
+    }
+    &:hover { border-color: var(--border-color-strong) !important; color: var(--text-main) !important; }
+  }
+
+  .sg-topic-count {
+    min-width: 36px; height: 28px;
+    padding: 0 10px !important;
+    border-radius: 9px !important;
+    background: var(--sg-surface-2) !important;
+    color: var(--sg-text-soft) !important;
+    font-size: 12.5px !important;
+    font-weight: 700 !important;
+    border: 1px solid var(--border-color);
+    &:hover { background: var(--sg-red-bg) !important; color: var(--primary-color) !important; border-color: transparent; }
+  }
+
+  // ── Sidebar cards ───────────────────────────────────────────
+  .sg-v2-side { gap: 16px; }
+  .sg-v2-box { margin-bottom: 16px; padding: 0; overflow: hidden; }
+  .sg-v2-cell { padding: 14px 16px !important; border-bottom: 1px solid var(--border-color) !important; }
+  .sg-v2-cell:last-child { border-bottom: 0 !important; }
+
+  .sg-v2-box-title, .sg-side-kicker {
+    color: var(--text-main) !important;
+    font-size: 13.5px !important;
+    font-weight: 700 !important;
+  }
+  .sg-side-kicker {
+    color: var(--text-tertiary) !important;
+    font-size: 11px !important;
+    letter-spacing: .08em; text-transform: uppercase;
+  }
+
+  .sg-v2-member-box {
+    background: linear-gradient(180deg, var(--card-bg), var(--sg-surface-soft)) !important;
+  }
+
+  .sg-v2-button {
+    min-height: 38px !important;
+    border-radius: 10px !important;
+    border: 1px solid var(--border-color-strong) !important;
+    background: var(--card-bg) !important;
+    color: var(--sg-text-soft) !important;
+    font-weight: 600 !important;
+    transition: border-color .14s, color .14s, background .14s;
+    &:hover { border-color: var(--text-tertiary) !important; color: var(--text-main) !important; }
+
+    &.primary {
+      border: 0 !important;
+      background: var(--primary-color) !important;
+      color: #fff !important;
+      box-shadow: var(--sg-shadow-red);
+      &:hover { background: var(--primary-hover) !important; }
+    }
+  }
+
+  .sg-v2-node-cloud { gap: 8px !important; }
+  .sg-v2-node-cloud a {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 6px 11px;
+    border-radius: 8px;
+    background: var(--sg-surface-2);
+    border: 1px solid var(--border-color);
+    color: var(--sg-text-soft) !important;
+    font-size: 12.5px; font-weight: 500;
+    text-decoration: none !important;
+    &::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--border-color-strong); }
+    &:hover { border-color: var(--border-color-strong); color: var(--text-main) !important; }
+  }
+  @each $slug, $color in $sg-nodes {
+    .sg-v2-node-cloud a[href*="#{$slug}"]::before { background: #{$color}; }
+  }
+
+  // ── Node head / Topic head ──────────────────────────────────
+  .sg-node-head, .sg-topic-head { padding: 20px 22px !important; margin-bottom: 16px; }
+  .sg-node-title-line h1, .sg-topic-head h1 {
+    font-size: 22px !important; font-weight: 800 !important; letter-spacing: -.015em;
+  }
+  .sg-node-crumb, .sg-topic-crumb { font-weight: 600 !important; color: var(--text-muted) !important; }
+
+  // ── Topic body / posts ──────────────────────────────────────
+  .sg-topic-body .posts > li[component="post"] { padding: 20px 22px 0 !important; }
+  .sg-topic-body .post-container-parent .avatar,
+  .sg-topic-body [component="user/picture"] { border-radius: 11px !important; }
+  .sg-topic-body .content { font-size: 15.5px !important; line-height: 1.75 !important; color: var(--sg-text-soft) !important; }
+
+  // ── Auth ────────────────────────────────────────────────────
+  .sg-auth-box { border-radius: var(--sg-radius-card) !important; }
+  .sg-auth-head h2 { font-size: 21px !important; font-weight: 800 !important; letter-spacing: -.01em; }
+  .sg-auth-field .form-control, .sg-auth-form .form-control {
+    height: 42px !important; border-radius: 10px !important;
+    background: var(--sg-surface-soft) !important; border: 1px solid var(--border-color-strong) !important;
+    &:focus { border-color: var(--sg-link) !important; box-shadow: 0 0 0 3px var(--sg-focus) !important; }
+  }
+  .sg-auth-submit {
+    min-height: 44px !important; border-radius: 10px !important;
+    background: var(--primary-color) !important; border: 0 !important;
+    font-size: 15px !important; font-weight: 700 !important;
+    box-shadow: var(--sg-shadow-red);
+    &:hover { background: var(--primary-hover) !important; }
+  }
+  .sg-auth-oauth { border-radius: 10px !important; min-height: 44px !important; }
+
+  // ── Footer ──────────────────────────────────────────────────
+  .sg-v2-footer { background: var(--background) !important; border-top: 1px solid var(--border-color) !important; }
+
+  // ── Generic primary buttons ─────────────────────────────────
+  .btn-primary {
+    background: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    border-radius: 10px !important;
+    &:hover, &:focus { background: var(--primary-hover) !important; border-color: var(--primary-hover) !important; }
+  }
+}
+
+// ── Mobile: kill overflow, tighten ──────────────────────────────
+@media (max-width: 991.98px) {
+  .theme-sgtalk #content { width: min(100vw - 24px, 760px) !important; }
+  .theme-sgtalk .sg-v2-left-rail { position: static; }
+}
+
+@media (max-width: 575.98px) {
+  .theme-sgtalk #content { width: calc(100vw - 24px) !important; }
+  .theme-sgtalk #content > .row { --bs-gutter-x: 0; margin: 0; row-gap: 14px; }
+  .theme-sgtalk .sg-v2-search { width: 100%; }
+  .theme-sgtalk .sg-topic-row {
+    grid-template-columns: 38px minmax(0, 1fr) auto !important;
+    gap: 10px !important; min-height: 62px; padding: 11px 13px !important;
+  }
+  .theme-sgtalk .sg-topic-avatar,
+  .theme-sgtalk .sg-topic-avatar .avatar,
+  .theme-sgtalk .sg-topic-avatar [component="user/picture"] {
+    width: 38px !important; height: 38px !important; border-radius: 10px !important;
+  }
+  .theme-sgtalk .sg-topic-title { font-size: 14.5px !important; }
+  .theme-sgtalk .sg-node-head, .theme-sgtalk .sg-topic-head { padding: 14px 15px !important; }
+  .theme-sgtalk .sg-topic-body .posts > li[component="post"] { padding: 14px 15px 0 !important; }
+}
+
+// ── Dark-mode fine tuning ───────────────────────────────────────
+// QA round 1 — live fixes
+.theme-sgtalk {
+  .sg-v2-footer a {
+    height: auto !important;
+    min-height: 0 !important;
+    line-height: 1.6 !important;
+    padding: 0 !important;
+  }
+  .sg-v2-footer .d-flex.flex-column { gap: 9px !important; }
+  .sg-v2-footer-label { margin-bottom: 2px; }
+  .sg-compose-guidelines { display: none !important; }
+  .sg-composer-status-right { gap: 8px !important; }
+}
+
+[data-bs-theme="dark"], .dark {
+  .theme-sgtalk {
+    .sg-category-label, .sg-topic-count, .sg-v2-node-cloud a {
+      background: var(--color-tertiary-101) !important;
+      border-color: var(--border-color) !important;
+      color: var(--text-muted) !important;
+    }
+    .sg-v2-left-group a.active { background: var(--text-main) !important; color: var(--background) !important; }
+    .sg-topic-row:hover .sg-topic-title a { color: var(--primary-color) !important; }
+    .sg-v2-button:not(.primary) {
+      background: var(--color-tertiary-101) !important; border-color: var(--border-color) !important;
+    }
+  }
+}
+
+
+// QA round 2 — live fixes
+.theme-sgtalk {
+  .sg-topic-layout { display: flex !important; flex-wrap: wrap; }
+
+  .sg-v2-topic-bar {
+    a.sg-v2-topic-rss,
+    .btn-group button.dropdown-toggle,
+    [component="topic/watch"] button.dropdown-toggle {
+      min-height: 34px !important;
+      font-size: 13px !important;
+      font-weight: 600 !important;
+      border-radius: 9px !important;
+      color: var(--sg-text-soft) !important;
+    }
+    [component="topic/reply/container"] a[component="topic/reply"],
+    a[component="topic/reply/guest"] {
+      min-height: 34px !important;
+      font-size: 13px !important;
+      font-weight: 600 !important;
+      border-radius: 9px !important;
+      box-shadow: var(--sg-shadow-red) !important;
+    }
+  }
+
+  .sg-v2-post-footer > .d-flex.justify-content-between { justify-content: flex-start !important; gap: 18px; }
+
+  &.page-compose [component="category-selector"] > button.dropdown-toggle { height: 42px !important; min-height: 42px !important; }
+  &.page-compose [data-component="composer/title"] input.title { height: 42px !important; }
+
+  .sg-guidelines-list { padding: 16px !important; }
+
+  .sg-v2-header .sg-auth-state-link { min-height: 34px; }
+  .sg-v2-header #sg-dark-toggle,
+  .sg-v2-header .sg-language-toggle { height: 34px; }
+}

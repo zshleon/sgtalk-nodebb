@@ -24,14 +24,14 @@
 			{{{ each categoryItems }}}
 			<li role="presentation" class="category {{{ if ./disabledClass }}}disabled {{{ end }}}" data-cid="{./cid}" data-name="{./name}" data-parent-cid="{./parentCid}">
 				<a class="dropdown-item rounded-1 {{{ if ./disabledClass }}}disabled{{{ end }}}" role="menuitem" href="#">{./level}
-					<span component="category-markup" style="{{{ if ./match }}}font-weight: bold;{{{end}}}">
-						<div class="category-item d-inline-flex align-items-center gap-1">
-							{{{ if ./icon }}}
-							{buildCategoryIcon(@value, "24px", "rounded-circle")}
-							{{{ end }}}
-							{./name} / <span class="text-muted text-xs">{./slug}</span>
-						</div>
-					</span>
+						<span component="category-markup" style="{{{ if ./match }}}font-weight: bold;{{{end}}}">
+							<span class="category-item d-inline-flex align-items-center gap-1">
+								{{{ if ./icon }}}
+								{buildCategoryIcon(@value, "24px", "rounded-circle")}
+								{{{ end }}}
+								{./name} / <span class="text-muted text-xs">{./slug}</span>
+							</span>
+						</span>
 				</a>
 			</li>
 			{{{ end }}}

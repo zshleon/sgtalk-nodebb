@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="SGTALK">
+  <rect x="2" y="2" width="96" height="96" rx="27" fill="#D23B30"/>
+  <g transform="translate(18,18) scale(2.6667)">
+    <path d="M5 4.5h14a1.5 1.5 0 0 1 1.5 1.5v8.5A1.5 1.5 0 0 1 19 16h-6.2l-3.9 3.3a.7.7 0 0 1-1.15-.53V16H5a1.5 1.5 0 0 1-1.5-1.5V6A1.5 1.5 0 0 1 5 4.5Z" fill="#fff"/>
+    <circle cx="12" cy="10.2" r="1.7" fill="#D23B30"/>
+  </g>
+</svg>

@@ -30,7 +30,7 @@ body.theme-sgtalk {
 }
 
 .theme-sgtalk .brand-container > .col-12 {
-  width: min(1100px, calc(100vw - 32px));
+  width: min(var(--sg-shell-max), calc(100vw - 40px));
   min-height: 66px;
   margin: 0 auto;
   padding: 0 !important;
@@ -92,8 +92,8 @@ body.theme-sgtalk {
 
 .theme-sgtalk .sg-v2-search input:focus {
   background: #fff;
-  border-color: #b8c7d8;
-  box-shadow: 0 0 0 3px rgba(80, 103, 133, 0.08);
+  border-color: var(--sg-link);
+  box-shadow: 0 0 0 3px var(--sg-focus);
 }
 
 .theme-sgtalk .sg-v2-search-icon {
@@ -133,7 +133,7 @@ body.theme-sgtalk {
 }
 
 .theme-sgtalk #content {
-  width: min(1100px, calc(100vw - 32px));
+  width: min(var(--sg-shell-max), calc(100vw - 40px));
   max-width: none;
   margin: 18px auto 38px;
   padding: 0 !important;
@@ -228,18 +228,7 @@ body.theme-sgtalk {
 }
 
 .theme-sgtalk.page-popular .sg-v2-node-row a[href="/popular"],
-.theme-sgtalk.page-category-5 .sg-v2-node-row a[href^="/category/5/"],
-.theme-sgtalk.page-category-6 .sg-v2-node-row a[href^="/category/6/"],
-.theme-sgtalk.page-category-7 .sg-v2-node-row a[href^="/category/7/"],
-.theme-sgtalk.page-category-8 .sg-v2-node-row a[href^="/category/8/"],
-.theme-sgtalk.page-category-9 .sg-v2-node-row a[href^="/category/9/"],
-.theme-sgtalk.page-category-10 .sg-v2-node-row a[href^="/category/10/"],
-.theme-sgtalk.page-category-11 .sg-v2-node-row a[href^="/category/11/"],
-.theme-sgtalk.page-category-12 .sg-v2-node-row a[href^="/category/12/"],
-.theme-sgtalk.page-category-13 .sg-v2-node-row a[href^="/category/13/"],
-.theme-sgtalk.page-category-14 .sg-v2-node-row a[href^="/category/14/"],
-.theme-sgtalk.page-category-15 .sg-v2-node-row a[href^="/category/15/"],
-.theme-sgtalk.page-category-16 .sg-v2-node-row a[href^="/category/16/"] {
+.theme-sgtalk .sg-v2-node-row a.active {
   padding: 0 12px;
   border-radius: 5px;
   background: #1f2937;
@@ -292,14 +281,21 @@ body.theme-sgtalk {
   justify-content: center;
   min-height: 28px;
   padding: 0 12px;
-  border: 1px solid #cfd9e5;
+  border: 1px solid var(--primary-color);
   border-radius: 4px;
-  background: linear-gradient(#fff, #f3f6f9);
-  color: #536a87;
+  background: var(--primary-color);
+  color: #fff;
   font-size: 13px;
   font-weight: 800;
   text-decoration: none !important;
   white-space: nowrap;
+}
+
+.theme-sgtalk .sg-v2-post-link:hover,
+.theme-sgtalk .sg-v2-post-link:focus-visible {
+  border-color: var(--primary-hover);
+  background: var(--primary-hover);
+  color: #fff;
 }
 
 .theme-sgtalk .alert {
@@ -351,7 +347,7 @@ body.theme-sgtalk {
 
 .theme-sgtalk ul.topics-list > li.category-item .avatar,
 .theme-sgtalk ul.topics-list > li.category-item [component="user/picture"] {
-  border-radius: 4px !important;
+  border-radius: 50% !important;
 }
 
 .theme-sgtalk [component="topic/header"].title {
@@ -472,6 +468,7 @@ body.theme-sgtalk {
   width: 48px;
   height: 48px;
   overflow: hidden;
+  border-radius: 50%;
   text-decoration: none;
 }
 
@@ -479,7 +476,7 @@ body.theme-sgtalk {
 .theme-sgtalk .sg-topic-avatar [component="user/picture"] {
   width: 48px !important;
   height: 48px !important;
-  border-radius: 4px !important;
+  border-radius: 50% !important;
 }
 
 .theme-sgtalk .sg-topic-main {
@@ -630,8 +627,8 @@ body.theme-sgtalk {
 }
 
 .theme-sgtalk .sg-v2-button.primary {
-  border-color: #dc2626;
-  background: linear-gradient(#ef3b32, #dc2626);
+  border-color: var(--primary-hover);
+  background: var(--primary-color);
   color: #fff;
 }
 
@@ -853,7 +850,7 @@ body.theme-sgtalk {
 
 .theme-sgtalk .sg-topic-body .post-container-parent .avatar,
 .theme-sgtalk .sg-topic-body [component="user/picture"] {
-  border-radius: 4px !important;
+  border-radius: 50% !important;
 }
 
 .theme-sgtalk .sg-topic-body .post-header {
@@ -981,8 +978,8 @@ body.theme-sgtalk {
 
 .theme-sgtalk .sg-auth-field .form-control:focus,
 .theme-sgtalk .sg-auth-form .form-control:focus {
-  border-color: #a9bdd5;
-  box-shadow: 0 0 0 3px rgba(80, 103, 133, 0.1);
+  border-color: var(--sg-link);
+  box-shadow: 0 0 0 3px var(--sg-focus);
 }
 
 .theme-sgtalk .sg-auth-small-link {
@@ -994,10 +991,13 @@ body.theme-sgtalk {
 
 .theme-sgtalk .sg-auth-submit {
   width: 100%;
-  min-height: 38px;
+  min-height: 42px;
+  padding-top: 0;
+  padding-bottom: 0;
   margin-top: 2px;
   border-radius: 4px;
   font-size: 14px;
+  line-height: 20px;
 }
 
 .theme-sgtalk .sg-auth-note,
@@ -1161,17 +1161,17 @@ body.theme-sgtalk {
 }
 
 .theme-sgtalk .sg-account-avatar {
-  width: 64px;
-  height: 64px;
+  width: 88px;
+  height: 88px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .theme-sgtalk .sg-account-avatar .avatar {
-  --avatar-size: 64px !important;
-  width: 64px !important;
-  height: 64px !important;
+  --avatar-size: 88px !important;
+  width: 88px !important;
+  height: 88px !important;
   border-radius: 4px !important;
   object-fit: cover;
 }
@@ -1249,13 +1249,16 @@ body.theme-sgtalk {
   display: inline-flex;
   align-items: center;
   gap: 5px;
+  flex: 0 0 auto;
   min-height: 32px;
+  min-width: max-content;
   padding: 0 10px;
   border-radius: 4px;
   color: #4f6685;
   font-size: 14px;
   font-weight: 800;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .theme-sgtalk .sg-account-tabs a.active {
@@ -1264,6 +1267,7 @@ body.theme-sgtalk {
 }
 
 .theme-sgtalk .sg-account-tabs span {
+  flex: 0 0 auto;
   font-size: 12px;
   opacity: 0.8;
 }
@@ -1625,7 +1629,7 @@ body.theme-sgtalk {
   transition: background-color 0.3s, border-color 0.3s;
 
   .sg-v2-footer-container {
-    max-width: 1100px;
+    max-width: var(--sg-shell-max);
     margin: 0 auto;
   }
 
@@ -1633,7 +1637,7 @@ body.theme-sgtalk {
     color: #5E6E85 !important;
     transition: color 0.2s;
     &:hover {
-      color: #E6002D !important; // Singapore Red
+      color: var(--primary-color) !important;
     }
   }
 }
@@ -1721,11 +1725,13 @@ body.theme-sgtalk {
       }
     }
     .sg-v2-post-link {
-      border-color: var(--border-color) !important;
-      background: var(--color-tertiary-101) !important;
-      color: var(--text-muted) !important;
+      border-color: var(--primary-color) !important;
+      background: var(--primary-color) !important;
+      color: #fff !important;
       &:hover {
-        color: var(--text-main) !important;
+        border-color: var(--primary-hover) !important;
+        background: var(--primary-hover) !important;
+        color: #fff !important;
       }
     }
     ul.topics-list {
@@ -1847,9 +1853,9 @@ body.theme-sgtalk {
       color: var(--text-main) !important;
     }
     .sg-auth-errors {
-      border-color: rgba(230, 0, 45, 0.3) !important;
-      background: rgba(230, 0, 45, 0.05) !important;
-      color: var(--primary-color) !important;
+      border-color: rgba(239, 68, 68, 0.24) !important;
+      background: rgba(239, 68, 68, 0.1) !important;
+      color: #f87171 !important;
     }
     .sg-account-hero {
       border-bottom-color: var(--border-color) !important;

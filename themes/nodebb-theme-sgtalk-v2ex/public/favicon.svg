@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="SGTALK">
+  <defs>
+    <clipPath id="circle"><circle cx="256" cy="256" r="246"/></clipPath>
+  </defs>
+  <image href="logo_icon.png?v=20260613-lion-flag-round-v3" width="512" height="512" clip-path="url(#circle)"/>
+</svg>

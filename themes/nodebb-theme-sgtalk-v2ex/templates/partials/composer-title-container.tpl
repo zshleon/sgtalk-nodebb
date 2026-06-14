@@ -1,7 +1,7 @@
 <div class="title-container sg-composer-title-container">
 	{{{ if isTopic }}}
 	<div class="sg-composer-field sg-composer-node-field">
-		<label>节点</label>
+		<label data-sgtalk-i18n="compose.node">节点</label>
 		<div class="category-list-container">
 			<!-- IMPORT partials/category/selector-dropdown-left.tpl -->
 		</div>
@@ -10,15 +10,15 @@
 
 	{{{ if showHandleInput }}}
 	<div data-component="composer/handle" class="sg-composer-field sg-composer-handle-field">
-		<label>身份</label>
+		<label data-sgtalk-i18n="compose.identity">身份</label>
 		<input class="handle form-control shadow-none" type="text" placeholder="[[topic:composer.handle-placeholder]]" value="{handle}" />
 	</div>
 	{{{ end }}}
 
 	<div data-component="composer/title" class="sg-composer-field sg-composer-title-field">
-		<label>标题</label>
+		<label data-sgtalk-i18n="compose.title">标题</label>
 		{{{ if isTopicOrMain }}}
-		<input class="title form-control shadow-none" type="text" placeholder="在此输入主题标题" value="{topicTitle}" />
+		<input class="title form-control shadow-none" type="text" placeholder="在此输入主题标题" data-sgtalk-i18n-placeholder="compose.titlePlaceholder" value="{topicTitle}" />
 		{{{ else }}}
 		<span class="title text-truncate">{{{ if isEditing }}}[[topic:composer.editing-in, "{topicTitle}"]]{{{ else }}}[[topic:composer.replying-to, "{topicTitle}"]]{{{ end }}}</span>
 		{{{ end }}}
@@ -28,15 +28,15 @@
 		</div>
 	</div>
 
-	<div class="action-bar sg-composer-actions" aria-label="发布操作">
+	<div class="action-bar sg-composer-actions" aria-label="发布操作" data-sgtalk-i18n-aria-label="compose.actions">
 		<button class="btn btn-sm btn-link composer-discard" data-action="discard">
 			<i class="fa fa-times"></i>
-			<span>取消</span>
+			<span data-sgtalk-i18n="compose.cancel">取消</span>
 		</button>
 		<div class="btn-group btn-group-sm" component="composer/submit/container">
 			<button class="btn btn-primary composer-submit fw-bold {{{ if !(submitOptions.length || canSchedule) }}}rounded-1{{{ end }}}" data-action="post" data-text-variant=" [[topic:composer.schedule]]">
 				<i class="fa fa-paper-plane"></i>
-				<span>发布主题</span>
+				<span data-sgtalk-i18n="topic.publish">发布主题</span>
 			</button>
 			<div component="composer/submit/options/container" data-submit-options="{submitOptions.length}" class="btn-group btn-group-sm {{{ if !(submitOptions.length || canSchedule) }}}hidden{{{ end }}}">
 				<button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

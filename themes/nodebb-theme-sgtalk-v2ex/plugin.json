@@ -1,13 +1,24 @@
 {
   "id": "nodebb-theme-sgtalk-v2ex",
   "staticDirs": {
-    "assets": "public"
+    "public": "public"
   },
+  "languages": "languages",
   "scripts": [
     "./public/sgtalk-composer.js"
   ],
   "hooks": [
-    { "hook": "filter:middleware.registrationComplete", "method": "allowRegistrationEscapeRoutes" },
-    { "hook": "filter:config.get", "method": "addConfig" }
+    {
+      "hook": "filter:middleware.registrationComplete",
+      "method": "allowRegistrationEscapeRoutes"
+    },
+    {
+      "hook": "filter:config.get",
+      "method": "addConfig"
+    },
+    {
+      "hook": "filter:meta.getLinkTags",
+      "method": "addFontLinks"
+    }
   ]
 }

@@ -7,36 +7,36 @@
 {{{ end }}}
 
 <div class="row flex-fill">
+	<!-- IMPORT partials/left-rail.tpl -->
 	<div class="recent {{{if widgets.sidebar.length }}}col-lg-9 col-sm-12{{{ else }}}col-lg-12{{{ end }}}">
 		<!-- IMPORT partials/topic-list-bar.tpl -->
 
 		<div class="category">
 			{{{ if !topics.length }}}
 			<section class="sg-empty-state" id="category-no-topics">
-				<strong>还没有主题。</strong>
-				<p>从一个真实问题、经验或新加坡生活细节开始。</p>
+				<strong data-sgtalk-i18n="empty.noTopicsTitle">这里还没有主题</strong>
+				<p data-sgtalk-i18n="empty.noTopicsBody">欢迎发布第一个主题，或者先去其它节点看看大家在聊什么。</p>
 				<div class="sg-empty-actions">
 					{{{ if canPost }}}
-					<a class="sg-v2-button primary" href="{config.relative_path}/compose?cid={config.defaultComposeCid}" data-ajaxify="false">发布第一个主题</a>
-					{{{ end }}}
-					{{{ if !canPost }}}
-					<a class="sg-v2-button primary" href="{config.relative_path}/login">登录后发帖</a>
-					{{{ end }}}
-					<a class="sg-v2-button" href="{config.relative_path}/categories">查看节点</a>
-				</div>
-				<div class="sg-empty-nodes">
-					<a href="{config.relative_path}/category/5/问与答">问与答</a>
-					<a href="{config.relative_path}/category/6/新移民">新移民</a>
-					<a href="{config.relative_path}/category/7/安家租房">安家租房</a>
-					<a href="{config.relative_path}/category/8/职业与薪资">职业与薪资</a>
-				</div>
-			</section>
+					<a class="sg-v2-button primary" href="{config.relative_path}/compose?cid={config.defaultComposeCid}" data-ajaxify="false" data-sgtalk-i18n="empty.firstTopic">发布第一个主题</a>
+						{{{ end }}}
+						{{{ if !canPost }}}
+							<a class="sg-v2-button primary" href="{config.relative_path}/login?next=%2Fcompose%3Fcid%3D{config.defaultComposeCid}" data-sgtalk-i18n="topic.loginToPost">登录后发帖</a>
+						{{{ end }}}
+					<a class="sg-v2-button" href="{config.relative_path}/categories" data-sgtalk-i18n="empty.viewNodes">浏览节点</a>
+					</div>
+					<div class="sg-empty-nodes">
+						{{{ each config.sgtalkStarterNodes }}}
+						<a href="{config.relative_path}/category/{./slug}" {{{ if ./i18nKey }}}data-sgtalk-i18n="{./i18nKey}"{{{ end }}}>{./name}</a>
+						{{{ end }}}
+					</div>
+				</section>
 			{{{ end }}}
 
 			{{{ if (selectedCategory.cid == "-1") }}}
-			<div class="sg-known-topics-note">
-				<h4>全站主题</h4>
-				<p>这里按时间整理 SGTALK 的公开讨论，适合快速查看最近发生的新加坡生活话题。</p>
+			<div class="py-3">
+				<h4>[[recent:uncategorized.title]]</h4>
+				<p>[[recent:uncategorized.intro]]</p>
 			</div>
 			{{{ end }}}
 

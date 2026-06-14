@@ -7,16 +7,17 @@
 {{{ end }}}
 
 <div class="row flex-fill">
-	<div class="popular {{{if widgets.sidebar.length }}}col-lg-9 col-sm-12{{{ else }}}col-lg-12{{{ end }}}">
+		<!-- IMPORT partials/left-rail.tpl -->
+		<div class="popular {{{if widgets.sidebar.length }}}col-lg-9 col-sm-12{{{ else }}}col-lg-12{{{ end }}}">
 		<!-- IMPORT partials/topic-list-bar.tpl -->
 		<div class="category">
 			{{{ if !topics.length }}}
 			<section class="sg-empty-state" id="category-no-topics">
-				<strong>暂时没有热门主题。</strong>
-				<p>有新的讨论后，这里会自然出现被关注的主题。</p>
+				<strong data-sgtalk-i18n="empty.noHotTopicsTitle">暂时没有热门主题。</strong>
+				<p data-sgtalk-i18n="empty.noHotTopicsBody">有新的讨论后，这里会自然出现被关注的主题。</p>
 				<div class="sg-empty-actions">
-					<a class="sg-v2-button" href="{config.relative_path}/recent">查看全部主题</a>
-					<a class="sg-v2-button" href="{config.relative_path}/categories">查看节点</a>
+					<a class="sg-v2-button" href="{config.relative_path}/recent" data-sgtalk-i18n="filter.all">查看全部主题</a>
+					<a class="sg-v2-button" href="{config.relative_path}/categories" data-sgtalk-i18n="empty.viewNodes">查看节点</a>
 				</div>
 			</section>
 			{{{ end }}}

@@ -1,7 +1,7 @@
 # SGTALK · 项目说明与维护指南
 
 > 单一事实来源（Single Source of Truth）。新一轮维护/交接前先读本文件。
-> 更新日期：2026-06-14（第 3 轮：栅格图标/头像色/Inter 字体/移动端 QA/GitHub 对账/push-to-deploy CI 全部落地）
+> Updated: 2026-06-15 (round 4: GitHub-first convergence; Google Drive archived; remote AI handoff and homelab boundaries)
 
 ---
 
@@ -34,7 +34,8 @@ SGTALK 是面向**新加坡华人新移民（中产）**的讨论社区——EP/
 | 项 | 值 |
 |---|---|
 | GitHub（canonical，私库） | `https://github.com/zshleon/sgtalk-nodebb` |
-| 本地同步工作副本（Google Drive） | `G:\My Drive\CODEX 2\sgtalk-nodebb`（Mac 上为 `/Users/jingwazhu/.../CODEX 2/sgtalk-nodebb`） |
+| 推荐本地工作副本 | `/Users/jingwazhu/Documents/Codex/sgtalk-nodebb`（普通 git checkout，可随时删掉重 clone） |
+| Google Drive 旧副本 | 已归档，不再作为开发入口；不要再从 Drive 判断最新代码 |
 | 线上 | `https://sgtalk.zshstc.org` |
 | 服务器（homelab，dockerhost） | `root@10.0.0.50`（LAN）/ Tailscale `100.106.234.127` |
 | 生产 stack 目录 | `/opt/stacks/sgtalk-nodebb` |
@@ -42,6 +43,8 @@ SGTALK 是面向**新加坡华人新移民（中产）**的讨论社区——EP/
 | Homelab 资料 | `http://wiki.home.arpa/` |
 
 > 服务器 stack **不是 git 仓库**，靠文件同步（rsync/scp）或 CI 部署，不是 `git pull`。
+
+> 从 2026-06-15 起，GitHub `main` 是唯一事实来源。后续 AI 接手时先 clone/fetch GitHub，再看本文档；不要再把 Google Drive 目录当作源代码主线。
 
 ---
 
@@ -59,7 +62,7 @@ SGTALK 是面向**新加坡华人新移民（中产）**的讨论社区——EP/
 
 ## 5. 部署与构建流程
 
-**首选：push-to-deploy CI**（见 §10）——把改动 push 到 GitHub `main` 即自动部署。
+**首选：push-to-deploy CI**（见 §10）——把改动 push 到 GitHub `main` 即自动部署。主题、模板、前端资源的日常升级原则上不需要直接访问内网 homelab；CI runner 会在 homelab 内部完成同步、build、restart 和 HTTP 验证。
 
 **手动部署（备用，已验证可用）**，编辑主题文件后：
 
@@ -78,6 +81,8 @@ ssh root@10.0.0.50 'cd /opt/stacks/sgtalk-nodebb && \
 - **部署前先备份**：`scripts/backup-sgtalk-nodebb.sh`（mongo + config + uploads，保留 14 天）。最近一次：`backups/20260614-213017`。
 - 改右侧边栏 HTML 结构或品牌/分类配置，需重跑服务端脚本（不是只 build）：`scripts/apply-v2ex-shell.js`（写 Mongo 的 widget 与 brand config）、`scripts/install-brand-assets.sh`。
 - 验证：`curl -I https://sgtalk.zshstc.org/` + `docker logs --since=5m sgtalk-nodebb | grep -Ei "error|exception|fatal"`。
+
+仍需要 homelab 权限的情况：CI runner 离线、NodeBB/Mongo 容器异常、DNS/Cloudflare Tunnel/Traefik 异常、数据库备份/恢复、NodeBB 管理脚本需要写 Mongo、或需要查看真实生产日志。换言之：代码和主题可以 GitHub-first；运行时故障仍属于 homelab 运维。
 
 ---
 
@@ -118,7 +123,7 @@ ssh root@10.0.0.50 'cd /opt/stacks/sgtalk-nodebb && \
 
 **待办 / 可选**：
 - 真机（真实手机硬件）最终手感确认（模拟视口已通过，可选）。
-- Drive 工作副本与生产/GitHub 的非主题文件（stack 脚本等）按需对账；主题已对齐。
+- Google Drive 旧工作副本已归档，后续不要从 Drive 继续开发；确需查历史时只作为只读参考。
 - 头像底色后续可进一步接入 12 节点专属色（当前为统一品牌红）。
 
 ---
@@ -142,7 +147,17 @@ ssh root@10.0.0.50 'cd /opt/stacks/sgtalk-nodebb && \
 
 ---
 
-## 11. 关键文件索引
+## 11. AI / 远程协作规则
+
+1. 新 AI 接手时默认从 GitHub `main` 开始：`git clone https://github.com/zshleon/sgtalk-nodebb.git`。
+2. 不要依赖某台 Mac 上的长期本地目录；本地 checkout 只是执行环境，可以随时重建。
+3. 修改主题、模板、语言包、品牌资源后，优先 push 到 GitHub `main` 触发 CI。
+4. 日常前端/主题迭代不需要内网 homelab；只有部署流水线失败、容器/数据库/DNS/反代异常、或需要生产日志时才需要 homelab 访问。
+5. 服务器 `/opt/stacks/sgtalk-nodebb` 是运行目录，不是源代码事实来源；不要在服务器上直接改主题后忘记回灌 GitHub。
+
+---
+
+## 12. 关键文件索引
 
 - `scss/variables.scss`（令牌）、`scss/redesign.scss`（精致层 + 节点色 + QA）、`theme.scss`（末尾 `@import "scss/redesign"`）
 - `public/brand/*.svg`（品牌资源）、`public/favicon-*.png`/`favicon.ico`/`touchicon-*.png`（第 3 轮新栅格图标）
